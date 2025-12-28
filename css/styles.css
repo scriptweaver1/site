@@ -103,8 +103,7 @@ header {
     border-bottom: 1px solid rgba(107, 63, 160, 0.3);
     backdrop-filter: blur(10px);
     background: rgba(10, 10, 18, 0.7);
-    position: sticky;
-    top: 0;
+    position: relative;
     z-index: 100;
 }
 
@@ -265,7 +264,7 @@ header {
     width: 280px;
     flex-shrink: 0;
     position: sticky;
-    top: 120px;
+    top: 2rem;
     height: fit-content;
 }
 
@@ -368,15 +367,165 @@ header {
     border-radius: 2px;
 }
 
+/* View Controls */
+.view-controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
 .results-count {
     color: rgba(233, 213, 255, 0.7);
     font-size: 0.95rem;
 }
 
+.view-toggle {
+    display: flex;
+    gap: 0.3rem;
+    background: rgba(45, 27, 78, 0.4);
+    padding: 0.3rem;
+    border-radius: 10px;
+    border: 1px solid rgba(107, 63, 160, 0.3);
+}
+
+.view-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 32px;
+    border: none;
+    background: transparent;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: rgba(233, 213, 255, 0.5);
+}
+
+.view-btn:hover {
+    background: rgba(107, 63, 160, 0.3);
+    color: var(--stardust);
+}
+
+.view-btn.active {
+    background: linear-gradient(135deg, var(--stellar-purple), var(--nova-pink));
+    color: var(--pure-light);
+    box-shadow: 0 0 10px var(--glow-pink);
+}
+
+.view-btn svg {
+    width: 18px;
+    height: 18px;
+    pointer-events: none;
+}
+
+/* ===== GRID LAYOUTS ===== */
 .scripts-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
     gap: 1.8rem;
+    transition: all 0.3s ease;
+}
+
+/* Single column (default) - horizontal cards */
+.scripts-grid.view-1 {
+    grid-template-columns: 1fr;
+    max-width: 900px;
+}
+
+.scripts-grid.view-1 .script-card {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    min-height: 240px;
+}
+
+.scripts-grid.view-1 .card-image-container {
+    height: 100%;
+}
+
+.scripts-grid.view-1 .card-image,
+.scripts-grid.view-1 .card-placeholder-image {
+    height: 100%;
+    min-height: 240px;
+}
+
+.scripts-grid.view-1 .card-content {
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem 1.8rem;
+}
+
+.scripts-grid.view-1 .card-synopsis {
+    -webkit-line-clamp: 5;
+    flex-grow: 1;
+    margin-bottom: 1rem;
+}
+
+.scripts-grid.view-1 .card-tags {
+    margin-bottom: 1rem;
+}
+
+.scripts-grid.view-1 .card-buttons {
+    margin-top: auto;
+}
+
+/* Two columns */
+.scripts-grid.view-2 {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.scripts-grid.view-2 .script-card {
+    display: flex;
+    flex-direction: column;
+}
+
+.scripts-grid.view-2 .card-image-container,
+.scripts-grid.view-2 .card-image,
+.scripts-grid.view-2 .card-placeholder-image {
+    height: 180px;
+}
+
+.scripts-grid.view-2 .card-synopsis {
+    -webkit-line-clamp: 3;
+}
+
+/* Three columns */
+.scripts-grid.view-3 {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.scripts-grid.view-3 .script-card {
+    display: flex;
+    flex-direction: column;
+}
+
+.scripts-grid.view-3 .card-image-container,
+.scripts-grid.view-3 .card-image,
+.scripts-grid.view-3 .card-placeholder-image {
+    height: 150px;
+}
+
+.scripts-grid.view-3 .card-title {
+    font-size: 1.15rem;
+}
+
+.scripts-grid.view-3 .card-synopsis {
+    -webkit-line-clamp: 2;
+    font-size: 0.85rem;
+}
+
+.scripts-grid.view-3 .card-tags {
+    margin-bottom: 0.8rem;
+}
+
+.scripts-grid.view-3 .tag {
+    font-size: 0.7rem;
+    padding: 0.25rem 0.6rem;
+}
+
+.scripts-grid.view-3 .card-link {
+    font-size: 0.8rem;
+    padding: 0.5rem 0.9rem;
 }
 
 /* ===== SCRIPT CARD ===== */
@@ -720,6 +869,11 @@ header {
     .nav-count {
         display: none;
     }
+
+    /* Force 2 columns max on tablet */
+    .scripts-grid.view-3 {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 @media (max-width: 768px) {
@@ -766,8 +920,35 @@ header {
         padding: 1rem;
     }
 
-    .scripts-grid {
+    /* Force single column on mobile */
+    .scripts-grid,
+    .scripts-grid.view-1,
+    .scripts-grid.view-2,
+    .scripts-grid.view-3 {
+        grid-template-columns: 1fr !important;
+        max-width: 100%;
+    }
+
+    /* Stack cards vertically on mobile */
+    .scripts-grid.view-1 .script-card {
         grid-template-columns: 1fr;
+        min-height: auto;
+    }
+
+    .scripts-grid.view-1 .card-image,
+    .scripts-grid.view-1 .card-placeholder-image {
+        height: 180px;
+        min-height: 180px;
+    }
+
+    .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .view-controls {
+        width: 100%;
+        justify-content: space-between;
     }
 
     .section-title {
