@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Read script on The Immaterial Loom">
+    <meta name="theme-color" content="#6b3fa0">
+    
+    <title>Reading... | The Immaterial Loom</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Raleway:wght@300;400;500;600&family=Crimson+Pro:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+    
+    <!-- Marked.js for Markdown parsing -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    
+    <style>
+        :root {
+            --cosmic-black: #0a0a12;
+            --deep-space: #12101f;
+            --nebula-purple: #2d1b4e;
+            --stellar-purple: #6b3fa0;
+            --nova-pink: #d946a8;
+            --cosmic-pink: #f472b6;
+            --stardust: #e9d5ff;
+            --pure-light: #faf5ff;
+            --accent-blue: #1e3a5f;
+            --glow-purple: rgba(107, 63, 160, 0.5);
+            --glow-pink: rgba(217, 70, 168, 0.4);
+            --reading-bg: #13111d;
+            --reading-text: #e8e0f0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Raleway', sans-serif;
+            background: var(--cosmic-black);
+            color: var(--stardust);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Galaxy Background */
+        .galaxy-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: 
+                radial-gradient(ellipse at 20% 20%, rgba(107, 63, 160, 0.2) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(217, 70, 168, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 60% 30%, rgba(30, 58, 95, 0.3) 0%, transparent 40%),
+                linear-gradient(180deg, var(--cosmic-black) 0%, var(--deep-space) 50%, var(--cosmic-black) 100%);
+        }
+
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background-image: 
+                radial-gradient(1px 1px at 100px 50px, var(--stardust), transparent),
+                radial-gradient(1px 1px at 200px 150px, var(--cosmic-pink), transparent),
+                radial-gradient(1px 1px at 300px 100px, var(--pure-light), transparent),
+                radial-gradient(1px 1px at 400px 200px, var(--stardust), transparent),
+                radial-gradient(1px 1px at 500px 80px, var(--cosmic-pink), transparent);
+            background-size: 550px 300px;
+            opacity: 0.5;
+        }
+
+        /* Header */
+        header {
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid rgba(107, 63, 160, 0.3);
+            backdrop-filter: blur(10px);
+            background: rgba(10, 10, 18, 0.8);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--cosmic-pink);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.6rem 1rem;
+            border-radius: 25px;
+            border: 1px solid rgba(217, 70, 168, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            background: rgba(217, 70, 168, 0.2);
+            border-color: var(--nova-pink);
+        }
+
+        .back-link svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .logo-mini {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            text-decoration: none;
+        }
+
+        .logo-mini-icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--stellar-purple), var(--nova-pink));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            color: var(--pure-light);
+        }
+
+        .logo-mini-text {
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--stardust);
+        }
+
+        /* Main Content */
+        main {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 3rem 2rem 5rem;
+        }
+
+        /* Script Header */
+        .script-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(107, 63, 160, 0.3);
+        }
+
+        .script-category {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--cosmic-pink);
+            margin-bottom: 1rem;
+            padding: 0.4rem 1rem;
+            background: rgba(217, 70, 168, 0.15);
+            border-radius: 20px;
+            border: 1px solid rgba(217, 70, 168, 0.3);
+        }
+
+        .script-title {
+            font-family: 'Cinzel', serif;
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: var(--pure-light);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            background: linear-gradient(135deg, var(--pure-light) 0%, var(--cosmic-pink) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .script-tags {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .script-tag {
+            background: rgba(107, 63, 160, 0.3);
+            color: var(--stardust);
+            padding: 0.4rem 0.9rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            border: 1px solid rgba(107, 63, 160, 0.4);
+        }
+
+        .script-meta {
+            color: rgba(233, 213, 255, 0.6);
+            font-size: 0.9rem;
+        }
+
+        .script-meta a {
+            color: var(--cosmic-pink);
+            text-decoration: none;
+        }
+
+        .script-meta a:hover {
+            text-decoration: underline;
+        }
+
+        /* Reading Actions */
+        .reading-actions {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .action-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.7rem 1.4rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .action-btn.scriptbin {
+            background: rgba(107, 63, 160, 0.3);
+            color: var(--stardust);
+            border: 1px solid rgba(107, 63, 160, 0.5);
+        }
+
+        .action-btn.scriptbin:hover {
+            background: var(--stellar-purple);
+            box-shadow: 0 0 20px var(--glow-purple);
+        }
+
+        /* Script Content */
+        .script-content {
+            background: var(--reading-bg);
+            border-radius: 20px;
+            padding: 3rem;
+            border: 1px solid rgba(107, 63, 160, 0.2);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Markdown Styling */
+        .script-content h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            color: var(--pure-light);
+            margin: 2.5rem 0 1.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid rgba(107, 63, 160, 0.3);
+        }
+
+        .script-content h1:first-child {
+            margin-top: 0;
+        }
+
+        .script-content h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.4rem;
+            color: var(--cosmic-pink);
+            margin: 2rem 0 1rem;
+        }
+
+        .script-content h3 {
+            font-family: 'Raleway', sans-serif;
+            font-size: 1.1rem;
+            color: var(--stardust);
+            margin: 1.5rem 0 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .script-content p {
+            font-family: 'Crimson Pro', serif;
+            font-size: 1.15rem;
+            line-height: 1.9;
+            color: var(--reading-text);
+            margin-bottom: 1.2rem;
+        }
+
+        .script-content strong {
+            color: var(--cosmic-pink);
+            font-weight: 600;
+        }
+
+        .script-content em {
+            color: rgba(233, 213, 255, 0.7);
+            font-style: italic;
+        }
+
+        .script-content hr {
+            border: none;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--stellar-purple), transparent);
+            margin: 2.5rem 0;
+        }
+
+        .script-content blockquote {
+            border-left: 3px solid var(--nova-pink);
+            padding-left: 1.5rem;
+            margin: 1.5rem 0;
+            font-style: italic;
+            color: rgba(233, 213, 255, 0.8);
+        }
+
+        .script-content ul, .script-content ol {
+            margin: 1rem 0 1.5rem 1.5rem;
+            font-family: 'Crimson Pro', serif;
+            font-size: 1.15rem;
+            line-height: 1.8;
+            color: var(--reading-text);
+        }
+
+        .script-content li {
+            margin-bottom: 0.5rem;
+        }
+
+        .script-content code {
+            background: rgba(107, 63, 160, 0.3);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.95rem;
+        }
+
+        .script-content pre {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 1.5rem;
+            border-radius: 10px;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+        }
+
+        .script-content pre code {
+            background: none;
+            padding: 0;
+        }
+
+        /* Loading State */
+        .loading-state {
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(107, 63, 160, 0.3);
+            border-top-color: var(--nova-pink);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1.5rem;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .loading-state p {
+            color: var(--cosmic-pink);
+            font-size: 1.1rem;
+        }
+
+        /* Error State */
+        .error-state {
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+
+        .error-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .error-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            color: var(--pure-light);
+            margin-bottom: 1rem;
+        }
+
+        .error-message {
+            color: rgba(233, 213, 255, 0.7);
+            margin-bottom: 2rem;
+        }
+
+        .error-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem 1.5rem;
+            background: linear-gradient(135deg, var(--stellar-purple), var(--nova-pink));
+            color: var(--pure-light);
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .error-btn:hover {
+            box-shadow: 0 0 25px var(--glow-pink);
+            transform: translateY(-2px);
+        }
+
+        /* Footer Navigation */
+        .footer-nav {
+            max-width: 900px;
+            margin: 3rem auto 0;
+            padding: 2rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .script-title {
+                font-size: 2rem;
+            }
+
+            .script-content {
+                padding: 2rem 1.5rem;
+            }
+
+            .script-content p {
+                font-size: 1.05rem;
+            }
+
+            main {
+                padding: 2rem 1rem 4rem;
+            }
+
+            .logo-mini-text {
+                display: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .script-title {
+                font-size: 1.6rem;
+            }
+
+            .header-content {
+                flex-direction: row;
+            }
+
+            .back-link span {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="galaxy-bg"></div>
+    <div class="stars"></div>
+
+    <header>
+        <div class="header-content">
+            <a href="index.html" class="back-link">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+                <span>Back to Scripts</span>
+            </a>
+            <a href="index.html" class="logo-mini">
+                <div class="logo-mini-icon">✦</div>
+                <span class="logo-mini-text">The Immaterial Loom</span>
+            </a>
+        </div>
+    </header>
+
+    <main id="mainContent">
+        <div class="loading-state">
+            <div class="loading-spinner"></div>
+            <p>Loading script...</p>
+        </div>
+    </main>
+
+    <script>
+        // Configuration
+        const CONFIG = {
+            dataPath: './data/scripts.json'
+        };
+
+        // Get script ID from URL
+        function getScriptId() {
+            const params = new URLSearchParams(window.location.search);
+            return parseInt(params.get('id'));
+        }
+
+        // Format category name
+        function formatCategory(category) {
+            if (category === 'daytoday') return 'Day-to-Day';
+            if (category === 'scifi') return 'Sci-Fi';
+            return category.charAt(0).toUpperCase() + category.slice(1);
+        }
+
+        // Escape HTML
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Render error state
+        function renderError(message) {
+            document.getElementById('mainContent').innerHTML = `
+                <div class="error-state">
+                    <div class="error-icon">📜</div>
+                    <h1 class="error-title">Script Not Found</h1>
+                    <p class="error-message">${message}</p>
+                    <a href="index.html" class="error-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                        </svg>
+                        Return to Masterlist
+                    </a>
+                </div>
+            `;
+        }
+
+        // Render script page
+        function renderScript(script, content) {
+            // Update page title
+            document.title = `${script.title} | The Immaterial Loom`;
+
+            // Build artist credit
+            let artistHTML = '';
+            if (script.artist) {
+                if (script.artistLink) {
+                    artistHTML = `<span class="script-meta">Cover art by <a href="${escapeHtml(script.artistLink)}" target="_blank" rel="noopener noreferrer">${escapeHtml(script.artist)}</a></span>`;
+                } else {
+                    artistHTML = `<span class="script-meta">Cover art by ${escapeHtml(script.artist)}</span>`;
+                }
+            }
+
+            // Build Scriptbin button if link exists
+            let scriptbinBtn = '';
+            if (script.scriptbinLink && script.scriptbinLink !== '' && script.scriptbinLink !== '#') {
+                scriptbinBtn = `
+                    <a href="${escapeHtml(script.scriptbinLink)}" target="_blank" rel="noopener noreferrer" class="action-btn scriptbin">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                        </svg>
+                        Read on Scriptbin
+                    </a>
+                `;
+            }
+
+            // Parse markdown content
+            const parsedContent = marked.parse(content);
+
+            document.getElementById('mainContent').innerHTML = `
+                <article>
+                    <header class="script-header">
+                        <span class="script-category">${formatCategory(script.category)}</span>
+                        <h1 class="script-title">${escapeHtml(script.title)}</h1>
+                        <div class="script-tags">
+                            ${script.tags.map(tag => `<span class="script-tag">${escapeHtml(tag)}</span>`).join('')}
+                        </div>
+                        ${artistHTML}
+                        ${scriptbinBtn ? `<div class="reading-actions">${scriptbinBtn}</div>` : ''}
+                    </header>
+                    <div class="script-content">
+                        ${parsedContent}
+                    </div>
+                </article>
+                <nav class="footer-nav">
+                    <a href="index.html" class="back-link">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="18" height="18">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                        </svg>
+                        <span>Back to All Scripts</span>
+                    </a>
+                </nav>
+            `;
+        }
+
+        // Main initialization
+        async function init() {
+            const scriptId = getScriptId();
+
+            if (!scriptId) {
+                renderError('No script ID provided. Please select a script from the masterlist.');
+                return;
+            }
+
+            try {
+                // Load scripts data
+                const response = await fetch(CONFIG.dataPath);
+                if (!response.ok) throw new Error('Failed to load scripts data');
+                
+                const data = await response.json();
+                const script = data.scripts.find(s => s.id === scriptId);
+
+                if (!script) {
+                    renderError(`Script with ID ${scriptId} was not found.`);
+                    return;
+                }
+
+                // Check if script has a content file
+                if (!script.contentFile) {
+                    renderError('This script does not have content available for reading yet.');
+                    return;
+                }
+
+                // Load the markdown content
+                const contentResponse = await fetch(script.contentFile);
+                if (!contentResponse.ok) {
+                    renderError('Failed to load script content. The file may be missing.');
+                    return;
+                }
+
+                const content = await contentResponse.text();
+                renderScript(script, content);
+
+            } catch (error) {
+                console.error('Error:', error);
+                renderError('An error occurred while loading the script.');
+            }
+        }
+
+        // Start
+        init();
+    </script>
+</body>
+</html>
