@@ -22,6 +22,7 @@ let state = {
     scripts: [],
     currentCategory: 'all',
     searchQuery: '',
+    currentView: localStorage.getItem('scriptViewMode') || '1',
     isLoading: true,
     error: null
 };
@@ -32,7 +33,9 @@ const elements = {
     searchInput: document.getElementById('searchInput'),
     navItems: document.querySelectorAll('.nav-item'),
     sectionTitle: document.getElementById('sectionTitle'),
-    resultsCount: document.getElementById('resultsCount')
+    resultsCount: document.getElementById('resultsCount'),
+    viewToggle: document.getElementById('viewToggle'),
+    viewBtns: document.querySelectorAll('.view-btn')
 };
 
 // ===== DATA LOADING =====
@@ -321,11 +324,45 @@ function initializeEventListeners() {
             renderScripts();
         }
     });
+
+    // View toggle buttons
+    if (elements.viewToggle) {
+        elements.viewToggle.addEventListener('click', (e) => {
+            const btn = e.target.closest('.view-btn');
+            if (btn) {
+                const view = btn.dataset.view;
+                setView(view);
+            }
+        });
+    }
+}
+
+// ===== VIEW TOGGLE =====
+function setView(view) {
+    state.currentView = view;
+    
+    // Save preference to localStorage
+    localStorage.setItem('scriptViewMode', view);
+    
+    // Update button active states
+    elements.viewBtns.forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.view === view);
+    });
+    
+    // Update grid class
+    elements.scriptsGrid.className = `scripts-grid view-${view}`;
+}
+
+function initializeView() {
+    // Apply saved view preference
+    const savedView = state.currentView;
+    setView(savedView);
 }
 
 // ===== INITIALIZATION =====
 function initialize() {
     initializeEventListeners();
+    initializeView();
     loadScripts();
 }
 
