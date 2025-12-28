@@ -3,7 +3,7 @@
     {
       "id": 1,
       "title": "Your Tech-Priest needs help calming her nerves, can you help her?",
-      "category": "Warhammer 40K",
+      "category": "Warhammer ", 
       "tags": ["F4M", "Friends to Lovers", "Cute", "Tentacles"],
       "synopsis": "Your friend from the Adeptus Mechanicus is going to have a big day tomorrow, but asked you to go with her to a bar to calm her nerves, could it be that she wants something more from you?",
       "image": "https://r34i.paheal-cdn.net/d7/f8/d7f80cded738bf8b24f94aecb0acdc7c",
@@ -14,99 +14,15 @@
     },
     {
       "id": 2,
-      "title": "Stellar Exodus",
-      "category": "scifi",
-      "tags": ["space", "colony ships", "AI", "survival"],
-      "synopsis": "The last generation ship carries humanity's remnants across the void. When the AI begins making impossible demands, the crew must choose between obedience and extinction.",
-      "image": "",
-      "artist": "",
-      "artistLink": "",
-      "contentFile": "",
-      "scriptbinLink": ""
+      "title": "Evil sorceress gives one of her servants a unforgettable night",
+      "category": "fantasy", "Warhammer"
+      "tags": ["F4M", "Soft Fdom to Mean Fdom", "Plot Twist", "Magic"],
+      "synopsis": "The all powerful Sorceress of Ghrond requests that a servant is taken to her chambers, what awaits you there is so much more than you ever expected.",
+      "image": "https://img2.rule34.us/images/ff/f8/fff81466bec48f6f8611cd53b3f6bb1e.jpeg",
+      "artist": "@hellcrossH",
+      "artistLink": "https://x.com/hellcrossH",
+      "contentFile": "morathi.md",
+      "scriptbinLink": "https://scriptbin.works/u/Isapeth/f4m-an-evil-sorceress-rewards-one-of-her-faithful"
     },
-    {
-      "id": 3,
-      "title": "Coffee Shop Confessions",
-      "category": "daytoday",
-      "tags": ["romance", "slice of life", "modern", "dialogue-heavy"],
-      "synopsis": "Two strangers share a table at a crowded café. Over countless cups of coffee, they unravel each other's secrets, fears, and unexpected connections.",
-      "image": "",
-      "artist": "",
-      "artistLink": "",
-      "contentFile": "",
-      "scriptbinLink": ""
-    },
-    {
-      "id": 4,
-      "title": "Shadows of the Hive Fleet",
-      "category": "warhammer",
-      "tags": ["tyranids", "space marines", "40k", "horror"],
-      "synopsis": "A stranded squad of Ultramarines faces the endless hunger of Hive Fleet Leviathan. Their only hope lies in reaching a forgotten beacon before they're consumed.",
-      "image": "",
-      "artist": "",
-      "artistLink": "",
-      "contentFile": "",
-      "scriptbinLink": ""
-    },
-    {
-      "id": 5,
-      "title": "The Witch's Garden",
-      "category": "fantasy",
-      "tags": ["witchcraft", "nature", "mystery", "folklore"],
-      "synopsis": "In a village where nothing grows, a mysterious woman arrives with seeds that bloom in moonlight. But every flower she plants demands a price in memories.",
-      "image": "",
-      "artist": "Example Artist",
-      "artistLink": "https://twitter.com/example",
-      "contentFile": "",
-      "scriptbinLink": "https://scriptbin.works/u/YOUR_USERNAME/witchs-garden"
-    },
-    {
-      "id": 6,
-      "title": "Neural Divide",
-      "category": "scifi",
-      "tags": ["cyberpunk", "hacking", "corporations", "rebellion"],
-      "synopsis": "In a world where memories can be bought and sold, a black-market memory dealer stumbles upon footage that could bring down the megacorp controlling everything.",
-      "image": "",
-      "artist": "",
-      "artistLink": "",
-      "contentFile": "",
-      "scriptbinLink": ""
-    },
-    {
-      "id": 7,
-      "title": "The Last Bookstore",
-      "category": "daytoday",
-      "tags": ["drama", "family", "legacy", "coming-of-age"],
-      "synopsis": "When her grandmother passes, Maya inherits a failing bookstore and discovers journals revealing decades of secrets hidden between the shelves.",
-      "image": "",
-      "artist": "",
-      "artistLink": "",
-      "contentFile": "",
-      "scriptbinLink": ""
-    },
-    {
-      "id": 8,
-      "title": "Crusade of Iron",
-      "category": "warhammer",
-      "tags": ["black templars", "crusade", "30k", "faith"],
-      "synopsis": "A Black Templar chaplain questions his faith when a miracle on a dying world reveals truths about the Emperor that could shake the Imperium.",
-      "image": "",
-      "artist": "",
-      "artistLink": "",
-      "contentFile": "",
-      "scriptbinLink": ""
-    },
-    {
-      "id": 9,
-      "title": "Echoes of Eldoria",
-      "category": "fantasy",
-      "tags": ["elves", "ancient ruins", "prophecy", "epic"],
-      "synopsis": "An elven archaeologist uncovers a city that shouldn't exist—one that fell before her people were even born. Its awakening threatens to rewrite history.",
-      "image": "",
-      "artist": "",
-      "artistLink": "",
-      "contentFile": "",
-      "scriptbinLink": ""
-    }
   ]
 }
