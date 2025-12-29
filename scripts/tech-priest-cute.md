@@ -57,7 +57,9 @@ Oh, by the Omnissiah, you kissed me!
 
 **[Embarrassed]** I never thought we would do this, I have wanted it so much and for so long!
 
-**[Fumbling over her words, embarrassed]** I never thought you liked me! A cog-girl ! I’m not beautiful, you’re so much more handsome, and strong and kind, this is too good to be true, are you sure that… **[Interrupted]**
+**[Fumbling over her words, embarrassed]** I never thought you liked me! A cog-girl !
+
+I’m not beautiful, you’re so much more handsome, and strong and kind, this is too good to be true, are you sure that… **[Interrupted]**
 
 **< Kissing, short moans >**
 
@@ -103,9 +105,9 @@ Please don’t stop rubbing!
 
 I’ve wanted this for so long…
 
-*[Out of breath]** Why did you stop? What are you… [moaning
+**[Out of breath]** Why did you stop? What are you… [moaning
 
-Oh! Your tongue! It is so warm and so good!
+Oh! Your tongue! It is so warm and feels so good!
 
 And I thought I was horny before! I’m needy now! Please, don’t stop!
 
