@@ -6,7 +6,7 @@ Rune priest and Magos Biologis - Ranks in the organization of the character.
 
 Omnissiah - Used as God, hard to separate it from the setting.
 
-**<...>** = Sound Effects
+**<...>** = Sound Effect   
 **[...]** = Actions/Intonations
 
 **< Ambient dinner/bar sounds >**
