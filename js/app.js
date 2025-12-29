@@ -144,11 +144,11 @@ function createScriptCard(script, index) {
         ? 'Day-to-Day' 
         : script.category.charAt(0).toUpperCase() + script.category.slice(1);
 
-    // Handle artist credit
+    // Handle artist credit - now placed below image
     let artistCreditHTML = '';
     if (script.artist) {
         if (script.artistLink) {
-            artistCreditHTML = `<div class="card-artist-credit">Art by <a href="${escapeHtml(script.artistLink)}" target="_blank" rel="noopener noreferrer">${escapeHtml(script.artist)}</a></div>`;
+            artistCreditHTML = `<div class="card-artist-credit">Art by <a href="${escapeHtml(script.artistLink)}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();">${escapeHtml(script.artist)}</a></div>`;
         } else {
             artistCreditHTML = `<div class="card-artist-credit">Art by ${escapeHtml(script.artist)}</div>`;
         }
@@ -158,17 +158,28 @@ function createScriptCard(script, index) {
     const imageHTML = script.image 
         ? `<div class="card-image-container">
                <img src="${script.image}" alt="${escapeHtml(script.title)}" class="card-image" loading="lazy">
-               ${artistCreditHTML}
-           </div>`
+           </div>${artistCreditHTML}`
         : `<div class="card-image-container">
                <div class="card-placeholder-image">${icon}</div>
-               ${artistCreditHTML}
-           </div>`;
+           </div>${artistCreditHTML}`;
 
-    // Generate tags HTML
-    const tagsHTML = script.tags
-        .map(tag => `<span class="tag" data-tag="${escapeHtml(tag)}">${escapeHtml(tag)}</span>`)
+    // Generate tags HTML with limit of 5 visible
+    const maxVisibleTags = 5;
+    const totalTags = script.tags.length;
+    const hasMoreTags = totalTags > maxVisibleTags;
+    
+    let tagsHTML = script.tags
+        .map((tag, idx) => {
+            const hiddenClass = idx >= maxVisibleTags ? 'hidden' : '';
+            return `<span class="tag ${hiddenClass}" data-tag="${escapeHtml(tag)}" onclick="event.stopPropagation(); handleTagClick('${escapeHtml(tag)}');">${escapeHtml(tag)}</span>`;
+        })
         .join('');
+    
+    // Add expand button if there are more than 5 tags
+    if (hasMoreTags) {
+        const hiddenCount = totalTags - maxVisibleTags;
+        tagsHTML += `<button class="tag-expand-btn" onclick="event.stopPropagation(); toggleTags(this);" data-expanded="false">+${hiddenCount} more</button>`;
+    }
 
     // Build action buttons
     let buttonsHTML = '<div class="card-buttons">';
@@ -176,7 +187,7 @@ function createScriptCard(script, index) {
     // "Read Now" button - only show if contentFile exists
     if (script.contentFile && script.contentFile !== '') {
         buttonsHTML += `
-            <a href="reader.html?id=${script.id}" class="card-link card-link-primary">
+            <a href="reader.html?id=${script.id}" class="card-link card-link-primary" onclick="event.stopPropagation();">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                 </svg>
@@ -188,7 +199,7 @@ function createScriptCard(script, index) {
     // "Read on Scriptbin" button - only show if scriptbinLink exists
     if (script.scriptbinLink && script.scriptbinLink !== '' && script.scriptbinLink !== '#') {
         buttonsHTML += `
-            <a href="${escapeHtml(script.scriptbinLink)}" class="card-link card-link-secondary" target="_blank" rel="noopener noreferrer">
+            <a href="${escapeHtml(script.scriptbinLink)}" class="card-link card-link-secondary" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                 </svg>
@@ -212,8 +223,12 @@ function createScriptCard(script, index) {
     
     buttonsHTML += '</div>';
 
+    // Determine click destination
+    const hasContent = script.contentFile && script.contentFile !== '';
+    const clickHandler = hasContent ? `onclick="window.location.href='reader.html?id=${script.id}';"` : '';
+
     return `
-        <article class="script-card" style="animation-delay: ${index * 0.05}s">
+        <article class="script-card" style="animation-delay: ${index * 0.05}s" ${clickHandler}>
             ${imageHTML}
             <div class="card-content">
                 <span class="card-category">${categoryDisplay}</span>
@@ -228,6 +243,40 @@ function createScriptCard(script, index) {
     `;
 }
 
+// Toggle tags visibility
+function toggleTags(btn) {
+    const tagsContainer = btn.parentElement;
+    const hiddenTags = tagsContainer.querySelectorAll('.tag.hidden');
+    const isExpanded = btn.dataset.expanded === 'true';
+    
+    if (isExpanded) {
+        // Collapse - hide tags beyond first 5
+        const allTags = tagsContainer.querySelectorAll('.tag');
+        allTags.forEach((tag, idx) => {
+            if (idx >= 5) {
+                tag.classList.add('hidden');
+            }
+        });
+        const hiddenCount = allTags.length - 5;
+        btn.textContent = `+${hiddenCount} more`;
+        btn.dataset.expanded = 'false';
+    } else {
+        // Expand - show all tags
+        hiddenTags.forEach(tag => {
+            tag.classList.remove('hidden');
+        });
+        btn.textContent = 'Show less';
+        btn.dataset.expanded = 'true';
+    }
+}
+
+// Handle tag click for search
+function handleTagClick(tag) {
+    elements.searchInput.value = tag;
+    state.searchQuery = tag;
+    renderScripts();
+}
+
 function renderScripts() {
     const filtered = filterScripts();
     
@@ -237,28 +286,11 @@ function renderScripts() {
         elements.scriptsGrid.innerHTML = filtered
             .map((script, index) => createScriptCard(script, index))
             .join('');
-        
-        // Add click handlers for tags
-        attachTagClickHandlers();
     }
 
     // Update results count
     const countText = filtered.length === 1 ? '1 script' : `${filtered.length} scripts`;
     elements.resultsCount.textContent = `Showing ${countText}`;
-}
-
-// ===== TAG CLICK HANDLING =====
-function attachTagClickHandlers() {
-    const tags = document.querySelectorAll('.tag');
-    tags.forEach(tag => {
-        tag.addEventListener('click', (e) => {
-            e.preventDefault();
-            const tagValue = tag.dataset.tag;
-            elements.searchInput.value = tagValue;
-            state.searchQuery = tagValue;
-            renderScripts();
-        });
-    });
 }
 
 // ===== CATEGORY SWITCHING =====
