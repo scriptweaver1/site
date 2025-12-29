@@ -158,10 +158,12 @@ function createScriptCard(script, index) {
     const imageHTML = script.image 
         ? `<div class="card-image-container">
                <img src="${script.image}" alt="${escapeHtml(script.title)}" class="card-image" loading="lazy">
-           </div>${artistCreditHTML}`
+               ${artistCreditHTML}
+           </div>`
         : `<div class="card-image-container">
                <div class="card-placeholder-image">${icon}</div>
-           </div>${artistCreditHTML}`;
+               ${artistCreditHTML}
+           </div>`;
 
     // Generate tags HTML with limit of 5 visible
     const maxVisibleTags = 5;
