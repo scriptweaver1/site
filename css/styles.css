@@ -600,6 +600,7 @@ header {
     object-fit: cover;
     object-position: center;
     display: block;
+    border-bottom: 1px solid rgba(107, 63, 160, 0.2);
 }
 
 .card-placeholder-image {
@@ -610,6 +611,7 @@ header {
     align-items: center;
     justify-content: center;
     font-size: 3rem;
+    border-bottom: 1px solid rgba(107, 63, 160, 0.2);
     position: relative;
     overflow: hidden;
 }
@@ -629,12 +631,15 @@ header {
 }
 
 .card-artist-credit {
-    padding: 0.4rem 0.8rem;
-    background: rgba(10, 10, 18, 0.6);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 0.5rem 0.8rem;
+    background: linear-gradient(transparent, rgba(10, 10, 18, 0.9));
     font-size: 0.7rem;
     color: rgba(233, 213, 255, 0.7);
     text-align: right;
-    border-bottom: 1px solid rgba(107, 63, 160, 0.2);
 }
 
 .card-artist-credit a {
