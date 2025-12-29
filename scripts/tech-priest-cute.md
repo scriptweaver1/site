@@ -1,13 +1,13 @@
-##Glossary:
+**Glossary:**
 
-#Mechadendrites - Extra limbs, too many types to list them all, but these ones in specific are tentacle shaped. I wonder why? ;)
+Mechadendrites - Extra limbs, too many types to list them all, but these ones in specific are tentacle shaped. I wonder why? ;)
 
-#Rune priest and Magos Biologis - Ranks in the organization of the character.
+Rune priest and Magos Biologis - Ranks in the organization of the character.
 
-#Omnissiah - Used as God, hard to separate it from the setting.
+Omnissiah - Used as God, hard to separate it from the setting.
 
-#**<...>** = Sound Effects
-#**[...]** = Actions/Intonations
+**<...>** = Sound Effects
+**[...]** = Actions/Intonations
 
 **< Ambient dinner/bar sounds >**
 
