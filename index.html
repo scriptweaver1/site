@@ -15,8 +15,149 @@
     
     <!-- Styles -->
     <link rel="stylesheet" href="css/styles.css">
+
+    <!-- Age Verification Modal Styles -->
+    <style>
+        .age-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 10, 18, 0.97);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .age-modal-overlay.hidden {
+            display: none;
+        }
+
+        .age-modal {
+            background: linear-gradient(160deg, rgba(45, 27, 78, 0.9) 0%, rgba(18, 16, 31, 0.95) 100%);
+            border: 1px solid rgba(217, 70, 168, 0.4);
+            border-radius: 24px;
+            padding: 3rem;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 
+                0 0 60px rgba(217, 70, 168, 0.3),
+                0 20px 60px rgba(0, 0, 0, 0.5);
+            animation: modalFadeIn 0.4s ease;
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9) translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .age-modal-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .age-modal-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #faf5ff;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #faf5ff 0%, #f472b6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .age-modal-text {
+            font-family: 'Raleway', sans-serif;
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: #e9d5ff;
+            margin-bottom: 2rem;
+        }
+
+        .age-modal-text strong {
+            color: #f472b6;
+        }
+
+        .age-modal-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .age-modal-btn {
+            padding: 0.9rem 2.5rem;
+            border-radius: 30px;
+            font-family: 'Raleway', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            min-width: 140px;
+        }
+
+        .age-modal-btn.proceed {
+            background: linear-gradient(135deg, #6b3fa0, #d946a8);
+            color: #faf5ff;
+            box-shadow: 0 0 20px rgba(217, 70, 168, 0.4);
+        }
+
+        .age-modal-btn.proceed:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 35px rgba(217, 70, 168, 0.6);
+        }
+
+        .age-modal-btn.leave {
+            background: transparent;
+            color: #e9d5ff;
+            border: 1px solid rgba(107, 63, 160, 0.5);
+        }
+
+        .age-modal-btn.leave:hover {
+            background: rgba(107, 63, 160, 0.3);
+            border-color: rgba(107, 63, 160, 0.8);
+        }
+
+        /* Hide main content until verified */
+        body.age-unverified header,
+        body.age-unverified main {
+            filter: blur(15px);
+            pointer-events: none;
+            user-select: none;
+        }
+    </style>
 </head>
-<body>
+<body class="age-unverified">
+    <!-- Age Verification Modal -->
+    <div class="age-modal-overlay" id="ageModal">
+        <div class="age-modal">
+            <div class="age-modal-icon">⚠️</div>
+            <h2 class="age-modal-title">Age Verification Required</h2>
+            <p class="age-modal-text">
+                This site contains <strong>explicit sexual content</strong>, meant to be viewed only by adults.
+                <br><br>
+                By continuing, you acknowledge that you are <strong>18 years of age or older</strong>.
+            </p>
+            <div class="age-modal-buttons">
+                <button class="age-modal-btn proceed" onclick="verifyAge()">Proceed</button>
+                <button class="age-modal-btn leave" onclick="leaveSite()">Leave</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Background Effects -->
     <div class="galaxy-bg"></div>
     <div class="stars"></div>
@@ -30,15 +171,15 @@
             </div>
             
             <div class="social-buttons">
-                <a href="https://ko-fi.com/TheScriptweaver" target="_blank" rel="noopener noreferrer" class="social-btn kofi">
+                <a href="https://ko-fi.com/YOUR_KOFI" target="_blank" rel="noopener noreferrer" class="social-btn kofi">
                     <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.881 8.948c-.773-4.085-4.859-4.593-4.859-4.593H.723c-.604 0-.679.798-.679.798s-.082 7.324-.022 11.822c.164 2.424 2.586 2.672 2.586 2.672s8.267-.023 11.966-.049c2.438-.426 2.683-2.566 2.658-3.734 4.352.24 7.422-2.831 6.649-6.916zm-11.062 3.511c-1.246 1.453-4.011 3.976-4.011 3.976s-.121.119-.31.023c-.076-.057-.108-.09-.108-.09-.443-.441-3.368-3.049-4.034-3.954-.709-.965-1.041-2.7-.091-3.71.951-1.01 3.005-1.086 4.363.407 0 0 1.565-1.782 3.468-.963 1.904.82 1.832 3.011.723 4.311zm6.173.478c-.928.116-1.682.028-1.682.028V7.284h1.77s1.971.551 1.971 2.638c0 1.913-.985 2.667-2.059 3.015z"/></svg>
                     <span>Ko-fi</span>
                 </a>
-                <a href=https://www.reddit.com/user/The-Scriptweaver/submitted/" target="_blank" rel="noopener noreferrer" class="social-btn reddit">
+                <a href="https://reddit.com/u/YOUR_REDDIT" target="_blank" rel="noopener noreferrer" class="social-btn reddit">
                     <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-2.498.056l-2.597-.547-.8 3.747c1.824.07 3.48.632 4.674 1.488.308-.309.73-.491 1.207-.491.968 0 1.754.786 1.754 1.754 0 .716-.435 1.333-1.01 1.614a3.111 3.111 0 0 1 .042.52c0 2.694-3.13 4.87-7.004 4.87-3.874 0-7.004-2.176-7.004-4.87 0-.183.015-.366.043-.534A1.748 1.748 0 0 1 4.028 12c0-.968.786-1.754 1.754-1.754.463 0 .898.196 1.207.49 1.207-.883 2.878-1.43 4.744-1.487l.885-4.182a.342.342 0 0 1 .14-.197.35.35 0 0 1 .238-.042l2.906.617a1.214 1.214 0 0 1 1.108-.701zM9.25 12C8.561 12 8 12.562 8 13.25c0 .687.561 1.248 1.25 1.248.687 0 1.248-.561 1.248-1.249 0-.688-.561-1.249-1.249-1.249zm5.5 0c-.687 0-1.248.561-1.248 1.25 0 .687.561 1.248 1.249 1.248.688 0 1.249-.561 1.249-1.249 0-.687-.562-1.249-1.25-1.249zm-5.466 3.99a.327.327 0 0 0-.231.094.33.33 0 0 0 0 .463c.842.842 2.484.913 2.961.913.477 0 2.105-.056 2.961-.913a.361.361 0 0 0 .029-.463.33.33 0 0 0-.464 0c-.547.533-1.684.73-2.512.73-.828 0-1.979-.196-2.512-.73a.326.326 0 0 0-.232-.095z"/></svg>
                     <span>Reddit</span>
                 </a>
-                <a href="https://www.patreon.com/cw/The_Scriptweaver" target="_blank" rel="noopener noreferrer" class="social-btn patreon">
+                <a href="https://patreon.com/YOUR_PATREON" target="_blank" rel="noopener noreferrer" class="social-btn patreon">
                     <svg viewBox="0 0 24 24" fill="currentColor"><path d="M15.386.524c-4.764 0-8.64 3.876-8.64 8.64 0 4.75 3.876 8.613 8.64 8.613 4.75 0 8.614-3.864 8.614-8.613C24 4.4 20.136.524 15.386.524M.003 23.537h4.22V.524H.003"/></svg>
                     <span>Patreon</span>
                 </a>
@@ -129,5 +270,36 @@
 
     <!-- Application Script -->
     <script src="js/app.js"></script>
+
+    <!-- Age Verification Script -->
+    <script>
+        // Check if user has already verified age
+        function checkAgeVerification() {
+            const verified = localStorage.getItem('ageVerified');
+            if (verified === 'true') {
+                hideAgeModal();
+            }
+        }
+
+        // User clicked "Proceed"
+        function verifyAge() {
+            localStorage.setItem('ageVerified', 'true');
+            hideAgeModal();
+        }
+
+        // User clicked "Leave"
+        function leaveSite() {
+            window.location.href = 'https://www.google.com';
+        }
+
+        // Hide the modal and show the site
+        function hideAgeModal() {
+            document.getElementById('ageModal').classList.add('hidden');
+            document.body.classList.remove('age-unverified');
+        }
+
+        // Check on page load
+        checkAgeVerification();
+    </script>
 </body>
 </html>
