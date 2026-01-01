@@ -468,46 +468,209 @@
 
         .related-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.2rem;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
         }
 
-        .related-card {
-            background: rgba(18, 16, 31, 0.8);
-            border-radius: 12px;
-            padding: 1.2rem;
+        /* Full Card Styles for Related Scripts */
+        .related-section .script-card {
+            background: linear-gradient(160deg, rgba(45, 27, 78, 0.6) 0%, rgba(18, 16, 31, 0.9) 100%);
             border: 1px solid rgba(107, 63, 160, 0.3);
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: block;
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            position: relative;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
         }
 
-        .related-card:hover {
+        .related-section .script-card:hover {
             border-color: var(--nova-pink);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(217, 70, 168, 0.2);
         }
 
-        .related-card-title {
-            font-family: 'Cinzel', serif;
-            font-size: 1rem;
-            color: var(--pure-light);
+        .related-section .card-image-container {
+            position: relative;
+            overflow: hidden;
+            height: 200px;
+        }
+
+        .related-section .card-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .related-section .script-card:hover .card-image {
+            transform: scale(1.05);
+        }
+
+        .related-section .card-placeholder-image {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(107, 63, 160, 0.3), rgba(217, 70, 168, 0.2));
+            font-size: 3rem;
+        }
+
+        .related-section .card-artist-credit {
+            position: absolute;
+            bottom: 0.6rem;
+            right: 0.6rem;
+            background: rgba(10, 10, 18, 0.85);
+            padding: 0.3rem 0.7rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            color: rgba(233, 213, 255, 0.8);
+            backdrop-filter: blur(4px);
+        }
+
+        .related-section .card-artist-credit a {
+            color: var(--cosmic-pink);
+            text-decoration: none;
+        }
+
+        .related-section .card-artist-credit a:hover {
+            text-decoration: underline;
+        }
+
+        .related-section .card-content {
+            padding: 1.3rem 1.5rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .related-section .card-category {
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--cosmic-pink);
             margin-bottom: 0.5rem;
+        }
+
+        .related-section .card-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--pure-light);
+            margin-bottom: 0.8rem;
             line-height: 1.3;
         }
 
-        .related-card-tags {
+        .related-section .card-tags {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.3rem;
+            gap: 0.4rem;
+            margin-bottom: 0.8rem;
         }
 
-        .related-card-tag {
-            font-size: 0.7rem;
-            padding: 0.2rem 0.5rem;
+        .related-section .tag {
             background: rgba(107, 63, 160, 0.3);
-            border-radius: 10px;
             color: var(--stardust);
+            padding: 0.3rem 0.7rem;
+            border-radius: 15px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            border: 1px solid rgba(107, 63, 160, 0.4);
+            transition: all 0.2s ease;
+        }
+
+        .related-section .tag.hidden {
+            display: none;
+        }
+
+        .related-section .tag-expand-btn {
+            background: rgba(217, 70, 168, 0.2);
+            color: var(--cosmic-pink);
+            padding: 0.3rem 0.7rem;
+            border-radius: 15px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            border: 1px solid rgba(217, 70, 168, 0.4);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .related-section .tag-expand-btn:hover {
+            background: rgba(217, 70, 168, 0.4);
+        }
+
+        .related-section .card-synopsis {
+            color: rgba(233, 213, 255, 0.8);
+            font-size: 0.85rem;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            flex: 1;
+        }
+
+        .related-section .card-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: auto;
+        }
+
+        .related-section .card-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            color: var(--cosmic-pink);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+            padding: 0.5rem 0.9rem;
+            border-radius: 20px;
+            border: 1px solid var(--nova-pink);
+            background: transparent;
+        }
+
+        .related-section .card-link-primary {
+            background: linear-gradient(135deg, var(--stellar-purple), var(--nova-pink));
+            color: var(--pure-light);
+            border: none;
+        }
+
+        .related-section .card-link-primary:hover {
+            box-shadow: 0 0 20px var(--glow-pink);
+            transform: translateY(-2px);
+        }
+
+        .related-section .card-link-secondary {
+            background: transparent;
+            color: var(--cosmic-pink);
+            border: 1px solid rgba(217, 70, 168, 0.5);
+        }
+
+        .related-section .card-link-secondary:hover {
+            background: rgba(217, 70, 168, 0.2);
+            border-color: var(--nova-pink);
+        }
+
+        .related-section .card-link svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .related-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .related-section .card-image-container {
+                height: 250px;
+            }
         }
 
         /* Reading Actions - Removed as Scriptbin button is removed from this page */
@@ -1196,14 +1359,7 @@
             if (allScripts && allScripts.length > 1) {
                 const relatedScripts = findRelatedScripts(script, allScripts, 3);
                 if (relatedScripts.length > 0) {
-                    const relatedCards = relatedScripts.map(related => `
-                        <a href="reader.html?id=${related.id}" class="related-card">
-                            <h4 class="related-card-title">${escapeHtml(related.title)}</h4>
-                            <div class="related-card-tags">
-                                ${related.tags.slice(0, 3).map(tag => `<span class="related-card-tag">${escapeHtml(tag)}</span>`).join('')}
-                            </div>
-                        </a>
-                    `).join('');
+                    const relatedCards = relatedScripts.map(related => createRelatedCard(related)).join('');
 
                     relatedHTML = `
                         <div class="related-section">
@@ -1265,6 +1421,132 @@
             // Sort by score descending and take top N
             scored.sort((a, b) => b.score - a.score);
             return scored.slice(0, count).filter(s => s.score > 0).map(s => s.script);
+        }
+
+        // Create full card HTML for related scripts
+        function createRelatedCard(script) {
+            const categoryIcons = {
+                fantasy: '🐉',
+                scifi: '🚀',
+                daytoday: '☕',
+                warhammer: '⚔️'
+            };
+            const icon = categoryIcons[script.category] || '✨';
+            
+            // Format category display name
+            const categoryDisplay = script.category === 'daytoday' 
+                ? 'Day-to-Day' 
+                : script.category === 'scifi'
+                    ? 'Sci-Fi'
+                    : script.category.charAt(0).toUpperCase() + script.category.slice(1);
+
+            // Handle artist credit
+            let artistCreditHTML = '';
+            if (script.artist) {
+                if (script.artistLink) {
+                    artistCreditHTML = `<div class="card-artist-credit">Art by <a href="${escapeHtml(script.artistLink)}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();">${escapeHtml(script.artist)}</a></div>`;
+                } else {
+                    artistCreditHTML = `<div class="card-artist-credit">Art by ${escapeHtml(script.artist)}</div>`;
+                }
+            }
+
+            // Handle image
+            const imageHTML = script.image 
+                ? `<div class="card-image-container">
+                       <img src="${script.image}" alt="${escapeHtml(script.title)}" class="card-image" loading="lazy">
+                       ${artistCreditHTML}
+                   </div>`
+                : `<div class="card-image-container">
+                       <div class="card-placeholder-image">${icon}</div>
+                       ${artistCreditHTML}
+                   </div>`;
+
+            // Generate tags HTML with limit of 5 visible
+            const maxVisibleTags = 5;
+            const totalTags = script.tags.length;
+            const hasMoreTags = totalTags > maxVisibleTags;
+            
+            let tagsHTML = script.tags
+                .map((tag, idx) => {
+                    const hiddenClass = idx >= maxVisibleTags ? 'hidden' : '';
+                    return `<span class="tag ${hiddenClass}">${escapeHtml(tag)}</span>`;
+                })
+                .join('');
+            
+            if (hasMoreTags) {
+                const hiddenCount = totalTags - maxVisibleTags;
+                tagsHTML += `<button class="tag-expand-btn" onclick="event.stopPropagation(); toggleRelatedTags(this);" data-expanded="false">+${hiddenCount} more</button>`;
+            }
+
+            // Build action buttons
+            let buttonsHTML = '<div class="card-buttons">';
+            
+            if (script.contentFile && script.contentFile !== '') {
+                buttonsHTML += `
+                    <a href="reader.html?id=${script.id}" class="card-link card-link-primary" onclick="event.stopPropagation();">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                        </svg>
+                        Read Now
+                    </a>
+                `;
+            }
+            
+            if (script.scriptbinLink && script.scriptbinLink !== '' && script.scriptbinLink !== '#') {
+                buttonsHTML += `
+                    <a href="${escapeHtml(script.scriptbinLink)}" class="card-link card-link-secondary" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                        </svg>
+                        Scriptbin
+                    </a>
+                `;
+            }
+            
+            buttonsHTML += '</div>';
+
+            const hasContent = script.contentFile && script.contentFile !== '';
+            const clickHandler = hasContent ? `onclick="window.location.href='reader.html?id=${script.id}';"` : '';
+
+            return `
+                <article class="script-card" ${clickHandler}>
+                    ${imageHTML}
+                    <div class="card-content">
+                        <span class="card-category">${categoryDisplay}</span>
+                        <h3 class="card-title">${escapeHtml(script.title)}</h3>
+                        <div class="card-tags">
+                            ${tagsHTML}
+                        </div>
+                        <p class="card-synopsis">${escapeHtml(script.synopsis)}</p>
+                        ${buttonsHTML}
+                    </div>
+                </article>
+            `;
+        }
+
+        // Toggle tags in related cards
+        function toggleRelatedTags(btn) {
+            const tagsContainer = btn.parentElement;
+            const hiddenTags = tagsContainer.querySelectorAll('.tag.hidden');
+            const isExpanded = btn.dataset.expanded === 'true';
+            
+            if (isExpanded) {
+                const allTags = tagsContainer.querySelectorAll('.tag');
+                allTags.forEach((tag, idx) => {
+                    if (idx >= 5) {
+                        tag.classList.add('hidden');
+                    }
+                });
+                const hiddenCount = allTags.length - 5;
+                btn.textContent = `+${hiddenCount} more`;
+                btn.dataset.expanded = 'false';
+            } else {
+                hiddenTags.forEach(tag => {
+                    tag.classList.remove('hidden');
+                });
+                btn.textContent = 'Show less';
+                btn.dataset.expanded = 'true';
+            }
         }
 
         // Copy to clipboard function
