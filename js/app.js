@@ -23,6 +23,9 @@ let state = {
     currentCategory: 'all',
     searchQuery: '',
     currentView: localStorage.getItem('scriptViewMode') || '1',
+    sortOrder: localStorage.getItem('scriptSortOrder') || 'newest',
+    showFavoritesOnly: false,
+    favorites: JSON.parse(localStorage.getItem('scriptFavorites')) || [],
     isLoading: true,
     error: null
 };
@@ -35,8 +38,72 @@ const elements = {
     sectionTitle: document.getElementById('sectionTitle'),
     resultsCount: document.getElementById('resultsCount'),
     viewToggle: document.getElementById('viewToggle'),
-    viewBtns: document.querySelectorAll('.view-btn')
+    viewBtns: document.querySelectorAll('.view-btn'),
+    sortSelect: document.getElementById('sortSelect'),
+    favoritesToggle: document.getElementById('favoritesToggle'),
+    randomBtn: document.getElementById('randomBtn')
 };
+
+// ===== FAVORITES FUNCTIONS =====
+function getFavorites() {
+    return state.favorites;
+}
+
+function saveFavorites() {
+    localStorage.setItem('scriptFavorites', JSON.stringify(state.favorites));
+}
+
+function isFavorite(scriptId) {
+    return state.favorites.includes(scriptId);
+}
+
+function toggleFavorite(scriptId) {
+    const index = state.favorites.indexOf(scriptId);
+    if (index > -1) {
+        state.favorites.splice(index, 1);
+    } else {
+        state.favorites.push(scriptId);
+    }
+    saveFavorites();
+    renderScripts();
+}
+
+// ===== SORTING FUNCTIONS =====
+function sortScripts(scripts) {
+    const sorted = [...scripts];
+    
+    switch (state.sortOrder) {
+        case 'newest':
+            sorted.sort((a, b) => {
+                const dateA = a.dateAdded ? new Date(a.dateAdded) : new Date(0);
+                const dateB = b.dateAdded ? new Date(b.dateAdded) : new Date(0);
+                return dateB - dateA;
+            });
+            break;
+        case 'oldest':
+            sorted.sort((a, b) => {
+                const dateA = a.dateAdded ? new Date(a.dateAdded) : new Date(0);
+                const dateB = b.dateAdded ? new Date(b.dateAdded) : new Date(0);
+                return dateA - dateB;
+            });
+            break;
+        case 'alphabetical':
+            sorted.sort((a, b) => a.title.localeCompare(b.title));
+            break;
+    }
+    
+    return sorted;
+}
+
+// ===== RANDOM SCRIPT =====
+function goToRandomScript() {
+    const scriptsWithContent = state.scripts.filter(s => s.contentFile && s.contentFile !== '');
+    if (scriptsWithContent.length > 0) {
+        const randomIndex = Math.floor(Math.random() * scriptsWithContent.length);
+        const randomScript = scriptsWithContent[randomIndex];
+        window.location.href = `reader.html?id=${randomScript.id}`;
+    }
+}
 
 // ===== DATA LOADING =====
 async function loadScripts() {
@@ -75,6 +142,11 @@ function filterScripts() {
         filtered = filtered.filter(script => script.category === state.currentCategory);
     }
 
+    // Filter by favorites only
+    if (state.showFavoritesOnly) {
+        filtered = filtered.filter(script => isFavorite(script.id));
+    }
+
     // Filter by search query
     if (state.searchQuery.trim()) {
         const query = state.searchQuery.toLowerCase().trim();
@@ -86,6 +158,9 @@ function filterScripts() {
             return titleMatch || tagsMatch || synopsisMatch || categoryMatch;
         });
     }
+
+    // Apply sorting
+    filtered = sortScripts(filtered);
 
     return filtered;
 }
@@ -144,6 +219,20 @@ function createScriptCard(script, index) {
         ? 'Day-to-Day' 
         : script.category.charAt(0).toUpperCase() + script.category.slice(1);
 
+    // Check if favorited
+    const isFav = isFavorite(script.id);
+    const favClass = isFav ? 'favorited' : '';
+    const favFill = isFav ? 'var(--nova-pink)' : 'none';
+
+    // Favorite button HTML
+    const favoriteBtn = `
+        <button class="card-favorite-btn ${favClass}" onclick="event.stopPropagation(); toggleFavorite(${script.id});" title="${isFav ? 'Remove from favorites' : 'Add to favorites'}">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="${favFill}" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+            </svg>
+        </button>
+    `;
+
     // Handle artist credit - now placed below image
     let artistCreditHTML = '';
     if (script.artist) {
@@ -157,10 +246,12 @@ function createScriptCard(script, index) {
     // Handle image (use placeholder if no image provided)
     const imageHTML = script.image 
         ? `<div class="card-image-container">
+               ${favoriteBtn}
                <img src="${script.image}" alt="${escapeHtml(script.title)}" class="card-image" loading="lazy">
                ${artistCreditHTML}
            </div>`
         : `<div class="card-image-container">
+               ${favoriteBtn}
                <div class="card-placeholder-image">${icon}</div>
                ${artistCreditHTML}
            </div>`;
@@ -368,6 +459,30 @@ function initializeEventListeners() {
                 setView(view);
             }
         });
+    }
+
+    // Sort select
+    if (elements.sortSelect) {
+        elements.sortSelect.value = state.sortOrder;
+        elements.sortSelect.addEventListener('change', (e) => {
+            state.sortOrder = e.target.value;
+            localStorage.setItem('scriptSortOrder', state.sortOrder);
+            renderScripts();
+        });
+    }
+
+    // Favorites toggle
+    if (elements.favoritesToggle) {
+        elements.favoritesToggle.addEventListener('click', () => {
+            state.showFavoritesOnly = !state.showFavoritesOnly;
+            elements.favoritesToggle.classList.toggle('active', state.showFavoritesOnly);
+            renderScripts();
+        });
+    }
+
+    // Random script button
+    if (elements.randomBtn) {
+        elements.randomBtn.addEventListener('click', goToRandomScript);
     }
 }
 
