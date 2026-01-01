@@ -11,6 +11,299 @@
     --accent-blue: #1e3a5f;
     --glow-purple: rgba(107, 63, 160, 0.5);
     --glow-pink: rgba(217, 70, 168, 0.4);
+    
+    /* Accessibility - Font Size */
+    --user-font-size: 16px;
+}
+
+/* ===== FONT FAMILIES ===== */
+body.font-arial {
+    font-family: Arial, Helvetica, sans-serif !important;
+}
+
+body.font-arial .card-title,
+body.font-arial .section-title,
+body.font-arial .nav-title,
+body.font-arial .logo h1 {
+    font-family: Arial, Helvetica, sans-serif !important;
+}
+
+body.font-times {
+    font-family: 'Times New Roman', Times, serif !important;
+}
+
+body.font-times .card-title,
+body.font-times .section-title,
+body.font-times .nav-title,
+body.font-times .logo h1 {
+    font-family: 'Times New Roman', Times, serif !important;
+}
+
+body.font-atkinson {
+    font-family: 'Atkinson Hyperlegible', sans-serif !important;
+}
+
+body.font-atkinson .card-title,
+body.font-atkinson .section-title,
+body.font-atkinson .nav-title,
+body.font-atkinson .logo h1 {
+    font-family: 'Atkinson Hyperlegible', sans-serif !important;
+}
+
+body.font-dyslexic {
+    font-family: 'OpenDyslexic', sans-serif !important;
+}
+
+body.font-dyslexic .card-title,
+body.font-dyslexic .section-title,
+body.font-dyslexic .nav-title,
+body.font-dyslexic .logo h1 {
+    font-family: 'OpenDyslexic', sans-serif !important;
+}
+
+/* ===== ACCESSIBILITY PANEL ===== */
+.accessibility-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    background: rgba(107, 63, 160, 0.3);
+    border: 1px solid rgba(107, 63, 160, 0.5);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: var(--stardust);
+}
+
+.accessibility-btn:hover {
+    background: rgba(217, 70, 168, 0.4);
+    border-color: var(--nova-pink);
+    box-shadow: 0 0 15px var(--glow-pink);
+}
+
+.accessibility-btn svg {
+    width: 24px;
+    height: 24px;
+}
+
+.accessibility-panel {
+    position: fixed;
+    top: 0;
+    right: -400px;
+    width: 350px;
+    max-width: 90vw;
+    height: 100vh;
+    background: linear-gradient(180deg, rgba(18, 16, 31, 0.98) 0%, rgba(10, 10, 18, 0.98) 100%);
+    border-left: 1px solid rgba(107, 63, 160, 0.4);
+    z-index: 10000;
+    padding: 2rem;
+    overflow-y: auto;
+    transition: right 0.3s ease;
+    backdrop-filter: blur(20px);
+}
+
+.accessibility-panel.open {
+    right: 0;
+}
+
+.accessibility-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.accessibility-overlay.open {
+    opacity: 1;
+    visibility: visible;
+}
+
+.accessibility-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(107, 63, 160, 0.3);
+}
+
+.accessibility-title {
+    font-family: 'Cinzel', serif;
+    font-size: 1.4rem;
+    color: var(--pure-light);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.accessibility-title svg {
+    width: 24px;
+    height: 24px;
+    color: var(--cosmic-pink);
+}
+
+.accessibility-close {
+    width: 36px;
+    height: 36px;
+    background: rgba(107, 63, 160, 0.3);
+    border: 1px solid rgba(107, 63, 160, 0.5);
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--stardust);
+    transition: all 0.2s ease;
+}
+
+.accessibility-close:hover {
+    background: rgba(217, 70, 168, 0.4);
+    border-color: var(--nova-pink);
+}
+
+.accessibility-close svg {
+    width: 20px;
+    height: 20px;
+}
+
+.accessibility-section {
+    margin-bottom: 2rem;
+}
+
+.accessibility-section-title {
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--cosmic-pink);
+    margin-bottom: 1rem;
+}
+
+/* Font Size Controls */
+.font-size-controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.font-size-btn {
+    width: 40px;
+    height: 40px;
+    background: rgba(107, 63, 160, 0.3);
+    border: 1px solid rgba(107, 63, 160, 0.5);
+    border-radius: 8px;
+    cursor: pointer;
+    color: var(--stardust);
+    font-size: 1.2rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.font-size-btn:hover {
+    background: rgba(217, 70, 168, 0.4);
+    border-color: var(--nova-pink);
+}
+
+.font-size-display {
+    flex: 1;
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--pure-light);
+    background: rgba(10, 10, 18, 0.5);
+    padding: 0.6rem 1rem;
+    border-radius: 8px;
+    border: 1px solid rgba(107, 63, 160, 0.3);
+}
+
+/* Font Type Options */
+.font-type-options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.font-type-btn {
+    padding: 1rem;
+    background: rgba(107, 63, 160, 0.2);
+    border: 1px solid rgba(107, 63, 160, 0.4);
+    border-radius: 10px;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.2s ease;
+}
+
+.font-type-btn:hover {
+    background: rgba(107, 63, 160, 0.35);
+    border-color: rgba(217, 70, 168, 0.5);
+}
+
+.font-type-btn.active {
+    background: linear-gradient(135deg, rgba(107, 63, 160, 0.5), rgba(217, 70, 168, 0.3));
+    border-color: var(--nova-pink);
+    box-shadow: 0 0 15px rgba(217, 70, 168, 0.2);
+}
+
+.font-type-name {
+    display: block;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--pure-light);
+    margin-bottom: 0.3rem;
+}
+
+.font-type-preview {
+    font-size: 0.85rem;
+    color: rgba(233, 213, 255, 0.7);
+}
+
+.font-type-btn[data-font="arial"] .font-type-name,
+.font-type-btn[data-font="arial"] .font-type-preview {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.font-type-btn[data-font="times"] .font-type-name,
+.font-type-btn[data-font="times"] .font-type-preview {
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.font-type-btn[data-font="atkinson"] .font-type-name,
+.font-type-btn[data-font="atkinson"] .font-type-preview {
+    font-family: 'Atkinson Hyperlegible', sans-serif;
+}
+
+.font-type-btn[data-font="opendyslexic"] .font-type-name,
+.font-type-btn[data-font="opendyslexic"] .font-type-preview {
+    font-family: 'OpenDyslexic', sans-serif;
+}
+
+.accessibility-reset {
+    width: 100%;
+    padding: 0.8rem;
+    background: transparent;
+    border: 1px solid rgba(107, 63, 160, 0.5);
+    border-radius: 8px;
+    color: var(--stardust);
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-top: 1rem;
+}
+
+.accessibility-reset:hover {
+    background: rgba(107, 63, 160, 0.3);
+    border-color: var(--cosmic-pink);
 }
 
 /* ===== RESET & BASE ===== */
@@ -482,7 +775,7 @@ header {
 .scripts-grid.view-2 .card-image-container,
 .scripts-grid.view-2 .card-image,
 .scripts-grid.view-2 .card-placeholder-image {
-    height: 180px;
+    height: 450px;
 }
 
 .scripts-grid.view-2 .card-synopsis {
@@ -502,7 +795,7 @@ header {
 .scripts-grid.view-3 .card-image-container,
 .scripts-grid.view-3 .card-image,
 .scripts-grid.view-3 .card-placeholder-image {
-    height: 150px;
+    height: 450px;
 }
 
 .scripts-grid.view-3 .card-title {
@@ -967,6 +1260,11 @@ header {
         padding: 1rem;
     }
 
+    /* Hide view toggle on mobile */
+    .view-toggle {
+        display: none;
+    }
+
     /* Force single column on mobile */
     .scripts-grid,
     .scripts-grid.view-1,
@@ -982,10 +1280,14 @@ header {
         min-height: auto;
     }
 
+    /* Taller images on mobile (2.5x) */
+    .scripts-grid .card-image-container,
+    .scripts-grid .card-image,
+    .scripts-grid .card-placeholder-image,
     .scripts-grid.view-1 .card-image,
     .scripts-grid.view-1 .card-placeholder-image {
-        height: 180px;
-        min-height: 180px;
+        height: 450px !important;
+        min-height: 450px !important;
     }
 
     .section-header {
