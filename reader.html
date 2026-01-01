@@ -351,6 +351,165 @@
             height: 14px;
         }
 
+        /* Share Buttons Section */
+        .share-section {
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .share-title {
+            font-size: 0.85rem;
+            color: rgba(233, 213, 255, 0.7);
+            margin-bottom: 1rem;
+        }
+
+        .share-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        .share-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+        }
+
+        .share-btn svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .share-btn.reddit {
+            background: rgba(255, 69, 0, 0.2);
+            color: #ff6b35;
+            border: 1px solid rgba(255, 69, 0, 0.4);
+        }
+
+        .share-btn.reddit:hover {
+            background: rgba(255, 69, 0, 0.4);
+            box-shadow: 0 0 15px rgba(255, 69, 0, 0.3);
+        }
+
+        .share-btn.twitter {
+            background: rgba(29, 161, 242, 0.2);
+            color: #1da1f2;
+            border: 1px solid rgba(29, 161, 242, 0.4);
+        }
+
+        .share-btn.twitter:hover {
+            background: rgba(29, 161, 242, 0.4);
+            box-shadow: 0 0 15px rgba(29, 161, 242, 0.3);
+        }
+
+        .share-btn.bluesky {
+            background: rgba(0, 133, 255, 0.2);
+            color: #0085ff;
+            border: 1px solid rgba(0, 133, 255, 0.4);
+        }
+
+        .share-btn.bluesky:hover {
+            background: rgba(0, 133, 255, 0.4);
+            box-shadow: 0 0 15px rgba(0, 133, 255, 0.3);
+        }
+
+        .share-btn.discord {
+            background: rgba(88, 101, 242, 0.2);
+            color: #5865f2;
+            border: 1px solid rgba(88, 101, 242, 0.4);
+        }
+
+        .share-btn.discord:hover {
+            background: rgba(88, 101, 242, 0.4);
+            box-shadow: 0 0 15px rgba(88, 101, 242, 0.3);
+        }
+
+        .share-btn.copy {
+            background: rgba(107, 63, 160, 0.2);
+            color: var(--cosmic-pink);
+            border: 1px solid rgba(107, 63, 160, 0.4);
+        }
+
+        .share-btn.copy:hover {
+            background: rgba(107, 63, 160, 0.4);
+            box-shadow: 0 0 15px var(--glow-purple);
+        }
+
+        .share-btn.copy.copied {
+            background: rgba(34, 197, 94, 0.3);
+            color: #22c55e;
+            border-color: rgba(34, 197, 94, 0.5);
+        }
+
+        /* Related Scripts Section */
+        .related-section {
+            margin: 3rem 0;
+            padding: 2rem;
+            background: rgba(45, 27, 78, 0.3);
+            border-radius: 20px;
+            border: 1px solid rgba(107, 63, 160, 0.3);
+        }
+
+        .related-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            color: var(--cosmic-pink);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.2rem;
+        }
+
+        .related-card {
+            background: rgba(18, 16, 31, 0.8);
+            border-radius: 12px;
+            padding: 1.2rem;
+            border: 1px solid rgba(107, 63, 160, 0.3);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: block;
+        }
+
+        .related-card:hover {
+            border-color: var(--nova-pink);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .related-card-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1rem;
+            color: var(--pure-light);
+            margin-bottom: 0.5rem;
+            line-height: 1.3;
+        }
+
+        .related-card-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.3rem;
+        }
+
+        .related-card-tag {
+            font-size: 0.7rem;
+            padding: 0.2rem 0.5rem;
+            background: rgba(107, 63, 160, 0.3);
+            border-radius: 10px;
+            color: var(--stardust);
+        }
+
         /* Reading Actions - Removed as Scriptbin button is removed from this page */
         .reading-actions {
             display: flex;
@@ -938,9 +1097,38 @@
         }
 
         // Render script page
-        function renderScript(script, content) {
+        function renderScript(script, content, allScripts) {
             // Update page title
             document.title = `${script.title} | The Immaterial Loom`;
+
+            // Get current page URL for sharing
+            const pageUrl = window.location.href;
+            const shareTitle = encodeURIComponent(script.title);
+            const shareUrl = encodeURIComponent(pageUrl);
+
+            // Build share buttons HTML
+            const shareButtonsHTML = `
+                <div class="share-section">
+                    <p class="share-title">Share this script</p>
+                    <div class="share-buttons">
+                        <a href="https://reddit.com/submit?url=${shareUrl}&title=${shareTitle}" target="_blank" rel="noopener noreferrer" class="share-btn reddit" title="Share on Reddit">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-2.498.056l-2.597-.547-.8 3.747c1.824.07 3.48.632 4.674 1.488.308-.309.73-.491 1.207-.491.968 0 1.754.786 1.754 1.754 0 .716-.435 1.333-1.01 1.614a3.111 3.111 0 0 1 .042.52c0 2.694-3.13 4.87-7.004 4.87-3.874 0-7.004-2.176-7.004-4.87 0-.183.015-.366.043-.534A1.748 1.748 0 0 1 4.028 12c0-.968.786-1.754 1.754-1.754.463 0 .898.196 1.207.49 1.207-.883 2.878-1.43 4.744-1.487l.885-4.182a.342.342 0 0 1 .14-.197.35.35 0 0 1 .238-.042l2.906.617a1.214 1.214 0 0 1 1.108-.701z"/></svg>
+                        </a>
+                        <a href="https://twitter.com/intent/tweet?url=${shareUrl}&text=${shareTitle}" target="_blank" rel="noopener noreferrer" class="share-btn twitter" title="Share on Twitter/X">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                        </a>
+                        <a href="https://bsky.app/intent/compose?text=${shareTitle}%20${shareUrl}" target="_blank" rel="noopener noreferrer" class="share-btn bluesky" title="Share on Bluesky">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 1.565.139 1.908 0 3.08 0 3.768c0 .69.378 5.65.624 6.479.815 2.736 3.713 3.66 6.383 3.364.136-.02.275-.039.415-.056-.138.022-.276.04-.415.056-3.912.58-7.387 2.005-2.83 7.078 5.013 5.19 6.87-1.113 7.823-4.308.953 3.195 2.05 9.271 7.733 4.308 4.267-4.308 1.172-6.498-2.74-7.078a8.741 8.741 0 0 1-.415-.056c.14.017.279.036.415.056 2.67.297 5.568-.628 6.383-3.364.246-.828.624-5.79.624-6.478 0-.69-.139-1.861-.902-2.206-.659-.298-1.664-.62-4.3 1.24C16.046 4.748 13.087 8.687 12 10.8z"/></svg>
+                        </a>
+                        <button class="share-btn discord" title="Copy for Discord" onclick="copyToClipboard('${script.title}\\n${pageUrl}')">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
+                        </button>
+                        <button class="share-btn copy" id="copyLinkBtn" title="Copy Link" onclick="copyToClipboard('${pageUrl}')">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+                        </button>
+                    </div>
+                </div>
+            `;
 
             // Build cover image HTML (after tags)
             let coverImageHTML = '';
@@ -1003,6 +1191,31 @@
                 `;
             }
 
+            // Build related scripts section
+            let relatedHTML = '';
+            if (allScripts && allScripts.length > 1) {
+                const relatedScripts = findRelatedScripts(script, allScripts, 3);
+                if (relatedScripts.length > 0) {
+                    const relatedCards = relatedScripts.map(related => `
+                        <a href="reader.html?id=${related.id}" class="related-card">
+                            <h4 class="related-card-title">${escapeHtml(related.title)}</h4>
+                            <div class="related-card-tags">
+                                ${related.tags.slice(0, 3).map(tag => `<span class="related-card-tag">${escapeHtml(tag)}</span>`).join('')}
+                            </div>
+                        </a>
+                    `).join('');
+
+                    relatedHTML = `
+                        <div class="related-section">
+                            <h3 class="related-title">You might also like...</h3>
+                            <div class="related-grid">
+                                ${relatedCards}
+                            </div>
+                        </div>
+                    `;
+                }
+            }
+
             // Parse markdown content
             const parsedContent = marked.parse(content);
 
@@ -1016,10 +1229,12 @@
                         </div>
                         ${coverImageHTML}
                     </header>
+                    ${shareButtonsHTML}
                     ${fillsHTML}
                     <div class="script-content">
                         ${parsedContent}
                     </div>
+                    ${relatedHTML}
                 </article>
                 <nav class="footer-nav">
                     <a href="index.html" class="back-link">
@@ -1030,6 +1245,62 @@
                     </a>
                 </nav>
             `;
+
+            // Restore scroll position if returning to this script
+            restoreScrollPosition(script.id);
+        }
+
+        // Find related scripts based on shared tags
+        function findRelatedScripts(currentScript, allScripts, count) {
+            const otherScripts = allScripts.filter(s => s.id !== currentScript.id && s.contentFile);
+            
+            // Score each script by number of shared tags
+            const scored = otherScripts.map(script => {
+                const sharedTags = script.tags.filter(tag => 
+                    currentScript.tags.some(t => t.toLowerCase() === tag.toLowerCase())
+                );
+                return { script, score: sharedTags.length };
+            });
+
+            // Sort by score descending and take top N
+            scored.sort((a, b) => b.score - a.score);
+            return scored.slice(0, count).filter(s => s.score > 0).map(s => s.script);
+        }
+
+        // Copy to clipboard function
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                const copyBtn = document.getElementById('copyLinkBtn');
+                if (copyBtn) {
+                    copyBtn.classList.add('copied');
+                    setTimeout(() => copyBtn.classList.remove('copied'), 2000);
+                }
+            });
+        }
+
+        // Reading progress functions
+        function saveScrollPosition(scriptId) {
+            const scrollPos = window.scrollY;
+            localStorage.setItem(`scroll_${scriptId}`, scrollPos);
+        }
+
+        function restoreScrollPosition(scriptId) {
+            const savedPos = localStorage.getItem(`scroll_${scriptId}`);
+            if (savedPos) {
+                setTimeout(() => {
+                    window.scrollTo(0, parseInt(savedPos));
+                }, 100);
+            }
+        }
+
+        function setupScrollTracking(scriptId) {
+            let saveTimeout;
+            window.addEventListener('scroll', () => {
+                clearTimeout(saveTimeout);
+                saveTimeout = setTimeout(() => {
+                    saveScrollPosition(scriptId);
+                }, 500);
+            });
         }
 
         // Main initialization
@@ -1047,7 +1318,8 @@
                 if (!response.ok) throw new Error('Failed to load scripts data');
                 
                 const data = await response.json();
-                const script = data.scripts.find(s => s.id === scriptId);
+                const allScripts = data.scripts || [];
+                const script = allScripts.find(s => s.id === scriptId);
 
                 if (!script) {
                     renderError(`Script with ID ${scriptId} was not found.`);
@@ -1068,7 +1340,10 @@
                 }
 
                 const content = await contentResponse.text();
-                renderScript(script, content);
+                renderScript(script, content, allScripts);
+
+                // Setup scroll position tracking
+                setupScrollTracking(scriptId);
 
             } catch (error) {
                 console.error('Error:', error);
