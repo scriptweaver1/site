@@ -673,6 +673,153 @@ header {
     font-size: 0.95rem;
 }
 
+/* Section Controls (Sort, Favorites, Random) */
+.section-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+}
+
+.sort-control {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.sort-control label {
+    font-size: 0.85rem;
+    color: rgba(233, 213, 255, 0.7);
+}
+
+.sort-select {
+    background: rgba(45, 27, 78, 0.6);
+    border: 1px solid rgba(107, 63, 160, 0.4);
+    border-radius: 8px;
+    padding: 0.5rem 0.8rem;
+    color: var(--stardust);
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.sort-select:hover {
+    border-color: var(--nova-pink);
+}
+
+.sort-select:focus {
+    outline: none;
+    border-color: var(--nova-pink);
+    box-shadow: 0 0 10px var(--glow-pink);
+}
+
+.sort-select option {
+    background: var(--deep-space);
+    color: var(--stardust);
+}
+
+.favorites-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.5rem 0.9rem;
+    background: rgba(45, 27, 78, 0.4);
+    border: 1px solid rgba(107, 63, 160, 0.4);
+    border-radius: 20px;
+    color: var(--stardust);
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.favorites-toggle:hover {
+    background: rgba(107, 63, 160, 0.4);
+    border-color: var(--nova-pink);
+}
+
+.favorites-toggle.active {
+    background: linear-gradient(135deg, rgba(217, 70, 168, 0.5), rgba(107, 63, 160, 0.5));
+    border-color: var(--nova-pink);
+    box-shadow: 0 0 15px var(--glow-pink);
+}
+
+.favorites-toggle.active svg {
+    fill: var(--nova-pink);
+}
+
+.favorites-toggle svg {
+    width: 18px;
+    height: 18px;
+}
+
+.random-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.5rem 0.9rem;
+    background: linear-gradient(135deg, var(--stellar-purple), var(--nova-pink));
+    border: none;
+    border-radius: 20px;
+    color: var(--pure-light);
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px var(--glow-pink);
+}
+
+.random-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 20px var(--glow-pink);
+}
+
+.random-btn svg {
+    width: 18px;
+    height: 18px;
+}
+
+/* Card Favorite Button */
+.card-favorite-btn {
+    position: absolute;
+    top: 0.8rem;
+    right: 0.8rem;
+    width: 36px;
+    height: 36px;
+    background: rgba(10, 10, 18, 0.7);
+    border: 1px solid rgba(107, 63, 160, 0.4);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    z-index: 5;
+    backdrop-filter: blur(4px);
+}
+
+.card-favorite-btn:hover {
+    background: rgba(217, 70, 168, 0.4);
+    border-color: var(--nova-pink);
+    transform: scale(1.1);
+}
+
+.card-favorite-btn.favorited {
+    background: rgba(217, 70, 168, 0.6);
+    border-color: var(--nova-pink);
+}
+
+.card-favorite-btn.favorited svg {
+    fill: var(--nova-pink);
+    stroke: var(--nova-pink);
+}
+
+.card-favorite-btn svg {
+    width: 18px;
+    height: 18px;
+    color: var(--stardust);
+    transition: all 0.2s ease;
+}
+
 .view-toggle {
     display: flex;
     gap: 0.3rem;
@@ -1258,6 +1405,28 @@ header {
 
     .main-container {
         padding: 1rem;
+    }
+
+    /* Section header stacking */
+    .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .section-controls {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .favorites-toggle span,
+    .random-btn span {
+        display: none;
+    }
+
+    .favorites-toggle,
+    .random-btn {
+        padding: 0.5rem 0.7rem;
     }
 
     /* Hide view toggle on mobile */
