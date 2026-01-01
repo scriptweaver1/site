@@ -11,7 +11,10 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Raleway:wght@300;400;500;600&family=Crimson+Pro:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Raleway:wght@300;400;500;600&family=Crimson+Pro:ital,wght@0,400;0,600;1,400;1,600&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    
+    <!-- OpenDyslexic Font -->
+    <link href="https://fonts.cdnfonts.com/css/opendyslexic" rel="stylesheet">
     
     <!-- Marked.js for Markdown parsing -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
@@ -595,6 +598,232 @@
                 display: none;
             }
         }
+
+        /* Accessibility Button */
+        .accessibility-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 42px;
+            height: 42px;
+            background: rgba(107, 63, 160, 0.3);
+            border: 1px solid rgba(107, 63, 160, 0.5);
+            border-radius: 50%;
+            color: #e9d5ff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .accessibility-btn:hover {
+            background: rgba(217, 70, 168, 0.4);
+            border-color: #d946a8;
+            box-shadow: 0 0 15px rgba(217, 70, 168, 0.4);
+        }
+
+        .accessibility-btn svg {
+            width: 22px;
+            height: 22px;
+        }
+
+        /* Accessibility Panel */
+        .accessibility-panel {
+            position: fixed;
+            top: 0;
+            right: -350px;
+            width: 320px;
+            height: 100vh;
+            background: linear-gradient(180deg, rgba(18, 16, 31, 0.98) 0%, rgba(10, 10, 18, 0.98) 100%);
+            border-left: 1px solid rgba(107, 63, 160, 0.4);
+            z-index: 10000;
+            padding: 2rem;
+            overflow-y: auto;
+            transition: right 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .accessibility-panel.open {
+            right: 0;
+        }
+
+        .accessibility-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .accessibility-overlay.open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .accessibility-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(107, 63, 160, 0.3);
+        }
+
+        .accessibility-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            color: #faf5ff;
+        }
+
+        .accessibility-close {
+            background: none;
+            border: none;
+            color: #e9d5ff;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .accessibility-close:hover {
+            background: rgba(107, 63, 160, 0.3);
+            color: #f472b6;
+        }
+
+        .accessibility-section {
+            margin-bottom: 2rem;
+        }
+
+        .accessibility-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #f472b6;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        /* Font Size Controls */
+        .font-size-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .font-size-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            border: 1px solid rgba(107, 63, 160, 0.5);
+            background: rgba(107, 63, 160, 0.2);
+            color: #e9d5ff;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .font-size-btn:hover {
+            background: rgba(217, 70, 168, 0.4);
+            border-color: #d946a8;
+        }
+
+        .font-size-display {
+            flex: 1;
+            text-align: center;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #faf5ff;
+            background: rgba(45, 27, 78, 0.5);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            border: 1px solid rgba(107, 63, 160, 0.3);
+        }
+
+        /* Font Type Options */
+        .font-type-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        .font-type-btn {
+            padding: 0.8rem 1rem;
+            border-radius: 10px;
+            border: 1px solid rgba(107, 63, 160, 0.4);
+            background: rgba(45, 27, 78, 0.3);
+            color: #e9d5ff;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: left;
+            font-size: 1rem;
+        }
+
+        .font-type-btn:hover {
+            background: rgba(107, 63, 160, 0.4);
+            border-color: rgba(107, 63, 160, 0.6);
+        }
+
+        .font-type-btn.active {
+            background: linear-gradient(135deg, rgba(107, 63, 160, 0.6), rgba(217, 70, 168, 0.4));
+            border-color: #d946a8;
+            box-shadow: 0 0 10px rgba(217, 70, 168, 0.3);
+        }
+
+        .font-type-btn.font-arial { font-family: Arial, sans-serif; }
+        .font-type-btn.font-times { font-family: 'Times New Roman', Times, serif; }
+        .font-type-btn.font-atkinson { font-family: 'Atkinson Hyperlegible', sans-serif; }
+        .font-type-btn.font-dyslexic { font-family: 'OpenDyslexic', sans-serif; }
+
+        /* Reset Button */
+        .accessibility-reset {
+            width: 100%;
+            padding: 0.8rem;
+            border-radius: 10px;
+            border: 1px solid rgba(107, 63, 160, 0.4);
+            background: transparent;
+            color: #e9d5ff;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+
+        .accessibility-reset:hover {
+            background: rgba(107, 63, 160, 0.3);
+            border-color: rgba(107, 63, 160, 0.6);
+        }
+
+        /* Font Family Classes */
+        body.font-arial,
+        body.font-arial .script-content,
+        body.font-arial .script-content p { font-family: Arial, sans-serif !important; }
+        body.font-arial .script-title,
+        body.font-arial .accessibility-title { font-family: Arial, sans-serif !important; }
+
+        body.font-times,
+        body.font-times .script-content,
+        body.font-times .script-content p { font-family: 'Times New Roman', Times, serif !important; }
+        body.font-times .script-title,
+        body.font-times .accessibility-title { font-family: 'Times New Roman', Times, serif !important; }
+
+        body.font-atkinson,
+        body.font-atkinson .script-content,
+        body.font-atkinson .script-content p { font-family: 'Atkinson Hyperlegible', sans-serif !important; }
+        body.font-atkinson .script-title,
+        body.font-atkinson .accessibility-title { font-family: 'Atkinson Hyperlegible', sans-serif !important; }
+
+        body.font-dyslexic,
+        body.font-dyslexic .script-content,
+        body.font-dyslexic .script-content p { font-family: 'OpenDyslexic', sans-serif !important; }
+        body.font-dyslexic .script-title,
+        body.font-dyslexic .accessibility-title { font-family: 'OpenDyslexic', sans-serif !important; }
     </style>
 </head>
 <body>
@@ -613,8 +842,50 @@
                 <div class="logo-mini-icon">✦</div>
                 <span class="logo-mini-text">The Immaterial Loom</span>
             </a>
+            <!-- Accessibility Button -->
+            <button class="accessibility-btn" id="accessibilityBtn" title="Accessibility Options">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+                </svg>
+            </button>
         </div>
     </header>
+
+    <!-- Accessibility Overlay -->
+    <div class="accessibility-overlay" id="accessibilityOverlay"></div>
+
+    <!-- Accessibility Panel -->
+    <div class="accessibility-panel" id="accessibilityPanel">
+        <div class="accessibility-header">
+            <h3 class="accessibility-title">Accessibility</h3>
+            <button class="accessibility-close" id="accessibilityClose">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+
+        <div class="accessibility-section">
+            <label class="accessibility-label">Font Size</label>
+            <div class="font-size-controls">
+                <button class="font-size-btn" id="fontSizeDecrease">−</button>
+                <span class="font-size-display" id="fontSizeDisplay">16</span>
+                <button class="font-size-btn" id="fontSizeIncrease">+</button>
+            </div>
+        </div>
+
+        <div class="accessibility-section">
+            <label class="accessibility-label">Font Type</label>
+            <div class="font-type-options">
+                <button class="font-type-btn font-arial" data-font="arial">Arial</button>
+                <button class="font-type-btn font-times" data-font="times">Times New Roman</button>
+                <button class="font-type-btn font-atkinson" data-font="atkinson">Atkinson Hyperlegible</button>
+                <button class="font-type-btn font-dyslexic" data-font="dyslexic">OpenDyslexic</button>
+            </div>
+        </div>
+
+        <button class="accessibility-reset" id="accessibilityReset">Reset to Defaults</button>
+    </div>
 
     <main id="mainContent">
         <div class="loading-state">
@@ -807,6 +1078,104 @@
 
         // Start
         init();
+    </script>
+
+    <!-- Accessibility Script -->
+    <script>
+        // Accessibility Settings
+        const accessibilitySettings = {
+            fontSize: parseInt(localStorage.getItem('accessFontSize')) || 16,
+            fontType: localStorage.getItem('accessFontType') || 'default'
+        };
+
+        const fontSizes = [12, 14, 16, 18, 20, 22, 24, 28, 32];
+
+        // DOM Elements
+        const accessibilityBtn = document.getElementById('accessibilityBtn');
+        const accessibilityPanel = document.getElementById('accessibilityPanel');
+        const accessibilityOverlay = document.getElementById('accessibilityOverlay');
+        const accessibilityClose = document.getElementById('accessibilityClose');
+        const fontSizeDecrease = document.getElementById('fontSizeDecrease');
+        const fontSizeIncrease = document.getElementById('fontSizeIncrease');
+        const fontSizeDisplay = document.getElementById('fontSizeDisplay');
+        const fontTypeBtns = document.querySelectorAll('.font-type-btn');
+        const accessibilityReset = document.getElementById('accessibilityReset');
+
+        // Open/Close Panel
+        function openAccessibilityPanel() {
+            accessibilityPanel.classList.add('open');
+            accessibilityOverlay.classList.add('open');
+        }
+
+        function closeAccessibilityPanel() {
+            accessibilityPanel.classList.remove('open');
+            accessibilityOverlay.classList.remove('open');
+        }
+
+        accessibilityBtn.addEventListener('click', openAccessibilityPanel);
+        accessibilityClose.addEventListener('click', closeAccessibilityPanel);
+        accessibilityOverlay.addEventListener('click', closeAccessibilityPanel);
+
+        // Font Size
+        function updateFontSize(size) {
+            accessibilitySettings.fontSize = size;
+            localStorage.setItem('accessFontSize', size);
+            fontSizeDisplay.textContent = size;
+            document.documentElement.style.fontSize = size + 'px';
+        }
+
+        fontSizeDecrease.addEventListener('click', () => {
+            const currentIndex = fontSizes.indexOf(accessibilitySettings.fontSize);
+            if (currentIndex > 0) {
+                updateFontSize(fontSizes[currentIndex - 1]);
+            }
+        });
+
+        fontSizeIncrease.addEventListener('click', () => {
+            const currentIndex = fontSizes.indexOf(accessibilitySettings.fontSize);
+            if (currentIndex < fontSizes.length - 1) {
+                updateFontSize(fontSizes[currentIndex + 1]);
+            }
+        });
+
+        // Font Type
+        function updateFontType(type) {
+            accessibilitySettings.fontType = type;
+            localStorage.setItem('accessFontType', type);
+            
+            // Remove all font classes
+            document.body.classList.remove('font-arial', 'font-times', 'font-atkinson', 'font-dyslexic');
+            
+            // Add new font class if not default
+            if (type !== 'default') {
+                document.body.classList.add('font-' + type);
+            }
+            
+            // Update active button
+            fontTypeBtns.forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.font === type);
+            });
+        }
+
+        fontTypeBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                updateFontType(btn.dataset.font);
+            });
+        });
+
+        // Reset
+        accessibilityReset.addEventListener('click', () => {
+            updateFontSize(16);
+            updateFontType('default');
+        });
+
+        // Apply saved settings on load
+        function applyAccessibilitySettings() {
+            updateFontSize(accessibilitySettings.fontSize);
+            updateFontType(accessibilitySettings.fontType);
+        }
+
+        applyAccessibilitySettings();
     </script>
 </body>
 </html>
