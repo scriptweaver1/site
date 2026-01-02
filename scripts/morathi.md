@@ -1,20 +1,29 @@
+**<...>** = SFX   
+**[...]**   = Actions/Intonations
 
-#**<... = Sound Effects
-#**[...>**** = Actions/Intonations
+--8<--
 
 **< Sounds of steps on a stone floor, Heavy door opens and closes >**
 
-**< Sigh, the type you do when arriving home after a long day>**
+**< Sigh, the type you do when arriving home after a long day >**
 
-What a delightful show was made in the Arena today! The Sisters of Slaughter should receive a prize for the performance. Never have I seen a chimera taken down with such viciousness and beauty! Tahril, arrange a delivery of wine and slaves for them will you? Oh, and be a dear and pour me some of that wine too.
+What a delightful show was made in the Arena today! The Sisters of Slaughter should receive a prize for the performance. 
 
-Sitting down, Glass is filled>**
+Never have I seen a chimera taken down with such viciousness and beauty! 
+
+Tahril, arrange a delivery of wine and slaves for them will you? 
+
+Oh, and be a dear and pour me some of that wine too.
+
+**< Sitting down, Glass is filled >**
 
 **[Pensive, Talking to yourself]** What should I do with the rest of my night though…?
 
-Take a sip of your drink >**
+**< Take a sip of your drink >**
 
-**[ Pensive, Talking to herself ]** Arrange for a party? No… I don’t feel like dealing with nobles. Maybe get some of those Sisters to join me for some fun? No, they’ll be too tired for that…
+**[ Pensive, Talking to herself ]** Arrange for a party? No… I don’t feel like dealing with nobles. 
+
+Maybe get some of those Sisters to join me for some fun? No, they’ll be too tired for that…
 
 **< Takes a sip of your drink >**
 
@@ -22,27 +31,27 @@ I don't know, I think I'm in the mood for something more basic…
 
 **[ Decisive tone ]** Tahril, fetch me a slave from the pits, any will do.
 
-**< Steps ,chains rattling, door opens and closes>**
+**< Steps ,chains rattling, door opens and closes >**
 
-Walking around the listener>**
+**< Walking around the listener >**
 
 Hmmm, Well chosen Tahril, i like the look of this one. Now, remove his chains and pour him some wine.
 
 Yes I'm sure! Wouldn't want my special guest to feel uncomfortable would you?
 
-Chain rattling, Wine pouring>**
+**< Chain rattling, Wine pouring >**
 
 Now, leave us be Tahril, and do not interrupt me, unless strictly necessary.
 
-Steps walking away, Door Closes>**
+**< Steps walking away, Door Closes>**
 
 **[In good humor]** Well, good night human! What is your name?
 
 **[ In good humor ]** Hmmmm, a man of the Empire I bet! Are you from Altdorf? Or maybe Marienburg...
 
-**< Take a sip of your drink >** 
+**< Take a sip of your drink >**
 
-**[In good humor ]** Ahhhh, Pfeildorf (Pronunciation: P is silent, phonetically Fail-Dorf works), what a coincidence! 
+**[In good humor ]** Ahhhh, Pfeildorf (Pronunciation: P is silent, phonetically Fail-Dorf works), what a coincidence!
 
 The wine I have poured for you is from your city! Your kin has some good taste. It will be like having a taste of home!
 
@@ -74,7 +83,7 @@ Hmmm? You’re staring. Admiring my pale skin? Or is it because I'm just that be
 
 No need to feel sorry, I don’t mind it. In fact, I like it, those hungry eyes of yours…
 
-I’m going to clean myself, you are welcome to watch. 
+I’m going to clean myself, you are welcome to watch.
 
 Washing my round big breasts…
 
@@ -132,17 +141,17 @@ Hmmm, your hands running on my soft skin feel good, and that spell makes me feel
 
 Did you like your little preview? I can tell...
 
-Walking sounds, windy or raining/snowing outside>**
+**< Walking sounds, windy or raining/snowing outside >**
 
 Sit down here, on my bed, let me just dim the light a bit, blow out some of these candles…
 
-blow softly>**
+**< Blow softly to extinquish the candle >**
 
 Hmmmm, I love it when the ambient is dim, don’t you?
 
 Now, let me see what you have there. Very nice, I like what I see…
 
-Light moaning, wet sounds>**
+**< Light moaning, wet sounds >**
 
 Already so hard for me…
 
@@ -154,7 +163,7 @@ Do you like it when I move my hands like this?
 
 Or when I cup your balls?
 
-You look so cute right now 
+You look so cute right now
 
 Don’t worry, you can let go when you want…
 
@@ -170,11 +179,11 @@ No, don’t feel embarrassed! I don't mind, let me just clean it up, maybe get m
 
 Another perk of my sorcery is...
 
-**< Finger snap >** 
+**< Finger snap >**
 
-I can make you ready to go again just like that. 
+I can make you ready to go again just like that.
 
-Now, lay down, I’ll let you have a treat: My tasty cunt all for you to suck on, don’t worry, I’ll be having something else down here. 
+Now, lay down, I’ll let you have a treat: My tasty cunt all for you to suck on, don’t worry, I’ll be having something else down here.
 
 **< Blowjob sounds, gasps and moans >**
 
@@ -184,7 +193,7 @@ There is a little bit of leftover for me to clean up here
 
 Still so hard!
 
-Do you like my taste, honey? 
+Do you like my taste, honey?
 
 Ahh, Move your tongue just like that!
 
@@ -212,7 +221,7 @@ Hmmmm… **< Gulping>**
 
 **[Open mouth]** Ahhhh...
 
-Seeee? All gone! 
+Seeee? All gone!
 
 We’re not done yet though, you still have to make ME climax. Can’t make you queen consort without you working for it!
 
@@ -220,7 +229,7 @@ We’re not done yet though, you still have to make ME climax. Can’t make you 
 
 See, already hard. And I am sooo wet, you aren’t going to be mean and leave me waiting are you?
 
- I’ll get on the bed, and you can take a look at my ass, doesn’t it look good from that angle?
+I’ll get on the bed, and you can take a look at my ass, doesn’t it look good from that angle?
 
 You like how I shake it around? C’mon don’t make me wait, I’m ready for you.
 
@@ -234,14 +243,13 @@ You’re filling me so well…
 
 Lay down, I’m going to mount you!
 
-Fast wet sounds, moaning, panting>**
+**< Fast wet sounds, moaning, gasping >**
 
-yes, yes!
+Yes, yes!
 
 I just want to wrap my arms and legs around you and feel you fuck me full!
 
 Hmmmm, keep going, don’t stop for nothing!
-
 
 You feel so good! So perfect inside me. It’s like we were made for each other.
 
@@ -265,7 +273,7 @@ Fuck me darling, don’t you dare stop!
 
 That's it...
 
- I'm almost there!
+I'm almost there!
 
 **< VA Orgasm >**
 
@@ -279,7 +287,9 @@ Thank you, I knew you wouldn't fail me
 
 **< Breathing normalizes >**
 
-But you might be wondering, why me, The high and mighty Sorceress of Ghrond, one of the strongest spellcasters in the world would bed with a lowly slave like you… Well I have two reasons:
+But you might be wondering, why would I, The high and mighty Sorceress of Ghrond, one of the strongest spellcasters in the world would bed with a lowly slave like you… 
+
+Well I have two reasons:
 
 For the first, when a woman like me has experienced the greatest pleasures this world can offer, she often wishes to return to normalcy again, like when you had the most wonderful dessert ever, but still might crave some chocolate every once in a while.
 
@@ -287,7 +297,7 @@ As for the second, I wanted to know what happens when you take a man from the lo
 
 **< Whispering me/nacingly >** And then take it all away from him again.
 
-**< Two claps, followed by a loud crack,like a thunder >**
+**< Two claps >**
 
 Tahril, Take this wretch away from me, cut off his tongue, and put him back at the mines. Goodbye human, until we never meet again!
 
