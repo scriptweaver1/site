@@ -1,13 +1,17 @@
+
 **Glossary:**
 
-Mechadendrites - Extra limbs, too many types to list them all, but these ones in specific are tentacle shaped. I wonder why? ;)
+Mechadendrites - Extra limbs, too many types to list them all, but these ones in specific are tentacle shaped.
 
-Rune priest and Magos Biologis - Ranks in the organization of the character.
+Rune Priest and Magos Biologis - Ranks in the organization of the character.
 
-Omnissiah - Used as God, hard to separate it from the setting.
+Omnissiah - The Cult Meachanicus God, hard to separate it from the setting.
 
-**<...>** = Sound Effect   
-**[...]** = Actions/Intonations
+
+
+
+**<...>** = SFX   
+**[...]**   = Actions/Intonations
 
 **< Ambient dinner/bar sounds >**
 
@@ -17,7 +21,13 @@ Omnissiah - Used as God, hard to separate it from the setting.
 
 Hey, I want to thank you for coming here today. My friends are too anxious for tomorrow to come for a drink, you are a cool guy, as far as you Meatbags go. [Laugh]
 
-But I can't lie, I'm very anxious. I wish you could come, I really do, but there is no way. Too many secrets that can’t leave our halls, you know how it is… But I think I can tell you roughly what is going to happen. First we need to sit through a 6 hours speech from our superiors, praising themselves for all the hard work we novitiates have done. After that we pray for the blessing of the Omnissiah, make our votes, swear loyalty to the Fabricator-General and in comes the best part! [Very Excited] New Augmetics!
+But I can't lie, I'm very anxious. I wish you could come, I really do, but there is no way. Too many secrets that can’t leave our halls, you know how it is… 
+
+But I think I can tell you roughly what is going to happen. First we need to sit through a 6 hours speech from our superiors, praising themselves for all the hard work we novitiates have done. 
+
+After that we pray for the blessing of the Omnissiah, make our votes, swear loyalty to the Fabricator-General and in comes the best part! 
+
+**[Very Excited]** New Augmetics!
 
 Of course I want more of them! The only cybernetics I have are one of my eyes, my left forearm and hand , a set of lungs, my cerebellum and 3 mechadendrites! It is basically nothing!
 
@@ -43,7 +53,7 @@ Let’s go back to your place, it is closer.
 
 So, what is your “ so smart and foolproof ” plan for making me change my mind?
 
-Show me the ‘’advantages’’ of organics? I’m graduating as Magos Biologis, what could you possibly tell me that I already [Understanding the implications] Don’t… Know… Of…
+Show me the ‘’advantages’’ of organics? I’m graduating as Magos Biologis, what could you possibly tell me that I already **[Understanding the implications]** Don’t… Know… Of…
 
 **[Embarrassed]** By the Emperor, I should have known!
 
@@ -247,7 +257,9 @@ Yes, yes, faster!
 
 I’m so happy I took you on that bet.
 
-12 years of work and you have me doubting it on the last day? You were right, there are things that machines can't do, but then again, they did help quite a lot don't you think? Let's call it a draw…
+12 years of work and you have me doubting it on the last day? 
+
+You were right, there are things that machines can't do, but then again, they did help quite a lot don't you think? Let's call it a draw…
 
 I think I’ll postpone my full initiation, I want to spend more time with you now, much more time. Hug me tight, let's sleep on each other's arms.
 
