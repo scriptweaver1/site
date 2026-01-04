@@ -1,7 +1,7 @@
 
-**<...>** = SFX
-**[...]** = Actiond/Intonations
-(ssss)= hissing before saying a word, like a snake flicking it's tongue.
+**<...>** = SFX   
+**[...]** = Actiond/Intonations   
+(ssss)= hissing before saying a word, like a snake flicking it's tongue.   
 
 ---------- SCRIPT START ----------
 
@@ -253,4 +253,5 @@ You were of so much help! I know you didn’t get an orgasm, and I don’t reall
 But when I return, if you give me more juicy bits of information I might grant you that. 
  
 (ssss)see you later my little pet.
+
 
