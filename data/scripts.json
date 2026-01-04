@@ -152,7 +152,7 @@
         "X-COM"
       ],
       "synopsis": "You're a soldier from the rebel organization know as XCOM. Your last operation failed and you were captured. Now they want informations on how to stop your organization, You have been resisting their techniques stoically, but their best interrogator found an unconventional way to make you talk, Isn't it, my sssspecial little pet?",
-      "image": "images/viper.jpg",
+      "image": "images/viper.png",
       "artist": "@ChrysalisDraws",
       "artistLink": "https://x.com/ChrysalisDraws",
       "contentFile": "scripts/viper.md",
