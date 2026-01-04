@@ -1,8 +1,9 @@
 
-**<...>**
-**[...]**
+**<...>** = SFX
+**[...]** = Actiond/Intonations
+(ssss)= hissing before saying a word, like a snake flicking it's tongue.
 
-(ssss)= hissing before saying the world like a snake.
+---------- SCRIPT START ----------
 
 **[Muffled, as if in another room]** At ease. Open the cell, today is interrogation day for this prisoner.
 
@@ -118,7 +119,7 @@ Let's establish a reward system, tell me what I want to know, and you get your p
 
 So, what color is the sky? 
 
-That’s a good little boy. And I honor my part of the deal. Feel my tight hug? It can get much tighter than that. And you know how to make this(ssss) better right?
+That’s a good little soldier. And I honor my part of the deal. Feel my tight hug? It can get much tighter than that. And you know how to make this(ssss) better right?
 
 What is your name?
 
@@ -223,23 +224,33 @@ Yes, just like that, you like it don't you, reduced to this.
 
 Gag on it as I push it deeper,,,
 
-**< soft moans >**
+**< Soft moans in between lines >**
 
 For my next question I want you to think very carefully, I want a detailed and precise answer. (ssss)suck on your prize while you think about it!
 
 What does your armory consist of, and can the resistance upgrade it?
 
-[SFX: Sounds of sucking for about 30 seconds, small moans]
-
-[SFX: Popping sound (tail pulled out of mouth)] So, the answer?
+So, the answer?
 
 Uhum.
+
 Yes, I’ve (ssss)seen this one. 
+
 You can make more?
+
 Working on plasma?
+
 The convoys…
 
-That is bad, that is very bad. I have to bring this to my superiors at once! Fun time is over. 
+That is bad, that is very bad. 
 
-Let me put my armor on. You were of so much help! I know you didn’t get an orgasm, and I don’t really care. But when I return, if you give me more juicy bits of information I might grant you that. (ssss)see you later my little pet. [Laugh]
+I have to bring this to my superiors at once! Fun time is over. 
+
+Let me put my armor on. 
+
+You were of so much help! I know you didn’t get an orgasm, and I don’t really care.
+
+But when I return, if you give me more juicy bits of information I might grant you that. 
+ 
+(ssss)see you later my little pet.
 
