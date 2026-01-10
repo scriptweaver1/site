@@ -1,5 +1,5 @@
 
-**<...>** = Sound Effects
+**<...>** = Sound Effects   
 **[...]** = Actions/Intonations
 
 **< Door opens and closes >**
@@ -8,7 +8,9 @@
 
 The music, the lights, the effects the crowd, everything was just fucking amazing!
 
-Oh my god, and when they started with ‘’Paranoid’’ everyone just went crazy! Even more than ‘’N.I,B’’! And to finish it all with ‘’War Pigs’’, just so amazing!
+Oh my god, and when they started with ‘’Paranoid’’ everyone just went crazy! 
+
+Even more than ‘’N.I,B’’! And to finish it all with ‘’War Pigs’’, just so amazing!
 
 It was totally worth the wait in line!
 
@@ -38,7 +40,9 @@ There, let's talk it out then, what was your favorite part?
 
 ‘‘Children of the grave?’, yeah, that was fucking badass…
 
-In doubt? Hmmm, yeah ‘’God is dead?’’ Is good too, but it doesn’t hit as hard. But I should have known, you like those lyrics that tell a story, don't you? [Laugh]
+In doubt? Hmmm, yeah ‘’God is dead?’’ Is good too, but it doesn’t hit as hard. 
+
+But I should have known, you like those lyrics that tell a story, don't you? 
 
 Don’t you dare bring Iron Maiden into this! Not again!
 
@@ -50,13 +54,13 @@ No, ‘’Dance of Death’’ is good, really, but ‘’Paranoid’’ is so m
 
 You take that back!
 
- Bruce Dickson has nothing on Ozzy! You are clearly insane
+Bruce Dickson has nothing on Ozzy! You are clearly insane
 
- And besides, this is a meaningless discussion, we both know Dio is the real deal, remember ‘’Holy Diver’’?
+And besides, this is a meaningless discussion, we both know Dio is the real deal, remember ‘’Holy Diver’’?
 
 Glad we agree on something at least!
 
-[Short silent gap]
+**< Short silent gap >**
 
 But hey, thanks for coming with me, it wouldn’t have been half as fun if you weren’t here…
 
@@ -74,7 +78,9 @@ But yeah, thanks, really, it means a lot…
 
 Ok, fuck, i feel like I have to say this or this is going to drive me crazy, but, what did you think of my outfit?
 
-You know what I mean… Black and white thigh high socks, black fishnets, checkered skirt, this tight Black sabbath shirt, and my black lipstick, even this itchy black neck strap… I remember when you told me that ‘goth girls’ looked good and well, I wanted to see your reaction…
+You know what I mean… Black and white thigh high socks, black fishnets, checkered skirt, this tight Black sabbath shirt, and my black lipstick, even this itchy black neck strap… 
+
+I remember when you told me that ‘goth girls’ looked good and well, I wanted to see your reaction…
 
 You went pale when you first saw me in this and I’ve seen you checking me out all day, but you didn’t really say anything, so, you know, I’m going to just ask…
 
@@ -110,7 +116,7 @@ You like my fishnets huh?
 
 Your hands sliding along my legs…
 
-[SFX: Kisses in between dialogue stops]
+**< Long kisses, gasps and moans in between lines>**
 
 Give me a sec, this goddamned tight shirt pressing on my boobs! Let me take it off… 
 
@@ -252,7 +258,7 @@ Look at you with your mouth open again, lets put it to good use!
 
 Lift up my skirt, and start eating me out pretty boy…
 
-[SfX: Constant moaning in between dialogue lines]
+**< Gasps and moans in between lines >**
 
 Oh yes, your tongue is so warm...
 
