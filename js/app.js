@@ -137,6 +137,9 @@ async function loadScripts() {
 function filterScripts() {
     let filtered = [...state.scripts];
 
+    // Filter out hidden scripts (sequels)
+    filtered = filtered.filter(script => !script.hidden);
+
     // Filter by category
     if (state.currentCategory !== 'all') {
         filtered = filtered.filter(script => script.category === state.currentCategory);
@@ -167,11 +170,13 @@ function filterScripts() {
 
 // ===== COUNT UPDATES =====
 function updateCounts() {
-    document.getElementById('count-all').textContent = state.scripts.length;
+    // Only count non-hidden scripts
+    const visibleScripts = state.scripts.filter(s => !s.hidden);
+    document.getElementById('count-all').textContent = visibleScripts.length;
     
     const categories = ['fantasy', 'scifi', 'daytoday', 'warhammer'];
     categories.forEach(cat => {
-        const count = state.scripts.filter(s => s.category === cat).length;
+        const count = visibleScripts.filter(s => s.category === cat).length;
         const element = document.getElementById(`count-${cat}`);
         if (element) {
             element.textContent = count;
