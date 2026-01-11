@@ -673,6 +673,130 @@
             }
         }
 
+        /* Series Navigation - Dropdown at top */
+        .series-dropdown {
+            margin-bottom: 2rem;
+            padding: 1.2rem 1.5rem;
+            background: linear-gradient(135deg, rgba(45, 27, 78, 0.5), rgba(107, 63, 160, 0.3));
+            border: 1px solid rgba(107, 63, 160, 0.4);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .series-label {
+            font-size: 0.9rem;
+            color: var(--cosmic-pink);
+            font-weight: 600;
+        }
+
+        .series-select {
+            background: rgba(18, 16, 31, 0.8);
+            border: 1px solid rgba(107, 63, 160, 0.5);
+            border-radius: 10px;
+            padding: 0.6rem 1rem;
+            color: var(--stardust);
+            font-size: 0.9rem;
+            cursor: pointer;
+            min-width: 250px;
+            transition: all 0.2s ease;
+        }
+
+        .series-select:hover {
+            border-color: var(--nova-pink);
+        }
+
+        .series-select:focus {
+            outline: none;
+            border-color: var(--nova-pink);
+            box-shadow: 0 0 15px var(--glow-pink);
+        }
+
+        .series-select option {
+            background: var(--deep-space);
+            color: var(--stardust);
+            padding: 0.5rem;
+        }
+
+        /* Series Navigation - Buttons at bottom */
+        .series-nav-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, rgba(45, 27, 78, 0.4), rgba(107, 63, 160, 0.2));
+            border: 1px solid rgba(107, 63, 160, 0.3);
+            border-radius: 15px;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .series-nav-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem 1.5rem;
+            background: linear-gradient(135deg, var(--stellar-purple), var(--nova-pink));
+            border: none;
+            border-radius: 25px;
+            color: var(--pure-light);
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 10px var(--glow-pink);
+        }
+
+        .series-nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 25px var(--glow-pink);
+        }
+
+        .series-nav-btn.disabled {
+            background: rgba(107, 63, 160, 0.3);
+            color: rgba(233, 213, 255, 0.5);
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        .series-nav-btn.disabled:hover {
+            transform: none;
+            box-shadow: none;
+        }
+
+        .series-nav-btn svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .series-nav-info {
+            font-size: 0.9rem;
+            color: var(--stardust);
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .series-nav-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .series-nav-btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .series-select {
+                width: 100%;
+                min-width: unset;
+            }
+        }
+
         /* Reading Actions - Removed as Scriptbin button is removed from this page */
         .reading-actions {
             display: flex;
@@ -1372,6 +1496,70 @@
                 }
             }
 
+            // Build series navigation (dropdown at top, buttons at bottom)
+            let seriesDropdownHTML = '';
+            let seriesNavBottomHTML = '';
+            
+            if (script.seriesId) {
+                // Get all parts in this series
+                const seriesParts = getSeriesParts(script.seriesId, allScripts);
+                
+                // Build dropdown options
+                const dropdownOptions = seriesParts.map(part => {
+                    const selected = part.id === script.id ? 'selected' : '';
+                    return `<option value="${part.id}" ${selected}>Part ${part.partNumber}: ${escapeHtml(part.title)}</option>`;
+                }).join('');
+
+                seriesDropdownHTML = `
+                    <div class="series-dropdown">
+                        <span class="series-label">📖 This is part of a series:</span>
+                        <select class="series-select" onchange="navigateToSeriesPart(this.value)">
+                            ${dropdownOptions}
+                        </select>
+                    </div>
+                `;
+
+                // Build bottom navigation buttons
+                const prevPart = script.previousPart ? allScripts.find(s => s.id === script.previousPart) : null;
+                const nextPart = script.nextPart ? allScripts.find(s => s.id === script.nextPart) : null;
+
+                const prevBtnHTML = prevPart 
+                    ? `<a href="reader.html?id=${prevPart.id}" class="series-nav-btn">
+                           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                           </svg>
+                           Previous Part
+                       </a>`
+                    : `<span class="series-nav-btn disabled">
+                           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                           </svg>
+                           Previous Part
+                       </span>`;
+
+                const nextBtnHTML = nextPart 
+                    ? `<a href="reader.html?id=${nextPart.id}" class="series-nav-btn">
+                           Next Part
+                           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                           </svg>
+                       </a>`
+                    : `<span class="series-nav-btn disabled">
+                           Next Part
+                           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                           </svg>
+                       </span>`;
+
+                seriesNavBottomHTML = `
+                    <div class="series-nav-bottom">
+                        ${prevBtnHTML}
+                        <span class="series-nav-info">Part ${script.partNumber} of ${script.totalParts}</span>
+                        ${nextBtnHTML}
+                    </div>
+                `;
+            }
+
             // Parse markdown content
             const parsedContent = marked.parse(content);
 
@@ -1385,11 +1573,13 @@
                         </div>
                         ${coverImageHTML}
                     </header>
+                    ${seriesDropdownHTML}
                     ${shareButtonsHTML}
                     ${fillsHTML}
                     <div class="script-content">
                         ${parsedContent}
                     </div>
+                    ${seriesNavBottomHTML}
                     ${relatedHTML}
                 </article>
                 <nav class="footer-nav">
@@ -1404,6 +1594,18 @@
 
             // Restore scroll position if returning to this script
             restoreScrollPosition(script.id);
+        }
+
+        // Get all parts in a series, sorted by part number
+        function getSeriesParts(seriesId, allScripts) {
+            return allScripts
+                .filter(s => s.seriesId === seriesId)
+                .sort((a, b) => a.partNumber - b.partNumber);
+        }
+
+        // Navigate to a series part
+        function navigateToSeriesPart(scriptId) {
+            window.location.href = `reader.html?id=${scriptId}`;
         }
 
         // Find related scripts based on shared tags
