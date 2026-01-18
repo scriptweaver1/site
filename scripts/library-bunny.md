@@ -1,4 +1,4 @@
-PS: All dialogue in this script is meant to be read in a soft, low voice, unhurried, as it is something meant to bring relaxation.
+**PS: All dialogue in this script is meant to be read in a soft, low voice, unhurried, as it is something meant to bring relaxation.**
 
 **< Sounds of moans, music and general partying, until a door opens and closes, and silence descends >**
 
@@ -443,6 +443,7 @@ We can head to the director’s office for a quick word with her…
 Arrange a deal that will make me yours, and only yours for the duration of the cruise…
 
 And perhaps, even beyond…
+
 
 
 
