@@ -371,8 +371,8 @@ header {
 .filter-controls {
     display: flex;
     align-items: center;
-    gap: 1rem;
-    flex-wrap: wrap;
+    gap: 0.8rem;
+    flex-wrap: nowrap;
 }
 
 /* Sort Container */
@@ -387,13 +387,14 @@ header {
     color: var(--cosmic-pink);
     font-size: 0.85rem;
     font-weight: 500;
+    white-space: nowrap;
 }
 
 /* Sort Dropdown */
 .sort-select {
     background: rgba(45, 27, 78, 0.6);
     border: 1px solid rgba(107, 63, 160, 0.5);
-    border-radius: 10px;
+    border-radius: 25px;
     padding: 0.6rem 1rem;
     color: var(--stardust);
     font-family: 'Raleway', sans-serif;
@@ -421,7 +422,7 @@ header {
 
 /* Favorites Toggle Button */
 .favorites-toggle {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     gap: 0.5rem;
     padding: 0.6rem 1.2rem;
@@ -434,11 +435,13 @@ header {
     font-weight: 500;
     cursor: pointer;
     transition: all 0.3s ease;
+    white-space: nowrap;
 }
 
 .favorites-toggle svg {
     width: 18px;
     height: 18px;
+    flex-shrink: 0;
 }
 
 .favorites-toggle:hover {
@@ -459,7 +462,7 @@ header {
 
 /* Random/Surprise Me Button */
 .random-btn {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     gap: 0.5rem;
     padding: 0.6rem 1.2rem;
@@ -472,11 +475,13 @@ header {
     font-weight: 500;
     cursor: pointer;
     transition: all 0.3s ease;
+    white-space: nowrap;
 }
 
 .random-btn svg {
     width: 18px;
     height: 18px;
+    flex-shrink: 0;
 }
 
 .random-btn:hover {
@@ -1165,6 +1170,12 @@ header {
     .filter-controls {
         width: 100%;
         justify-content: flex-start;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .sort-label {
+        display: none;
     }
 
     .favorites-toggle span,
