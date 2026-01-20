@@ -349,6 +349,13 @@ header {
     gap: 1rem;
 }
 
+.section-header-row {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
 .section-title {
     font-family: 'Cinzel', serif;
     font-size: 2rem;
@@ -357,6 +364,7 @@ header {
     display: flex;
     align-items: center;
     gap: 0.8rem;
+    flex-shrink: 0;
 }
 
 .section-title::before {
@@ -367,22 +375,27 @@ header {
     border-radius: 2px;
 }
 
-/* ===== FILTER CONTROLS ===== */
+/* ===== FILTER/SECTION CONTROLS ===== */
+.section-controls,
 .filter-controls {
     display: flex;
     align-items: center;
     gap: 0.8rem;
     flex-wrap: nowrap;
+    flex-shrink: 0;
 }
 
 /* Sort Container */
+.sort-control,
 .sort-container {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     gap: 0.5rem;
+    flex-shrink: 0;
 }
 
 /* Sort Label */
+.sort-control label,
 .sort-label {
     color: var(--cosmic-pink);
     font-size: 0.85rem;
@@ -436,6 +449,7 @@ header {
     cursor: pointer;
     transition: all 0.3s ease;
     white-space: nowrap;
+    flex-shrink: 0;
 }
 
 .favorites-toggle svg {
@@ -476,6 +490,7 @@ header {
     cursor: pointer;
     transition: all 0.3s ease;
     white-space: nowrap;
+    flex-shrink: 0;
 }
 
 .random-btn svg {
@@ -1167,6 +1182,7 @@ header {
     }
 
     /* Mobile filter controls */
+    .section-controls,
     .filter-controls {
         width: 100%;
         justify-content: flex-start;
@@ -1174,6 +1190,7 @@ header {
         gap: 0.5rem;
     }
 
+    .sort-control label,
     .sort-label {
         display: none;
     }
