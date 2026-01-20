@@ -142,6 +142,152 @@
             user-select: none;
         }
 
+        /* Patreon Modal */
+        .patreon-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 10, 18, 0.95);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10001;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .patreon-modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .patreon-modal {
+            background: linear-gradient(160deg, rgba(45, 27, 78, 0.95) 0%, rgba(18, 16, 31, 0.98) 100%);
+            border: 1px solid rgba(255, 85, 0, 0.4);
+            border-radius: 24px;
+            padding: 2.5rem;
+            max-width: 420px;
+            width: 90%;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(255, 85, 0, 0.2);
+        }
+
+        .patreon-modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: transparent;
+            border: none;
+            color: #e9d5ff;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 50%;
+            transition: all 0.2s ease;
+        }
+
+        .patreon-modal-close:hover {
+            background: rgba(255, 85, 0, 0.2);
+            color: #ff5500;
+        }
+
+        .patreon-modal-icon {
+            margin-bottom: 1rem;
+            color: #ff5500;
+        }
+
+        .patreon-modal-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.4rem;
+            color: #fff;
+            margin-bottom: 0.8rem;
+            padding: 0 1rem;
+        }
+
+        .patreon-modal-text {
+            color: rgba(233, 213, 255, 0.85);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .patreon-modal-input-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .patreon-modal-input {
+            width: 100%;
+            padding: 0.9rem 1.2rem;
+            background: rgba(18, 16, 31, 0.8);
+            border: 1px solid rgba(255, 85, 0, 0.3);
+            border-radius: 12px;
+            color: #fff;
+            font-size: 1rem;
+            transition: all 0.2s ease;
+        }
+
+        .patreon-modal-input:focus {
+            outline: none;
+            border-color: #ff5500;
+            box-shadow: 0 0 20px rgba(255, 85, 0, 0.3);
+        }
+
+        .patreon-modal-input::placeholder {
+            color: rgba(233, 213, 255, 0.5);
+        }
+
+        .patreon-modal-error {
+            color: #ff6b6b;
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        .patreon-modal-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .patreon-modal-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.9rem 1.8rem;
+            border-radius: 25px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+        .patreon-modal-btn.submit {
+            background: linear-gradient(135deg, #ff5500, #ff7733);
+            color: #fff;
+            box-shadow: 0 0 20px rgba(255, 85, 0, 0.4);
+        }
+
+        .patreon-modal-btn.submit:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 35px rgba(255, 85, 0, 0.6);
+        }
+
+        .patreon-modal-btn.cancel {
+            background: transparent;
+            color: #e9d5ff;
+            border: 1px solid rgba(107, 63, 160, 0.5);
+        }
+
+        .patreon-modal-btn.cancel:hover {
+            background: rgba(107, 63, 160, 0.3);
+            border-color: rgba(107, 63, 160, 0.8);
+        }
+
         /* Accessibility Button */
         .accessibility-btn {
             display: flex;
@@ -391,6 +537,39 @@
         </div>
     </div>
 
+    <!-- Patreon Access Modal -->
+    <div class="patreon-modal-overlay" id="patreonModal">
+        <div class="patreon-modal">
+            <button class="patreon-modal-close" onclick="closePatreonModal()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+            <div class="patreon-modal-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="48" height="48">
+                    <path d="M15.386.524c-4.764 0-8.64 3.876-8.64 8.64 0 4.75 3.876 8.613 8.64 8.613 4.75 0 8.614-3.864 8.614-8.613C24 4.4 20.136.524 15.386.524M.003 23.537h4.22V.524H.003"/>
+                </svg>
+            </div>
+            <h2 class="patreon-modal-title" id="patreonModalTitle">Patron-Only Script</h2>
+            <p class="patreon-modal-text">
+                This script is exclusive to Patrons. Enter the password from the Patreon post to unlock it.
+            </p>
+            <div class="patreon-modal-input-group">
+                <input type="password" id="patreonKeyInput" class="patreon-modal-input" placeholder="Enter password...">
+                <p class="patreon-modal-error" id="patreonModalError">Invalid password</p>
+            </div>
+            <div class="patreon-modal-buttons">
+                <button class="patreon-modal-btn submit" onclick="submitPatreonKey()">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="18" height="18">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z" />
+                    </svg>
+                    Unlock Script
+                </button>
+                <button class="patreon-modal-btn cancel" onclick="closePatreonModal()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Accessibility Overlay -->
     <div class="accessibility-overlay" id="accessibilityOverlay"></div>
 
@@ -440,15 +619,15 @@
             </div>
             
             <div class="social-buttons">
-                <a href="https://ko-fi.com/thescriptweaver" target="_blank" rel="noopener noreferrer" class="social-btn kofi">
+                <a href="https://ko-fi.com/YOUR_KOFI" target="_blank" rel="noopener noreferrer" class="social-btn kofi">
                     <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.881 8.948c-.773-4.085-4.859-4.593-4.859-4.593H.723c-.604 0-.679.798-.679.798s-.082 7.324-.022 11.822c.164 2.424 2.586 2.672 2.586 2.672s8.267-.023 11.966-.049c2.438-.426 2.683-2.566 2.658-3.734 4.352.24 7.422-2.831 6.649-6.916zm-11.062 3.511c-1.246 1.453-4.011 3.976-4.011 3.976s-.121.119-.31.023c-.076-.057-.108-.09-.108-.09-.443-.441-3.368-3.049-4.034-3.954-.709-.965-1.041-2.7-.091-3.71.951-1.01 3.005-1.086 4.363.407 0 0 1.565-1.782 3.468-.963 1.904.82 1.832 3.011.723 4.311zm6.173.478c-.928.116-1.682.028-1.682.028V7.284h1.77s1.971.551 1.971 2.638c0 1.913-.985 2.667-2.059 3.015z"/></svg>
                     <span>Ko-fi</span>
                 </a>
-                <a href="https://www.reddit.com/user/The-Scriptweaver/" target="_blank" rel="noopener noreferrer" class="social-btn reddit">
+                <a href="https://reddit.com/u/YOUR_REDDIT" target="_blank" rel="noopener noreferrer" class="social-btn reddit">
                     <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-2.498.056l-2.597-.547-.8 3.747c1.824.07 3.48.632 4.674 1.488.308-.309.73-.491 1.207-.491.968 0 1.754.786 1.754 1.754 0 .716-.435 1.333-1.01 1.614a3.111 3.111 0 0 1 .042.52c0 2.694-3.13 4.87-7.004 4.87-3.874 0-7.004-2.176-7.004-4.87 0-.183.015-.366.043-.534A1.748 1.748 0 0 1 4.028 12c0-.968.786-1.754 1.754-1.754.463 0 .898.196 1.207.49 1.207-.883 2.878-1.43 4.744-1.487l.885-4.182a.342.342 0 0 1 .14-.197.35.35 0 0 1 .238-.042l2.906.617a1.214 1.214 0 0 1 1.108-.701zM9.25 12C8.561 12 8 12.562 8 13.25c0 .687.561 1.248 1.25 1.248.687 0 1.248-.561 1.248-1.249 0-.688-.561-1.249-1.249-1.249zm5.5 0c-.687 0-1.248.561-1.248 1.25 0 .687.561 1.248 1.249 1.248.688 0 1.249-.561 1.249-1.249 0-.687-.562-1.249-1.25-1.249zm-5.466 3.99a.327.327 0 0 0-.231.094.33.33 0 0 0 0 .463c.842.842 2.484.913 2.961.913.477 0 2.105-.056 2.961-.913a.361.361 0 0 0 .029-.463.33.33 0 0 0-.464 0c-.547.533-1.684.73-2.512.73-.828 0-1.979-.196-2.512-.73a.326.326 0 0 0-.232-.095z"/></svg>
                     <span>Reddit</span>
                 </a>
-                <a href="https://www.patreon.com/cw/The_Scriptweaver" target="_blank" rel="noopener noreferrer" class="social-btn patreon">
+                <a href="https://patreon.com/YOUR_PATREON" target="_blank" rel="noopener noreferrer" class="social-btn patreon">
                     <svg viewBox="0 0 24 24" fill="currentColor"><path d="M15.386.524c-4.764 0-8.64 3.876-8.64 8.64 0 4.75 3.876 8.613 8.64 8.613 4.75 0 8.614-3.864 8.614-8.613C24 4.4 20.136.524 15.386.524M.003 23.537h4.22V.524H.003"/></svg>
                     <span>Patreon</span>
                 </a>
