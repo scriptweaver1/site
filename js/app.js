@@ -282,20 +282,47 @@ function createScriptCard(script, index) {
     // Build action buttons
     let buttonsHTML = '<div class="card-buttons">';
     
+    // Check if this is a Patreon-only script
+    const isPatreonOnly = script.patreonOnly === true;
+    
     // "Read Now" button - only show if contentFile exists
     if (script.contentFile && script.contentFile !== '') {
+        if (isPatreonOnly) {
+            // For Patreon scripts, trigger password modal instead of direct link
+            buttonsHTML += `
+                <button class="card-link card-link-primary" onclick="event.stopPropagation(); openPatreonModal(${script.id}, '${escapeHtml(script.title)}');">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                    </svg>
+                    Read Now
+                </button>
+            `;
+        } else {
+            buttonsHTML += `
+                <a href="reader.html?id=${script.id}" class="card-link card-link-primary" onclick="event.stopPropagation();">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                    </svg>
+                    Read Now
+                </a>
+            `;
+        }
+    }
+    
+    // "Unlock on Patreon" button - only show for patreonOnly scripts
+    if (isPatreonOnly && script.patreonLink) {
         buttonsHTML += `
-            <a href="reader.html?id=${script.id}" class="card-link card-link-primary" onclick="event.stopPropagation();">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+            <a href="${escapeHtml(script.patreonLink)}" class="card-link card-link-patreon" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M15.386.524c-4.764 0-8.64 3.876-8.64 8.64 0 4.75 3.876 8.613 8.64 8.613 4.75 0 8.614-3.864 8.614-8.613C24 4.4 20.136.524 15.386.524M.003 23.537h4.22V.524H.003"/>
                 </svg>
-                Read Now
+                Unlock on Patreon
             </a>
         `;
     }
     
-    // "Read on Scriptbin" button - only show if scriptbinLink exists
-    if (script.scriptbinLink && script.scriptbinLink !== '' && script.scriptbinLink !== '#') {
+    // "Read on Scriptbin" button - only show if scriptbinLink exists (and not patreonOnly)
+    if (!isPatreonOnly && script.scriptbinLink && script.scriptbinLink !== '' && script.scriptbinLink !== '#') {
         buttonsHTML += `
             <a href="${escapeHtml(script.scriptbinLink)}" class="card-link card-link-secondary" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -321,9 +348,13 @@ function createScriptCard(script, index) {
     
     buttonsHTML += '</div>';
 
-    // Determine click destination
+    // Determine click destination (disable for patreon scripts - require modal)
     const hasContent = script.contentFile && script.contentFile !== '';
-    const clickHandler = hasContent ? `onclick="window.location.href='reader.html?id=${script.id}';"` : '';
+    const clickHandler = hasContent && !isPatreonOnly 
+        ? `onclick="window.location.href='reader.html?id=${script.id}';"` 
+        : isPatreonOnly && hasContent 
+            ? `onclick="openPatreonModal(${script.id}, '${escapeHtml(script.title).replace(/'/g, "\\'")}');"` 
+            : '';
 
     return `
         <article class="script-card" style="animation-delay: ${index * 0.05}s" ${clickHandler}>
@@ -512,6 +543,71 @@ function initializeView() {
     const savedView = state.currentView;
     setView(savedView);
 }
+
+// ===== PATREON ACCESS FUNCTIONS =====
+let currentPatreonScriptId = null;
+
+function openPatreonModal(scriptId, title) {
+    currentPatreonScriptId = scriptId;
+    
+    // Check if already unlocked
+    const savedKey = localStorage.getItem(`patreon_key_${scriptId}`);
+    if (savedKey) {
+        // Already have a saved key, go directly to reader with key
+        window.location.href = `reader.html?id=${scriptId}&key=${encodeURIComponent(savedKey)}`;
+        return;
+    }
+    
+    // Show modal
+    const modal = document.getElementById('patreonModal');
+    const titleEl = document.getElementById('patreonModalTitle');
+    const input = document.getElementById('patreonKeyInput');
+    const errorEl = document.getElementById('patreonModalError');
+    
+    if (modal && titleEl && input) {
+        titleEl.textContent = title;
+        input.value = '';
+        errorEl.style.display = 'none';
+        modal.classList.add('active');
+        input.focus();
+    }
+}
+
+function closePatreonModal() {
+    const modal = document.getElementById('patreonModal');
+    if (modal) {
+        modal.classList.remove('active');
+    }
+    currentPatreonScriptId = null;
+}
+
+function submitPatreonKey() {
+    const input = document.getElementById('patreonKeyInput');
+    const errorEl = document.getElementById('patreonModalError');
+    
+    if (!input || !currentPatreonScriptId) return;
+    
+    const key = input.value.trim();
+    if (!key) {
+        errorEl.textContent = 'Please enter a password.';
+        errorEl.style.display = 'block';
+        return;
+    }
+    
+    // Save the key and navigate - validation happens on reader page
+    localStorage.setItem(`patreon_key_${currentPatreonScriptId}`, key);
+    window.location.href = `reader.html?id=${currentPatreonScriptId}&key=${encodeURIComponent(key)}`;
+}
+
+// Handle Enter key in password input
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && document.getElementById('patreonModal')?.classList.contains('active')) {
+        submitPatreonKey();
+    }
+    if (e.key === 'Escape' && document.getElementById('patreonModal')?.classList.contains('active')) {
+        closePatreonModal();
+    }
+});
 
 // ===== INITIALIZATION =====
 function initialize() {
