@@ -696,6 +696,17 @@
             border-color: var(--nova-pink);
         }
 
+        .related-section .card-link-patreon {
+            background: linear-gradient(135deg, #ff5500, #ff7733);
+            color: #fff;
+            border: none;
+            box-shadow: 0 0 10px rgba(255, 85, 0, 0.3);
+        }
+
+        .related-section .card-link-patreon:hover {
+            box-shadow: 0 0 15px rgba(255, 85, 0, 0.5);
+        }
+
         .related-section .card-link svg {
             width: 12px;
             height: 12px;
@@ -1926,32 +1937,52 @@
             // Build action buttons
             let buttonsHTML = '<div class="card-buttons">';
             
-            if (script.contentFile && script.contentFile !== '') {
-                buttonsHTML += `
-                    <a href="reader.html?id=${script.id}" class="card-link card-link-primary" onclick="event.stopPropagation();">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                        </svg>
-                        Read Now
-                    </a>
-                `;
-            }
+            // Check if this is a Patreon-only script
+            const isPatreonOnly = script.patreonOnly === true;
             
-            if (script.scriptbinLink && script.scriptbinLink !== '' && script.scriptbinLink !== '#') {
-                buttonsHTML += `
-                    <a href="${escapeHtml(script.scriptbinLink)}" class="card-link card-link-secondary" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                        </svg>
-                        Scriptbin
-                    </a>
-                `;
+            if (isPatreonOnly) {
+                // For Patreon scripts, show "Unlock on Patreon" button instead of "Read Now"
+                if (script.patreonLink) {
+                    buttonsHTML += `
+                        <a href="${escapeHtml(script.patreonLink)}" class="card-link card-link-patreon" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M15.386.524c-4.764 0-8.64 3.876-8.64 8.64 0 4.75 3.876 8.613 8.64 8.613 4.75 0 8.614-3.864 8.614-8.613C24 4.4 20.136.524 15.386.524M.003 23.537h4.22V.524H.003"/>
+                            </svg>
+                            Unlock on Patreon
+                        </a>
+                    `;
+                }
+            } else {
+                // Regular script - show "Read Now" button
+                if (script.contentFile && script.contentFile !== '') {
+                    buttonsHTML += `
+                        <a href="reader.html?id=${script.id}" class="card-link card-link-primary" onclick="event.stopPropagation();">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                            </svg>
+                            Read Now
+                        </a>
+                    `;
+                }
+                
+                // Scriptbin link - only for non-Patreon scripts
+                if (script.scriptbinLink && script.scriptbinLink !== '' && script.scriptbinLink !== '#') {
+                    buttonsHTML += `
+                        <a href="${escapeHtml(script.scriptbinLink)}" class="card-link card-link-secondary" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                            </svg>
+                            Scriptbin
+                        </a>
+                    `;
+                }
             }
             
             buttonsHTML += '</div>';
 
             const hasContent = script.contentFile && script.contentFile !== '';
-            const clickHandler = hasContent ? `onclick="window.location.href='reader.html?id=${script.id}';"` : '';
+            // Disable click handler for Patreon-only scripts
+            const clickHandler = (hasContent && !isPatreonOnly) ? `onclick="window.location.href='reader.html?id=${script.id}';"` : '';
 
             return `
                 <article class="script-card" ${clickHandler}>
