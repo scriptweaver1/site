@@ -579,12 +579,15 @@ header {
 
 .scripts-grid.view-1 .card-image-container {
     height: 100%;
+    aspect-ratio: auto;
 }
 
 .scripts-grid.view-1 .card-image,
 .scripts-grid.view-1 .card-placeholder-image {
     height: 100%;
     min-height: 240px;
+    object-fit: contain;
+    background: linear-gradient(135deg, var(--nebula-purple) 0%, var(--deep-space) 100%);
 }
 
 .scripts-grid.view-1 .card-content {
@@ -617,10 +620,16 @@ header {
     flex-direction: column;
 }
 
-.scripts-grid.view-2 .card-image-container,
+.scripts-grid.view-2 .card-image-container {
+    aspect-ratio: 4 / 3;
+    height: auto;
+}
+
 .scripts-grid.view-2 .card-image,
 .scripts-grid.view-2 .card-placeholder-image {
-    height: 180px;
+    height: 100%;
+    object-fit: contain;
+    background: linear-gradient(135deg, var(--nebula-purple) 0%, var(--deep-space) 100%);
 }
 
 .scripts-grid.view-2 .card-synopsis {
@@ -637,10 +646,16 @@ header {
     flex-direction: column;
 }
 
-.scripts-grid.view-3 .card-image-container,
+.scripts-grid.view-3 .card-image-container {
+    aspect-ratio: 4 / 3;
+    height: auto;
+}
+
 .scripts-grid.view-3 .card-image,
 .scripts-grid.view-3 .card-placeholder-image {
-    height: 150px;
+    height: 100%;
+    object-fit: contain;
+    background: linear-gradient(135deg, var(--nebula-purple) 0%, var(--deep-space) 100%);
 }
 
 .scripts-grid.view-3 .card-title {
@@ -729,14 +744,15 @@ header {
 
 .card-image {
     width: 100%;
-    height: 180px;
-    object-fit: cover;
+    height: 100%;
+    object-fit: contain;
+    background: linear-gradient(135deg, var(--nebula-purple) 0%, var(--deep-space) 100%);
     border-bottom: 1px solid rgba(107, 63, 160, 0.2);
 }
 
 .card-placeholder-image {
     width: 100%;
-    height: 180px;
+    height: 100%;
     background: linear-gradient(135deg, var(--nebula-purple) 0%, var(--accent-blue) 50%, var(--deep-space) 100%);
     display: flex;
     align-items: center;
@@ -763,6 +779,9 @@ header {
 
 .card-image-container {
     position: relative;
+    aspect-ratio: 4 / 3;
+    background: linear-gradient(135deg, var(--nebula-purple) 0%, var(--deep-space) 100%);
+    overflow: hidden;
 }
 
 .card-artist-credit {
@@ -1177,10 +1196,17 @@ header {
         min-height: auto;
     }
 
+    .scripts-grid.view-1 .card-image-container {
+        aspect-ratio: 4 / 3;
+        height: auto;
+    }
+
     .scripts-grid.view-1 .card-image,
     .scripts-grid.view-1 .card-placeholder-image {
-        height: 180px;
-        min-height: 180px;
+        height: 100%;
+        min-height: auto;
+        object-fit: contain;
+        background: linear-gradient(135deg, var(--nebula-purple) 0%, var(--deep-space) 100%);
     }
 
     .section-header {
