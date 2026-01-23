@@ -900,11 +900,37 @@ header {
     color: rgba(233, 213, 255, 0.8);
     font-size: 0.9rem;
     line-height: 1.6;
-    margin-bottom: 1.2rem;
+    margin-bottom: 0.5rem;
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
+}
+
+.card-synopsis.expanded {
+    -webkit-line-clamp: unset;
+    display: block;
+}
+
+.card-synopsis-container {
+    margin-bottom: 1.2rem;
+}
+
+.synopsis-expand-btn {
+    background: transparent;
+    border: none;
+    color: var(--cosmic-pink);
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 0.2rem 0;
+    font-family: 'Raleway', sans-serif;
+    transition: color 0.2s ease;
+}
+
+.synopsis-expand-btn:hover {
+    color: var(--nova-pink);
+    text-decoration: underline;
 }
 
 .card-link {
