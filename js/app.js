@@ -97,10 +97,16 @@ function sortScripts(scripts) {
 
 // ===== RANDOM SCRIPT =====
 function goToRandomScript() {
-    const scriptsWithContent = state.scripts.filter(s => s.contentFile && s.contentFile !== '');
-    if (scriptsWithContent.length > 0) {
-        const randomIndex = Math.floor(Math.random() * scriptsWithContent.length);
-        const randomScript = scriptsWithContent[randomIndex];
+    // Filter to only include scripts that are: visible, not patreon-only, and have content
+    const eligibleScripts = state.scripts.filter(s => 
+        s.contentFile && 
+        s.contentFile !== '' && 
+        !s.hidden && 
+        !s.patreonOnly
+    );
+    if (eligibleScripts.length > 0) {
+        const randomIndex = Math.floor(Math.random() * eligibleScripts.length);
+        const randomScript = eligibleScripts[randomIndex];
         window.location.href = `reader.html?id=${randomScript.id}`;
     }
 }
@@ -365,7 +371,10 @@ function createScriptCard(script, index) {
                 <div class="card-tags">
                     ${tagsHTML}
                 </div>
-                <p class="card-synopsis">${escapeHtml(script.synopsis)}</p>
+                <div class="card-synopsis-container">
+                    <p class="card-synopsis" data-full-text="${escapeHtml(script.synopsis)}">${escapeHtml(script.synopsis)}</p>
+                    <button class="synopsis-expand-btn" onclick="event.stopPropagation(); toggleSynopsis(this);" style="display: none;">Show more</button>
+                </div>
                 ${buttonsHTML}
             </div>
         </article>
@@ -399,6 +408,42 @@ function toggleTags(btn) {
     }
 }
 
+// Toggle synopsis visibility
+function toggleSynopsis(btn) {
+    const container = btn.parentElement;
+    const synopsis = container.querySelector('.card-synopsis');
+    const isExpanded = btn.dataset.expanded === 'true';
+    
+    if (isExpanded) {
+        // Collapse
+        synopsis.classList.remove('expanded');
+        btn.textContent = 'Show more';
+        btn.dataset.expanded = 'false';
+    } else {
+        // Expand
+        synopsis.classList.add('expanded');
+        btn.textContent = 'Show less';
+        btn.dataset.expanded = 'true';
+    }
+}
+
+// Check if synopsis is truncated and show expand button
+function checkSynopsisTruncation() {
+    const synopsisElements = document.querySelectorAll('.card-synopsis');
+    synopsisElements.forEach(synopsis => {
+        const container = synopsis.parentElement;
+        const expandBtn = container.querySelector('.synopsis-expand-btn');
+        if (expandBtn) {
+            // Check if text is actually truncated
+            if (synopsis.scrollHeight > synopsis.clientHeight) {
+                expandBtn.style.display = 'inline-block';
+            } else {
+                expandBtn.style.display = 'none';
+            }
+        }
+    });
+}
+
 // Handle tag click for search
 function handleTagClick(tag) {
     elements.searchInput.value = tag;
@@ -415,6 +460,11 @@ function renderScripts() {
         elements.scriptsGrid.innerHTML = filtered
             .map((script, index) => createScriptCard(script, index))
             .join('');
+        
+        // Check synopsis truncation after DOM renders
+        requestAnimationFrame(() => {
+            checkSynopsisTruncation();
+        });
     }
 
     // Update results count
@@ -520,6 +570,15 @@ function initializeEventListeners() {
     if (elements.randomBtn) {
         elements.randomBtn.addEventListener('click', goToRandomScript);
     }
+
+    // Recheck synopsis truncation on window resize (debounced)
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+            checkSynopsisTruncation();
+        }, 250);
+    });
 }
 
 // ===== VIEW TOGGLE =====
@@ -536,6 +595,11 @@ function setView(view) {
     
     // Update grid class
     elements.scriptsGrid.className = `scripts-grid view-${view}`;
+    
+    // Recheck synopsis truncation after view change
+    requestAnimationFrame(() => {
+        checkSynopsisTruncation();
+    });
 }
 
 function initializeView() {
