@@ -477,8 +477,6 @@
       "image": "images/werewolf-hunt.jpg",
       "artist": "@Aleriia_V",
       "artistLink": "https://x.com/Aleriia_V",
-      "contentFile": "scripts/werewolf-hunt.md",
-      "contentFileCondensed": "scripts/werewolf-hunt-short.md",
       "scriptbinLink": "",
       "dateAdded": "2026-01-23",
       "seriesId": "",
@@ -489,7 +487,6 @@
       "hidden": false,
       "patreonOnly": true,
       "patreonLink": "https://www.patreon.com/posts/148966439",
-      "patreonKey": "werewolfscripty231",
       "fills": []
     }
   ]
