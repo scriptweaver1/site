@@ -1869,7 +1869,12 @@
 
         // Find related scripts based on shared tags
         function findRelatedScripts(currentScript, allScripts, count) {
-            const otherScripts = allScripts.filter(s => s.id !== currentScript.id && s.contentFile && !s.hidden);
+            // Include scripts that have content OR are Patreon-only (content comes from API)
+            const otherScripts = allScripts.filter(s => 
+                s.id !== currentScript.id && 
+                (s.contentFile || s.patreonOnly) && 
+                !s.hidden
+            );
             
             // Score each script by number of shared tags
             const scored = otherScripts.map(script => {
@@ -1946,7 +1951,16 @@
             const isPatreonOnly = script.patreonOnly === true;
             
             if (isPatreonOnly) {
-                // For Patreon scripts, show "Unlock on Patreon" button instead of "Read Now"
+                // For Patreon scripts, show "Read Now" that goes to password gate
+                buttonsHTML += `
+                    <a href="reader.html?id=${script.id}" class="card-link card-link-primary" onclick="event.stopPropagation();">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                        </svg>
+                        Read Now
+                    </a>
+                `;
+                // Also show "Unlock on Patreon" as secondary option
                 if (script.patreonLink) {
                     buttonsHTML += `
                         <a href="${escapeHtml(script.patreonLink)}" class="card-link card-link-patreon" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();">
@@ -1985,9 +1999,9 @@
             
             buttonsHTML += '</div>';
 
-            const hasContent = script.contentFile && script.contentFile !== '';
-            // Disable click handler for Patreon-only scripts
-            const clickHandler = (hasContent && !isPatreonOnly) ? `onclick="window.location.href='reader.html?id=${script.id}';"` : '';
+            // Enable click handler for all scripts with content (including Patreon)
+            const hasContent = script.contentFile || script.patreonOnly;
+            const clickHandler = hasContent ? `onclick="window.location.href='reader.html?id=${script.id}';"` : '';
 
             return `
                 <article class="script-card" ${clickHandler}>
