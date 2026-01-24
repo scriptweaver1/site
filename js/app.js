@@ -290,18 +290,19 @@ function createScriptCard(script, index) {
     
     // Check if this is a Patreon-only script
     const isPatreonOnly = script.patreonOnly === true;
+    const hasContentFile = script.contentFile && script.contentFile !== '';
     
-    // "Read Now" button - only show if contentFile exists
-    if (script.contentFile && script.contentFile !== '') {
+    // "Read Now" button - show if contentFile exists OR if it's a Patreon script (content comes from API)
+    if (hasContentFile || isPatreonOnly) {
         if (isPatreonOnly) {
-            // For Patreon scripts, trigger password modal instead of direct link
+            // For Patreon scripts, link directly to reader (which shows password gate)
             buttonsHTML += `
-                <button class="card-link card-link-primary" onclick="event.stopPropagation(); openPatreonModal(${script.id}, '${escapeHtml(script.title)}');">
+                <a href="reader.html?id=${script.id}" class="card-link card-link-primary" onclick="event.stopPropagation();">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                     </svg>
                     Read Now
-                </button>
+                </a>
             `;
         } else {
             buttonsHTML += `
@@ -340,7 +341,7 @@ function createScriptCard(script, index) {
     }
     
     // If neither button is available, show a "coming soon" state
-    if ((!script.contentFile || script.contentFile === '') && 
+    if (!hasContentFile && !isPatreonOnly && 
         (!script.scriptbinLink || script.scriptbinLink === '' || script.scriptbinLink === '#')) {
         buttonsHTML += `
             <span class="card-link card-link-disabled">
@@ -354,13 +355,11 @@ function createScriptCard(script, index) {
     
     buttonsHTML += '</div>';
 
-    // Determine click destination (disable for patreon scripts - require modal)
-    const hasContent = script.contentFile && script.contentFile !== '';
-    const clickHandler = hasContent && !isPatreonOnly 
+    // Determine click destination
+    const canNavigate = hasContentFile || isPatreonOnly;
+    const clickHandler = canNavigate 
         ? `onclick="window.location.href='reader.html?id=${script.id}';"` 
-        : isPatreonOnly && hasContent 
-            ? `onclick="openPatreonModal(${script.id}, '${escapeHtml(script.title).replace(/'/g, "\\'")}');"` 
-            : '';
+        : '';
 
     return `
         <article class="script-card" style="animation-delay: ${index * 0.05}s" ${clickHandler}>
