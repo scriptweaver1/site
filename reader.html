@@ -1527,8 +1527,13 @@
     <script>
         // Configuration
         const CONFIG = {
-            dataPath: './data/scripts.json'
+            dataPath: './data/scripts.json',
+            workerApiUrl: 'https://patreon-script-api.isapethscriptweaver.workers.dev'
         };
+
+        // Store script data for API calls
+        let currentScriptData = null;
+        let allScriptsData = null;
 
         // Get script ID from URL
         function getScriptId() {
@@ -2070,24 +2075,10 @@
         function verifyPatreonAccess(script) {
             if (!script.patreonOnly) return true;
             
-            const urlKey = getUrlKey();
-            const savedKey = localStorage.getItem(`patreon_key_${script.id}`);
-            
-            // Check URL key first
-            if (urlKey && urlKey === script.patreonKey) {
-                // Save valid key to localStorage for future visits
-                localStorage.setItem(`patreon_key_${script.id}`, urlKey);
+            // Check if we have validated access in this session
+            const sessionAccess = sessionStorage.getItem(`patreon_access_${script.id}`);
+            if (sessionAccess === 'granted') {
                 return true;
-            }
-            
-            // Check saved key
-            if (savedKey && savedKey === script.patreonKey) {
-                return true;
-            }
-            
-            // Invalid or no key - clear any saved invalid key
-            if (savedKey && savedKey !== script.patreonKey) {
-                localStorage.removeItem(`patreon_key_${script.id}`);
             }
             
             return false;
@@ -2111,9 +2102,10 @@
                     <div class="patreon-gate-input-group">
                         <input type="password" id="patreonGateInput" class="patreon-gate-input" placeholder="Enter password...">
                         <p class="patreon-gate-error" id="patreonGateError">Incorrect password. Please try again.</p>
+                        <p class="patreon-gate-loading" id="patreonGateLoading" style="display: none; color: var(--cosmic-pink); margin-top: 0.8rem; font-size: 0.9rem;">Verifying...</p>
                     </div>
                     <div class="patreon-gate-buttons">
-                        <button class="patreon-gate-btn unlock" onclick="submitPatreonGateKey(${script.id}, '${script.patreonKey}')">
+                        <button class="patreon-gate-btn unlock" id="unlockBtn" onclick="submitPatreonGateKey(${script.id})">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="18" height="18">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z" />
                             </svg>
@@ -2143,29 +2135,76 @@
                 input.focus();
                 input.addEventListener('keydown', (e) => {
                     if (e.key === 'Enter') {
-                        submitPatreonGateKey(script.id, script.patreonKey);
+                        submitPatreonGateKey(script.id);
                     }
                 });
             }
         }
 
-        function submitPatreonGateKey(scriptId, correctKey) {
+        async function submitPatreonGateKey(scriptId) {
             const input = document.getElementById('patreonGateInput');
             const errorEl = document.getElementById('patreonGateError');
+            const loadingEl = document.getElementById('patreonGateLoading');
+            const unlockBtn = document.getElementById('unlockBtn');
             
             if (!input) return;
             
-            const key = input.value.trim();
+            const password = input.value.trim();
             
-            if (key === correctKey) {
-                // Save key and reload page
-                localStorage.setItem(`patreon_key_${scriptId}`, key);
-                window.location.reload();
-            } else {
-                // Show error
+            if (!password) {
+                errorEl.textContent = 'Please enter a password.';
                 errorEl.style.display = 'block';
                 input.classList.add('error');
-                input.focus();
+                return;
+            }
+            
+            // Show loading state
+            errorEl.style.display = 'none';
+            loadingEl.style.display = 'block';
+            unlockBtn.disabled = true;
+            input.disabled = true;
+            
+            try {
+                const response = await fetch(`${CONFIG.workerApiUrl}/api/patreon-script/${scriptId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ password: password })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok && data.success) {
+                    // Password valid! Store access for this session
+                    sessionStorage.setItem(`patreon_access_${scriptId}`, 'granted');
+                    sessionStorage.setItem(`patreon_pw_${scriptId}`, password);
+                    
+                    // Render the script with the content from the API
+                    renderScript(currentScriptData, data.content, allScriptsData, null);
+                    
+                    // Setup scroll tracking
+                    setupScrollTracking(scriptId);
+                    
+                } else {
+                    // Password invalid
+                    loadingEl.style.display = 'none';
+                    errorEl.textContent = data.error || 'Incorrect password. Please try again.';
+                    errorEl.style.display = 'block';
+                    input.classList.add('error');
+                    unlockBtn.disabled = false;
+                    input.disabled = false;
+                    input.focus();
+                    input.select();
+                }
+                
+            } catch (error) {
+                console.error('API Error:', error);
+                loadingEl.style.display = 'none';
+                errorEl.textContent = 'Connection error. Please try again.';
+                errorEl.style.display = 'block';
+                unlockBtn.disabled = false;
+                input.disabled = false;
             }
         }
 
@@ -2192,15 +2231,47 @@
                     return;
                 }
 
-                // Check if script has a content file
-                if (!script.contentFile) {
-                    renderError('This script does not have content available for reading yet.');
+                // Store for use in submitPatreonGateKey
+                currentScriptData = script;
+                allScriptsData = allScripts;
+
+                // Handle Patreon-only scripts
+                if (script.patreonOnly) {
+                    // Check if already verified this session
+                    if (!verifyPatreonAccess(script)) {
+                        renderPatreonGate(script);
+                        return;
+                    }
+                    
+                    // Already verified - re-fetch content from API with saved password
+                    const savedPassword = sessionStorage.getItem(`patreon_pw_${scriptId}`);
+                    if (savedPassword) {
+                        try {
+                            const apiResponse = await fetch(`${CONFIG.workerApiUrl}/api/patreon-script/${scriptId}`, {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({ password: savedPassword })
+                            });
+                            const apiData = await apiResponse.json();
+                            if (apiResponse.ok && apiData.success) {
+                                renderScript(script, apiData.content, allScripts, null);
+                                setupScrollTracking(scriptId);
+                                return;
+                            }
+                        } catch (e) {
+                            console.error('Failed to re-fetch:', e);
+                        }
+                    }
+                    
+                    // Couldn't get content, show gate again
+                    sessionStorage.removeItem(`patreon_access_${scriptId}`);
+                    renderPatreonGate(script);
                     return;
                 }
 
-                // Check Patreon access for patron-only scripts
-                if (script.patreonOnly && !verifyPatreonAccess(script)) {
-                    renderPatreonGate(script);
+                // Regular (non-Patreon) script handling
+                if (!script.contentFile) {
+                    renderError('This script does not have content available for reading yet.');
                     return;
                 }
 
