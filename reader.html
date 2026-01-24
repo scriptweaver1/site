@@ -2180,8 +2180,8 @@
                     sessionStorage.setItem(`patreon_access_${scriptId}`, 'granted');
                     sessionStorage.setItem(`patreon_pw_${scriptId}`, password);
                     
-                    // Render the script with the content from the API
-                    renderScript(currentScriptData, data.content, allScriptsData, null);
+                    // Render the script with the content from the API (including condensed version if available)
+                    renderScript(currentScriptData, data.content, allScriptsData, data.condensedContent || null);
                     
                     // Setup scroll tracking
                     setupScrollTracking(scriptId);
@@ -2254,7 +2254,7 @@
                             });
                             const apiData = await apiResponse.json();
                             if (apiResponse.ok && apiData.success) {
-                                renderScript(script, apiData.content, allScripts, null);
+                                renderScript(script, apiData.content, allScripts, apiData.condensedContent || null);
                                 setupScrollTracking(scriptId);
                                 return;
                             }
