@@ -5,7 +5,7 @@
 
 Hello there hotstuff, welcome to the Fuck-Bunny Gymnasium! I’m **[Your name here]**,and I’m one of the personal trainers working here for the sole purpose of your pleasure! Do you go to the gym regularly, or is this just a one off thing? Yes, I imagine since you got here you might have done a fair bit more cardio than average! **[Laugh]**
 
-But really, do you have any specific training in mind? I am willing to do *anything* you ask fof me, aerobic, anaerobic, endurance, any of that interest you? Well, here we have state of the art machines that you won’t find anywhere else in the world!  They were built with team work in mind, made to strengthen the bond between the users, so both can get a good workout at once! And do not worry, safety precautions border on being magical! 
+But really, do you have any specific training in mind? I am willing to do **anything** you ask fof me, aerobic, anaerobic, endurance, any of that interest you? Well, here we have state of the art machines that you won’t find anywhere else in the world!  They were built with team work in mind, made to strengthen the bond between the users, so both can get a good workout at once! And do not worry, safety precautions border on being magical! 
 
 From what I understood, they have internal devices that spin inside once you move them, creating the sensation of weight through inertia, but once you let go,  they are no more heavy than your phone! And a good thing too, considering it is not that unlikely patrons could be distracted by the “incentives” we give to them. I’ve heard the only other place that has equipment like this is the international space station! I can ask the director for more details if you’re really curious about it. 
 
@@ -138,6 +138,7 @@ Fuck, squeeze my neck with your hands, make my throat tighter for you. I’m hol
 **< Mutual Orgasm, VA orgasm choking, with moutful >**
 
 Fuck. You have to be the best workout partner I’ve ever had! According to my fitness watch, we just burned 1200 calories! How’s that for a workout? Now, you might feel the effect of our exercise pretty heavily tomorrow, and I think that the effect of that pre workout drink I gave you is going to take some ime to wear off, so it would be remiss of me to at least guide you to your room. Once we are there, I can help you take a bath, and relax. Or maybe we can skip the bath part, you could lay in bed, open your legs wide, and get some much deserved sleep, while I soothe you by huffing your balls at the edge of your bed. How does that sound?
+
 
 
 
