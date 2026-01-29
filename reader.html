@@ -1265,6 +1265,168 @@
             box-shadow: 0 8px 25px rgba(217, 70, 168, 0.4);
         }
 
+        /* Preview Top Unlock Bar */
+        .preview-top-bar {
+            background: linear-gradient(135deg, rgba(45, 27, 78, 0.9), rgba(26, 20, 46, 0.95));
+            border: 1px solid rgba(107, 63, 160, 0.4);
+            border-radius: 16px;
+            padding: 1.5rem 2rem;
+            margin-bottom: 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .preview-top-bar-text {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .preview-top-bar-text h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--starlight);
+            margin-bottom: 0.3rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .preview-top-bar-text h3 svg {
+            color: var(--cosmic-pink);
+        }
+
+        .preview-top-bar-text p {
+            font-size: 0.9rem;
+            color: var(--stardust);
+            opacity: 0.8;
+            margin: 0;
+        }
+
+        .preview-top-bar-form {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        .preview-top-bar-input {
+            padding: 0.7rem 1rem;
+            border-radius: 10px;
+            border: 2px solid rgba(107, 63, 160, 0.5);
+            background: rgba(13, 11, 20, 0.6);
+            color: var(--starlight);
+            font-size: 0.95rem;
+            width: 180px;
+            transition: all 0.3s ease;
+        }
+
+        .preview-top-bar-input:focus {
+            outline: none;
+            border-color: var(--cosmic-pink);
+            box-shadow: 0 0 15px rgba(217, 70, 168, 0.2);
+        }
+
+        .preview-top-bar-input::placeholder {
+            color: rgba(233, 213, 255, 0.4);
+        }
+
+        .preview-top-bar-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.7rem 1.2rem;
+            background: linear-gradient(135deg, var(--deep-purple), var(--cosmic-pink));
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .preview-top-bar-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(217, 70, 168, 0.4);
+        }
+
+        .preview-top-bar-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .preview-top-bar-error {
+            width: 100%;
+            color: #ef4444;
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        .preview-top-bar-link {
+            color: var(--cosmic-pink);
+            font-size: 0.9rem;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            transition: opacity 0.2s ease;
+        }
+
+        .preview-top-bar-link:hover {
+            opacity: 0.8;
+            text-decoration: underline;
+        }
+
+        /* Preview Notice Banner */
+        .preview-notice {
+            background: linear-gradient(135deg, rgba(255, 66, 77, 0.15), rgba(217, 70, 168, 0.15));
+            border: 1px solid rgba(255, 66, 77, 0.3);
+            border-radius: 12px;
+            padding: 1rem 1.5rem;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .preview-notice-icon {
+            color: #FF424D;
+            flex-shrink: 0;
+        }
+
+        .preview-notice-text {
+            font-size: 0.95rem;
+            color: var(--stardust);
+        }
+
+        .preview-notice-text strong {
+            color: var(--starlight);
+        }
+
+        @media (max-width: 768px) {
+            .preview-top-bar {
+                flex-direction: column;
+                align-items: stretch;
+                text-align: center;
+            }
+
+            .preview-top-bar-form {
+                justify-content: center;
+            }
+
+            .preview-top-bar-input {
+                width: 100%;
+                max-width: 250px;
+            }
+        }
+
         /* Modal Overlay */
         .preview-modal-overlay {
             position: fixed;
@@ -2585,7 +2747,51 @@
                         ${coverImageHTML}
                     </header>
 
+                    <!-- Top Unlock Bar -->
+                    <div class="preview-top-bar">
+                        <div class="preview-top-bar-text">
+                            <h3>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="20" height="20">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                                </svg>
+                                Already a Patron?
+                            </h3>
+                            <p>Enter your password to unlock the full script</p>
+                        </div>
+                        <div class="preview-top-bar-form">
+                            <input type="password" id="topBarPasswordInput" class="preview-top-bar-input" placeholder="Password...">
+                            <button class="preview-top-bar-btn" id="topBarUnlockBtn" onclick="submitTopBarUnlock(${script.id})">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="16" height="16">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z" />
+                                </svg>
+                                Unlock
+                            </button>
+                            ${script.patreonLink ? `
+                            <a href="${escapeHtml(script.patreonLink)}" class="preview-top-bar-link" target="_blank" rel="noopener noreferrer">
+                                Get password
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="14" height="14">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                                </svg>
+                            </a>
+                            ` : ''}
+                        </div>
+                        <p class="preview-top-bar-error" id="topBarError"></p>
+                    </div>
+
                     <div class="preview-content">
+                        <!-- Preview Notice -->
+                        <div class="preview-notice">
+                            <div class="preview-notice-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="24" height="24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                </svg>
+                            </div>
+                            <div class="preview-notice-text">
+                                <strong>This is a preview.</strong> You're reading a sample of this Patron-exclusive script. Enter your password above or scroll down to unlock the full content.
+                            </div>
+                        </div>
+
                         <div class="script-content" id="scriptContent">
                             ${parsedPreview}
                         </div>
@@ -2649,6 +2855,16 @@
 
             // Setup scroll detection for auto-showing modal
             setupPreviewScrollDetection();
+
+            // Add Enter key handler for top bar input
+            const topBarInput = document.getElementById('topBarPasswordInput');
+            if (topBarInput) {
+                topBarInput.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter') {
+                        submitTopBarUnlock(script.id);
+                    }
+                });
+            }
 
             // Add Enter key handler for modal input
             const modalInput = document.getElementById('previewModalInput');
@@ -2806,6 +3022,89 @@
                 errorEl.textContent = 'Connection error. Please try again.';
                 errorEl.style.display = 'block';
                 unlockBtn.disabled = false;
+                input.disabled = false;
+            }
+        }
+
+        // Handle top bar unlock submission
+        async function submitTopBarUnlock(scriptId) {
+            const input = document.getElementById('topBarPasswordInput');
+            const errorEl = document.getElementById('topBarError');
+            const unlockBtn = document.getElementById('topBarUnlockBtn');
+            
+            if (!input) return;
+            
+            const password = input.value.trim();
+            
+            if (!password) {
+                errorEl.textContent = 'Please enter a password.';
+                errorEl.style.display = 'block';
+                return;
+            }
+            
+            // Show loading state
+            errorEl.style.display = 'none';
+            unlockBtn.disabled = true;
+            unlockBtn.innerHTML = `
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="16" height="16" class="animate-spin">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                </svg>
+                Verifying...
+            `;
+            input.disabled = true;
+            
+            try {
+                const response = await fetch(`${CONFIG.workerApiUrl}/api/patreon-script/${scriptId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ password: password })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok && data.success) {
+                    // Password valid! Store access for this session
+                    sessionStorage.setItem(`patreon_access_${scriptId}`, 'granted');
+                    sessionStorage.setItem(`patreon_pw_${scriptId}`, password);
+                    
+                    // Render the full script
+                    renderScript(currentScriptData, data.content, allScriptsData, data.condensedContent || null);
+                    
+                    // Scroll to top to see full content
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    
+                    // Setup scroll tracking
+                    setupScrollTracking(scriptId);
+                    
+                } else {
+                    // Password invalid
+                    errorEl.textContent = data.error || 'Incorrect password. Please try again.';
+                    errorEl.style.display = 'block';
+                    unlockBtn.disabled = false;
+                    unlockBtn.innerHTML = `
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="16" height="16">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z" />
+                        </svg>
+                        Unlock
+                    `;
+                    input.disabled = false;
+                    input.focus();
+                    input.select();
+                }
+                
+            } catch (error) {
+                console.error('API Error:', error);
+                errorEl.textContent = 'Connection error. Please try again.';
+                errorEl.style.display = 'block';
+                unlockBtn.disabled = false;
+                unlockBtn.innerHTML = `
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="16" height="16">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z" />
+                    </svg>
+                    Unlock
+                `;
                 input.disabled = false;
             }
         }
