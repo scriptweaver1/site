@@ -214,6 +214,31 @@
             border: 1px solid rgba(107, 63, 160, 0.4);
         }
 
+        .script-tags-hidden {
+            display: none;
+        }
+
+        .script-tags-hidden.visible {
+            display: contents;
+        }
+
+        .script-tags-toggle {
+            background: rgba(217, 70, 168, 0.2);
+            color: var(--cosmic-pink);
+            padding: 0.4rem 0.9rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            border: 1px solid rgba(217, 70, 168, 0.4);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .script-tags-toggle:hover {
+            background: rgba(217, 70, 168, 0.3);
+            border-color: rgba(217, 70, 168, 0.6);
+        }
+
         .script-meta {
             color: rgba(233, 213, 255, 0.6);
             font-size: 0.9rem;
@@ -1800,6 +1825,49 @@
             return div.innerHTML;
         }
 
+        // Toggle hidden tags visibility
+        function toggleTags() {
+            const hiddenTags = document.getElementById('hiddenTags');
+            const toggleBtn = document.getElementById('tagsToggle');
+            
+            if (hiddenTags && toggleBtn) {
+                const isVisible = hiddenTags.classList.contains('visible');
+                
+                if (isVisible) {
+                    hiddenTags.classList.remove('visible');
+                    const tagCount = hiddenTags.querySelectorAll('.script-tag').length;
+                    toggleBtn.textContent = `+${tagCount} more`;
+                } else {
+                    hiddenTags.classList.add('visible');
+                    toggleBtn.textContent = 'Show less';
+                }
+            }
+        }
+
+        // Build tags HTML with collapsible "show more" for many tags
+        function buildTagsHTML(tags, maxVisible = 6) {
+            if (!tags || tags.length === 0) return '';
+            
+            const visibleTags = tags.slice(0, maxVisible);
+            const hiddenTags = tags.slice(maxVisible);
+            
+            let html = visibleTags.map(tag => 
+                `<span class="script-tag">${escapeHtml(tag)}</span>`
+            ).join('');
+            
+            if (hiddenTags.length > 0) {
+                const hiddenTagsHTML = hiddenTags.map(tag => 
+                    `<span class="script-tag">${escapeHtml(tag)}</span>`
+                ).join('');
+                html += `
+                    <span class="script-tags-hidden" id="hiddenTags">${hiddenTagsHTML}</span>
+                    <button class="script-tags-toggle" id="tagsToggle" onclick="toggleTags()">+${hiddenTags.length} more</button>
+                `;
+            }
+            
+            return html;
+        }
+
         // Render error state
         function renderError(message) {
             document.getElementById('mainContent').innerHTML = `
@@ -2032,7 +2100,7 @@
                         <span class="script-category">${formatCategory(script.category)}</span>
                         <h1 class="script-title">${escapeHtml(script.title)}</h1>
                         <div class="script-tags">
-                            ${script.tags.map(tag => `<span class="script-tag">${escapeHtml(tag)}</span>`).join('')}
+                            ${buildTagsHTML(script.tags)}
                         </div>
                         ${coverImageHTML}
                     </header>
@@ -2474,22 +2542,8 @@
             // Parse preview markdown
             const parsedPreview = marked.parse(previewContent);
 
-            // Build tags HTML
-            const visibleTags = script.tags ? script.tags.slice(0, 6) : [];
-            const hiddenTags = script.tags ? script.tags.slice(6) : [];
-            let tagsHTML = visibleTags.map(tag => 
-                `<span class="script-tag">${escapeHtml(tag)}</span>`
-            ).join('');
-            
-            if (hiddenTags.length > 0) {
-                const hiddenTagsHTML = hiddenTags.map(tag => 
-                    `<span class="script-tag">${escapeHtml(tag)}</span>`
-                ).join('');
-                tagsHTML += `
-                    <span class="script-tags-hidden" id="hiddenTags">${hiddenTagsHTML}</span>
-                    <button class="script-tags-toggle" id="tagsToggle" onclick="toggleTags()">+${hiddenTags.length} more</button>
-                `;
-            }
+            // Build tags HTML using helper
+            const tagsHTML = buildTagsHTML(script.tags);
 
             // Build cover image HTML
             let coverImageHTML = '';
@@ -2640,10 +2694,10 @@
                 if (scrollTop + clientHeight >= scrollHeight - 100 && !previewModalShown) {
                     previewModalShown = true;
                     
-                    // Show modal after 5 second delay
+                    // Show modal after 2 second delay
                     previewModalTimeout = setTimeout(() => {
                         showPreviewModal();
-                    }, 5000);
+                    }, 2000);
                 }
             };
 
