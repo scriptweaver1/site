@@ -1200,18 +1200,111 @@
             );
         }
 
-        .preview-unlock-gate {
+        .preview-end-message {
             padding: 3rem 2rem;
             text-align: center;
             background: var(--void);
         }
 
-        .preview-unlock-icon {
+        .preview-end-message h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.4rem;
+            color: var(--starlight);
+            margin-bottom: 0.5rem;
+        }
+
+        .preview-end-message p {
+            color: var(--stardust);
+            opacity: 0.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .preview-end-message .manual-unlock-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem 1.5rem;
+            background: linear-gradient(135deg, var(--deep-purple), var(--cosmic-pink));
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .preview-end-message .manual-unlock-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(217, 70, 168, 0.4);
+        }
+
+        /* Modal Overlay */
+        .preview-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(13, 11, 20, 0.85);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        .preview-modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .preview-modal {
+            position: relative;
+            background: linear-gradient(135deg, rgba(45, 27, 78, 0.95), rgba(13, 11, 20, 0.98));
+            border: 1px solid rgba(107, 63, 160, 0.5);
+            border-radius: 20px;
+            padding: 3rem 2.5rem;
+            max-width: 450px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5), 0 0 40px rgba(217, 70, 168, 0.2);
+            transform: translateY(20px) scale(0.95);
+            transition: transform 0.5s ease;
+        }
+
+        .preview-modal-overlay.active .preview-modal {
+            transform: translateY(0) scale(1);
+        }
+
+        .preview-modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: transparent;
+            border: none;
+            color: var(--stardust);
+            cursor: pointer;
+            padding: 0.5rem;
+            opacity: 0.7;
+            transition: opacity 0.2s ease;
+        }
+
+        .preview-modal-close:hover {
+            opacity: 1;
+        }
+
+        .preview-modal-icon {
             color: var(--cosmic-pink);
             margin-bottom: 1.5rem;
         }
 
-        .preview-unlock-title {
+        .preview-modal-title {
             font-family: 'Space Grotesk', sans-serif;
             font-size: 1.8rem;
             font-weight: 700;
@@ -1219,19 +1312,18 @@
             margin-bottom: 0.5rem;
         }
 
-        .preview-unlock-subtitle {
+        .preview-modal-subtitle {
             font-size: 1.1rem;
             color: var(--stardust);
             margin-bottom: 2rem;
             opacity: 0.9;
         }
 
-        .preview-unlock-input-group {
-            max-width: 400px;
-            margin: 0 auto 1.5rem;
+        .preview-modal-input-group {
+            margin-bottom: 1.5rem;
         }
 
-        .preview-unlock-input {
+        .preview-modal-input {
             width: 100%;
             padding: 1rem 1.2rem;
             border-radius: 12px;
@@ -1240,45 +1332,44 @@
             color: var(--starlight);
             font-size: 1rem;
             transition: all 0.3s ease;
+            box-sizing: border-box;
         }
 
-        .preview-unlock-input:focus {
+        .preview-modal-input:focus {
             outline: none;
             border-color: var(--cosmic-pink);
             box-shadow: 0 0 20px rgba(217, 70, 168, 0.3);
         }
 
-        .preview-unlock-input.error {
+        .preview-modal-input.error {
             border-color: #ef4444;
             animation: shake 0.5s ease-in-out;
         }
 
-        .preview-unlock-input::placeholder {
+        .preview-modal-input::placeholder {
             color: rgba(233, 213, 255, 0.5);
         }
 
-        .preview-unlock-error {
+        .preview-modal-error {
             color: #ef4444;
             font-size: 0.9rem;
             margin-top: 0.8rem;
             display: none;
         }
 
-        .preview-unlock-loading {
+        .preview-modal-loading {
             color: var(--cosmic-pink);
             font-size: 0.9rem;
             margin-top: 0.8rem;
         }
 
-        .preview-unlock-buttons {
+        .preview-modal-buttons {
             display: flex;
             flex-direction: column;
             gap: 1rem;
-            max-width: 400px;
-            margin: 0 auto;
         }
 
-        .preview-unlock-btn {
+        .preview-modal-btn {
             display: flex;
             align-items: center;
             justify-content: center;
@@ -1294,39 +1385,46 @@
             border: none;
         }
 
-        .preview-unlock-btn.unlock {
+        .preview-modal-btn.unlock {
             background: linear-gradient(135deg, var(--deep-purple), var(--cosmic-pink));
             color: white;
         }
 
-        .preview-unlock-btn.unlock:hover {
+        .preview-modal-btn.unlock:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 25px rgba(217, 70, 168, 0.4);
         }
 
-        .preview-unlock-btn.unlock:disabled {
+        .preview-modal-btn.unlock:disabled {
             opacity: 0.6;
             cursor: not-allowed;
             transform: none;
         }
 
-        .preview-unlock-btn.patreon {
+        .preview-modal-btn.patreon {
             background: #FF424D;
             color: white;
         }
 
-        .preview-unlock-btn.patreon:hover {
+        .preview-modal-btn.patreon:hover {
             background: #e03a44;
             transform: translateY(-2px);
         }
 
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
         @media (max-width: 768px) {
-            .preview-unlock-title {
-                font-size: 1.5rem;
+            .preview-modal {
+                padding: 2rem 1.5rem;
+                margin: 1rem;
             }
             
-            .preview-unlock-gate {
-                padding: 2rem 1rem;
+            .preview-modal-title {
+                font-size: 1.5rem;
             }
         }
 
@@ -2405,8 +2503,8 @@
                     }
                 }
                 coverImageHTML = `
-                    <div class="script-cover-wrapper">
-                        <img src="${script.image}" alt="${escapeHtml(script.title)}" class="script-cover-image">
+                    <div class="script-cover">
+                        <img src="${escapeHtml(script.image)}" alt="${escapeHtml(script.title)} cover art">
                         ${artistCredit}
                     </div>
                 `;
@@ -2439,60 +2537,157 @@
                         </div>
 
                         <div class="preview-fade-overlay">
-                            <div class="preview-unlock-gate">
-                                <div class="preview-unlock-icon">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="48" height="48">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                            <div class="preview-end-message" id="previewEndMessage">
+                                <h3>End of Preview</h3>
+                                <p>Unlock the full script with your Patron password</p>
+                                <button class="manual-unlock-btn" onclick="showPreviewModal()">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="18" height="18">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z" />
                                     </svg>
-                                </div>
-                                <h2 class="preview-unlock-title">Continue Reading</h2>
-                                <p class="preview-unlock-subtitle">Enter your Patron password to unlock the full script</p>
-                                
-                                <div class="preview-unlock-input-group">
-                                    <input type="password" id="previewUnlockInput" class="preview-unlock-input" placeholder="Enter password...">
-                                    <p class="preview-unlock-error" id="previewUnlockError"></p>
-                                    <p class="preview-unlock-loading" id="previewUnlockLoading" style="display: none;">Verifying...</p>
-                                </div>
-                                
-                                <div class="preview-unlock-buttons">
-                                    <button class="preview-unlock-btn unlock" id="previewUnlockBtn" onclick="submitPreviewUnlock(${script.id})">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="20" height="20">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z" />
-                                        </svg>
-                                        Unlock Full Script
-                                    </button>
-                                    ${script.patreonLink ? `
-                                    <a href="${escapeHtml(script.patreonLink)}" class="preview-unlock-btn patreon" target="_blank" rel="noopener noreferrer">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
-                                            <path d="M15.386.524c-4.764 0-8.64 3.876-8.64 8.64 0 4.75 3.876 8.613 8.64 8.613 4.75 0 8.614-3.864 8.614-8.613C24 4.4 20.136.524 15.386.524M.003 23.537h4.22V.524H.003"/>
-                                        </svg>
-                                        Get Password on Patreon
-                                    </a>
-                                    ` : ''}
-                                </div>
+                                    Unlock Now
+                                </button>
                             </div>
                         </div>
                     </div>
                 </article>
+
+                <!-- Modal Overlay -->
+                <div class="preview-modal-overlay" id="previewModalOverlay">
+                    <div class="preview-modal">
+                        <button class="preview-modal-close" onclick="hidePreviewModal()">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="24" height="24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                        <div class="preview-modal-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="48" height="48">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                            </svg>
+                        </div>
+                        <h2 class="preview-modal-title">Continue Reading</h2>
+                        <p class="preview-modal-subtitle">Enter your Patron password to unlock the full script</p>
+                        
+                        <div class="preview-modal-input-group">
+                            <input type="password" id="previewModalInput" class="preview-modal-input" placeholder="Enter password...">
+                            <p class="preview-modal-error" id="previewModalError"></p>
+                            <p class="preview-modal-loading" id="previewModalLoading" style="display: none;">Verifying...</p>
+                        </div>
+                        
+                        <div class="preview-modal-buttons">
+                            <button class="preview-modal-btn unlock" id="previewModalUnlockBtn" onclick="submitPreviewModal(${script.id})">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="20" height="20">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z" />
+                                </svg>
+                                Unlock Full Script
+                            </button>
+                            ${script.patreonLink ? `
+                            <a href="${escapeHtml(script.patreonLink)}" class="preview-modal-btn patreon" target="_blank" rel="noopener noreferrer">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+                                    <path d="M15.386.524c-4.764 0-8.64 3.876-8.64 8.64 0 4.75 3.876 8.613 8.64 8.613 4.75 0 8.614-3.864 8.614-8.613C24 4.4 20.136.524 15.386.524M.003 23.537h4.22V.524H.003"/>
+                                </svg>
+                                Get Password on Patreon
+                            </a>
+                            ` : ''}
+                        </div>
+                    </div>
+                </div>
             `;
 
-            // Focus input and add Enter key handler
-            const input = document.getElementById('previewUnlockInput');
-            if (input) {
-                input.addEventListener('keydown', (e) => {
+            // Setup scroll detection for auto-showing modal
+            setupPreviewScrollDetection();
+
+            // Add Enter key handler for modal input
+            const modalInput = document.getElementById('previewModalInput');
+            if (modalInput) {
+                modalInput.addEventListener('keydown', (e) => {
                     if (e.key === 'Enter') {
-                        submitPreviewUnlock(script.id);
+                        submitPreviewModal(script.id);
                     }
                 });
             }
+
+            // Close modal on overlay click
+            const overlay = document.getElementById('previewModalOverlay');
+            if (overlay) {
+                overlay.addEventListener('click', (e) => {
+                    if (e.target === overlay) {
+                        hidePreviewModal();
+                    }
+                });
+            }
+
+            // Close modal on Escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    hidePreviewModal();
+                }
+            });
         }
 
-        // Handle preview unlock submission
-        async function submitPreviewUnlock(scriptId) {
-            const input = document.getElementById('previewUnlockInput');
-            const errorEl = document.getElementById('previewUnlockError');
-            const loadingEl = document.getElementById('previewUnlockLoading');
-            const unlockBtn = document.getElementById('previewUnlockBtn');
+        // Track if modal has been shown this session
+        let previewModalShown = false;
+        let previewModalTimeout = null;
+
+        // Setup scroll detection for preview pages
+        function setupPreviewScrollDetection() {
+            const checkScrollPosition = () => {
+                // Check if user has scrolled near the bottom
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                const scrollHeight = document.documentElement.scrollHeight;
+                const clientHeight = document.documentElement.clientHeight;
+                
+                // If within 100px of bottom and modal hasn't been shown yet
+                if (scrollTop + clientHeight >= scrollHeight - 100 && !previewModalShown) {
+                    previewModalShown = true;
+                    
+                    // Show modal after 5 second delay
+                    previewModalTimeout = setTimeout(() => {
+                        showPreviewModal();
+                    }, 5000);
+                }
+            };
+
+            window.addEventListener('scroll', checkScrollPosition);
+            // Also check on load in case content is short
+            checkScrollPosition();
+        }
+
+        // Show the preview unlock modal
+        function showPreviewModal() {
+            const overlay = document.getElementById('previewModalOverlay');
+            if (overlay) {
+                overlay.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Prevent background scroll
+                
+                // Focus the input
+                setTimeout(() => {
+                    const input = document.getElementById('previewModalInput');
+                    if (input) input.focus();
+                }, 100);
+            }
+        }
+
+        // Hide the preview unlock modal
+        function hidePreviewModal() {
+            const overlay = document.getElementById('previewModalOverlay');
+            if (overlay) {
+                overlay.classList.remove('active');
+                document.body.style.overflow = ''; // Restore scroll
+            }
+            
+            // Clear any pending timeout
+            if (previewModalTimeout) {
+                clearTimeout(previewModalTimeout);
+                previewModalTimeout = null;
+            }
+        }
+
+        // Handle preview modal unlock submission
+        async function submitPreviewModal(scriptId) {
+            const input = document.getElementById('previewModalInput');
+            const errorEl = document.getElementById('previewModalError');
+            const loadingEl = document.getElementById('previewModalLoading');
+            const unlockBtn = document.getElementById('previewModalUnlockBtn');
             
             if (!input) return;
             
@@ -2526,6 +2721,9 @@
                     // Password valid! Store access for this session
                     sessionStorage.setItem(`patreon_access_${scriptId}`, 'granted');
                     sessionStorage.setItem(`patreon_pw_${scriptId}`, password);
+                    
+                    // Hide modal and restore scroll
+                    hidePreviewModal();
                     
                     // Render the full script
                     renderScript(currentScriptData, data.content, allScriptsData, data.condensedContent || null);
