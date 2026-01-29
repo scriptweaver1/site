@@ -1183,6 +1183,153 @@
             border-color: rgba(107, 63, 160, 0.8);
         }
 
+        /* Preview Fade Gate - for Patreon script previews */
+        .preview-content {
+            position: relative;
+        }
+
+        .preview-fade-overlay {
+            position: relative;
+            margin-top: -150px;
+            padding-top: 150px;
+            background: linear-gradient(to bottom, 
+                transparent 0%,
+                rgba(13, 11, 20, 0.7) 30%,
+                rgba(13, 11, 20, 0.95) 60%,
+                var(--void) 100%
+            );
+        }
+
+        .preview-unlock-gate {
+            padding: 3rem 2rem;
+            text-align: center;
+            background: var(--void);
+        }
+
+        .preview-unlock-icon {
+            color: var(--cosmic-pink);
+            margin-bottom: 1.5rem;
+        }
+
+        .preview-unlock-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--starlight);
+            margin-bottom: 0.5rem;
+        }
+
+        .preview-unlock-subtitle {
+            font-size: 1.1rem;
+            color: var(--stardust);
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .preview-unlock-input-group {
+            max-width: 400px;
+            margin: 0 auto 1.5rem;
+        }
+
+        .preview-unlock-input {
+            width: 100%;
+            padding: 1rem 1.2rem;
+            border-radius: 12px;
+            border: 2px solid rgba(107, 63, 160, 0.5);
+            background: rgba(45, 27, 78, 0.4);
+            color: var(--starlight);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .preview-unlock-input:focus {
+            outline: none;
+            border-color: var(--cosmic-pink);
+            box-shadow: 0 0 20px rgba(217, 70, 168, 0.3);
+        }
+
+        .preview-unlock-input.error {
+            border-color: #ef4444;
+            animation: shake 0.5s ease-in-out;
+        }
+
+        .preview-unlock-input::placeholder {
+            color: rgba(233, 213, 255, 0.5);
+        }
+
+        .preview-unlock-error {
+            color: #ef4444;
+            font-size: 0.9rem;
+            margin-top: 0.8rem;
+            display: none;
+        }
+
+        .preview-unlock-loading {
+            color: var(--cosmic-pink);
+            font-size: 0.9rem;
+            margin-top: 0.8rem;
+        }
+
+        .preview-unlock-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .preview-unlock-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .preview-unlock-btn.unlock {
+            background: linear-gradient(135deg, var(--deep-purple), var(--cosmic-pink));
+            color: white;
+        }
+
+        .preview-unlock-btn.unlock:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(217, 70, 168, 0.4);
+        }
+
+        .preview-unlock-btn.unlock:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .preview-unlock-btn.patreon {
+            background: #FF424D;
+            color: white;
+        }
+
+        .preview-unlock-btn.patreon:hover {
+            background: #e03a44;
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .preview-unlock-title {
+                font-size: 1.5rem;
+            }
+            
+            .preview-unlock-gate {
+                padding: 2rem 1rem;
+            }
+        }
+
         /* Footer Navigation */
         .footer-nav {
             max-width: 900px;
@@ -2222,6 +2369,195 @@
             }
         }
 
+        // Render Patreon script with preview content
+        function renderPatreonPreview(script, previewContent, allScripts) {
+            document.title = `${script.title} | The Immaterial Loom`;
+
+            // Parse preview markdown
+            const parsedPreview = marked.parse(previewContent);
+
+            // Build tags HTML
+            const visibleTags = script.tags ? script.tags.slice(0, 6) : [];
+            const hiddenTags = script.tags ? script.tags.slice(6) : [];
+            let tagsHTML = visibleTags.map(tag => 
+                `<span class="script-tag">${escapeHtml(tag)}</span>`
+            ).join('');
+            
+            if (hiddenTags.length > 0) {
+                const hiddenTagsHTML = hiddenTags.map(tag => 
+                    `<span class="script-tag">${escapeHtml(tag)}</span>`
+                ).join('');
+                tagsHTML += `
+                    <span class="script-tags-hidden" id="hiddenTags">${hiddenTagsHTML}</span>
+                    <button class="script-tags-toggle" id="tagsToggle" onclick="toggleTags()">+${hiddenTags.length} more</button>
+                `;
+            }
+
+            // Build cover image HTML
+            let coverImageHTML = '';
+            if (script.image) {
+                let artistCredit = '';
+                if (script.artist) {
+                    if (script.artistLink) {
+                        artistCredit = `<div class="script-cover-credit">Art by <a href="${escapeHtml(script.artistLink)}" target="_blank" rel="noopener noreferrer">${escapeHtml(script.artist)}</a></div>`;
+                    } else {
+                        artistCredit = `<div class="script-cover-credit">Art by ${escapeHtml(script.artist)}</div>`;
+                    }
+                }
+                coverImageHTML = `
+                    <div class="script-cover-wrapper">
+                        <img src="${script.image}" alt="${escapeHtml(script.title)}" class="script-cover-image">
+                        ${artistCredit}
+                    </div>
+                `;
+            }
+
+            // Patreon badge
+            const patreonBadge = `
+                <div class="script-tag" style="background: linear-gradient(135deg, #FF424D, #ff6b6b); color: white; font-weight: 600;">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="14" height="14" style="margin-right: 4px;">
+                        <path d="M15.386.524c-4.764 0-8.64 3.876-8.64 8.64 0 4.75 3.876 8.613 8.64 8.613 4.75 0 8.614-3.864 8.614-8.613C24 4.4 20.136.524 15.386.524M.003 23.537h4.22V.524H.003"/>
+                    </svg>
+                    Patron Exclusive
+                </div>
+            `;
+
+            document.getElementById('mainContent').innerHTML = `
+                <article class="script-article">
+                    <header class="script-header">
+                        <h1 class="script-title">${escapeHtml(script.title)}</h1>
+                        <div class="script-tags">
+                            ${patreonBadge}
+                            ${tagsHTML}
+                        </div>
+                        ${coverImageHTML}
+                    </header>
+
+                    <div class="preview-content">
+                        <div class="script-content" id="scriptContent">
+                            ${parsedPreview}
+                        </div>
+
+                        <div class="preview-fade-overlay">
+                            <div class="preview-unlock-gate">
+                                <div class="preview-unlock-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="48" height="48">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                                    </svg>
+                                </div>
+                                <h2 class="preview-unlock-title">Continue Reading</h2>
+                                <p class="preview-unlock-subtitle">Enter your Patron password to unlock the full script</p>
+                                
+                                <div class="preview-unlock-input-group">
+                                    <input type="password" id="previewUnlockInput" class="preview-unlock-input" placeholder="Enter password...">
+                                    <p class="preview-unlock-error" id="previewUnlockError"></p>
+                                    <p class="preview-unlock-loading" id="previewUnlockLoading" style="display: none;">Verifying...</p>
+                                </div>
+                                
+                                <div class="preview-unlock-buttons">
+                                    <button class="preview-unlock-btn unlock" id="previewUnlockBtn" onclick="submitPreviewUnlock(${script.id})">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="20" height="20">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z" />
+                                        </svg>
+                                        Unlock Full Script
+                                    </button>
+                                    ${script.patreonLink ? `
+                                    <a href="${escapeHtml(script.patreonLink)}" class="preview-unlock-btn patreon" target="_blank" rel="noopener noreferrer">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+                                            <path d="M15.386.524c-4.764 0-8.64 3.876-8.64 8.64 0 4.75 3.876 8.613 8.64 8.613 4.75 0 8.614-3.864 8.614-8.613C24 4.4 20.136.524 15.386.524M.003 23.537h4.22V.524H.003"/>
+                                        </svg>
+                                        Get Password on Patreon
+                                    </a>
+                                    ` : ''}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            `;
+
+            // Focus input and add Enter key handler
+            const input = document.getElementById('previewUnlockInput');
+            if (input) {
+                input.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter') {
+                        submitPreviewUnlock(script.id);
+                    }
+                });
+            }
+        }
+
+        // Handle preview unlock submission
+        async function submitPreviewUnlock(scriptId) {
+            const input = document.getElementById('previewUnlockInput');
+            const errorEl = document.getElementById('previewUnlockError');
+            const loadingEl = document.getElementById('previewUnlockLoading');
+            const unlockBtn = document.getElementById('previewUnlockBtn');
+            
+            if (!input) return;
+            
+            const password = input.value.trim();
+            
+            if (!password) {
+                errorEl.textContent = 'Please enter a password.';
+                errorEl.style.display = 'block';
+                input.classList.add('error');
+                return;
+            }
+            
+            // Show loading state
+            errorEl.style.display = 'none';
+            loadingEl.style.display = 'block';
+            unlockBtn.disabled = true;
+            input.disabled = true;
+            
+            try {
+                const response = await fetch(`${CONFIG.workerApiUrl}/api/patreon-script/${scriptId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ password: password })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok && data.success) {
+                    // Password valid! Store access for this session
+                    sessionStorage.setItem(`patreon_access_${scriptId}`, 'granted');
+                    sessionStorage.setItem(`patreon_pw_${scriptId}`, password);
+                    
+                    // Render the full script
+                    renderScript(currentScriptData, data.content, allScriptsData, data.condensedContent || null);
+                    
+                    // Scroll to top to see full content
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    
+                    // Setup scroll tracking
+                    setupScrollTracking(scriptId);
+                    
+                } else {
+                    // Password invalid
+                    loadingEl.style.display = 'none';
+                    errorEl.textContent = data.error || 'Incorrect password. Please try again.';
+                    errorEl.style.display = 'block';
+                    input.classList.add('error');
+                    unlockBtn.disabled = false;
+                    input.disabled = false;
+                    input.focus();
+                    input.select();
+                }
+                
+            } catch (error) {
+                console.error('API Error:', error);
+                loadingEl.style.display = 'none';
+                errorEl.textContent = 'Connection error. Please try again.';
+                errorEl.style.display = 'block';
+                unlockBtn.disabled = false;
+                input.disabled = false;
+            }
+        }
+
         // Main initialization
         async function init() {
             const scriptId = getScriptId();
@@ -2253,6 +2589,20 @@
                 if (script.patreonOnly) {
                     // Check if already verified this session
                     if (!verifyPatreonAccess(script)) {
+                        // Not verified - check if preview is available
+                        if (script.previewFile) {
+                            try {
+                                const previewResponse = await fetch(script.previewFile);
+                                if (previewResponse.ok) {
+                                    const previewContent = await previewResponse.text();
+                                    renderPatreonPreview(script, previewContent, allScripts);
+                                    return;
+                                }
+                            } catch (e) {
+                                console.error('Failed to load preview:', e);
+                            }
+                        }
+                        // No preview or preview failed to load - show regular gate
                         renderPatreonGate(script);
                         return;
                     }
@@ -2277,8 +2627,20 @@
                         }
                     }
                     
-                    // Couldn't get content, show gate again
+                    // Couldn't get content, show gate again (with preview if available)
                     sessionStorage.removeItem(`patreon_access_${scriptId}`);
+                    if (script.previewFile) {
+                        try {
+                            const previewResponse = await fetch(script.previewFile);
+                            if (previewResponse.ok) {
+                                const previewContent = await previewResponse.text();
+                                renderPatreonPreview(script, previewContent, allScripts);
+                                return;
+                            }
+                        } catch (e) {
+                            console.error('Failed to load preview:', e);
+                        }
+                    }
                     renderPatreonGate(script);
                     return;
                 }
