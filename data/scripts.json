@@ -724,7 +724,7 @@
       "totalParts": null,
       "previousPart": null,
       "nextPart": null,
-      "hidden": true,
+      "hidden": false,
       "fills": []
     }
   ]
