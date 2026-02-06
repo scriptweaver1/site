@@ -1,7 +1,7 @@
 <!-- CHARACTERS
 MEDUSA: #39FF14
 POSEIDON: #26f7fd
-ATHENA: #ffd700
+[ATHENA]: #ffd700
 -->
 
 **< A snowstorm rages outside the temple >**
@@ -70,9 +70,9 @@ ATHENA: #ffd700
 
 **[POSEIDON]:** Hurts? Your cunt drips already, soaking the stone.
 
-**[POSEIDON]:** Feel it, your thighs slick with shame. 
+**[POSEIDON]:** Feel it, your thighs slick with shame, temple whore.
 
-**[POSEIDON]:** Temple whore, even as you fight, your hole weeps for invasion.
+**[POSEIDON]:** Even as you fight, your hole weeps for invasion.
 
 **< He flips her over the altar, her belly on cold marble, ass exposed. He kicks her legs apart, and without warning starts to fuck her. >**
 
@@ -80,9 +80,9 @@ ATHENA: #ffd700
 
 **[MEDUSA]:** Please, mercy! 
 
-**[MEDUSA]:** I forbit you... pull out!
+**[MEDUSA]:** I forbid you... Pull out!
 
-**[MEDUSA]:**  It's wrong—stop!
+**[MEDUSA]:**  That is wrong, stop!
 
 **[POSEIDON]:** **[Chuckles]** Forbid me? You know that is a lie!
 
@@ -170,7 +170,7 @@ ATHENA: #ffd700
 
 **[MEDUSA]:** Goddess, forgive me!
 
-**[MEDUSA]:** I fought, but he took waht he willed...
+**[MEDUSA]:** I fought, but he took what he willed...
 
 **[MEDUSA]:** I was forced! There was nothing I could do!
 
@@ -208,7 +208,7 @@ ATHENA: #ffd700
 
 **[MEDUSA]:** Please, Goddess!
 
-**[MEDUSA]:** Show me mercy! I do not deserve your punishment! Stop1
+**[MEDUSA]:** Show me mercy! I do not deserve your punishment! Stop!
 
 **[ATHENA]:** Stop talking, harlot!
 
@@ -296,13 +296,13 @@ ATHENA: #ffd700
 
 **[ATHENA]:** Let me pleasure myself on your ruin, this is all your body is good for!
 
-**< Medusa Orgasms >**
-
-**[ATHENA]:** Shameful, your body betrays you again.
-
 **[MEDUSA]:** It burns... 
 
 **[MEDUSA]:** Make it stop... no!
+
+**< Medusa Orgasms >**
+
+**[ATHENA]:** Shameful, your body betrays you again.
 
 **< Wet sounds stop >**
 
@@ -338,7 +338,6 @@ ATHENA: #ffd700
 
 **[ATHENA]:** That is the cost of your body's eager betrayal.
 
-**[ATHENA]:** You will be slain in time, your name nothing more than forgotten filth.
+**[ATHENA]:** And in time, you will be slain, your name nothing more than forgotten filth.
 
  **< Athena departs, and Medusa weeps and writhes, serpents coiling, fractured sobs turning into hows of anger >**
-
