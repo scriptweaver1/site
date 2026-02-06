@@ -1,7 +1,7 @@
 <!-- CHARACTERS
 MEDUSA: #39FF14
 POSEIDON: #26f7fd
-[ATHENA]: #ffd700
+ATHENA: #ffd700
 -->
 
 **< A snowstorm rages outside the temple >**
@@ -131,5 +131,6 @@ POSEIDON: #26f7fd
 **[MEDUSA]:** Serpents, hiss in my skull. Why, why? 
 
 **[ATHENA]:** **< Satisfied sigh >** Now, begone from my temple, creature! You're an abomination! No one will ever want you. No one will ever love you. You will never earn pity, only the accusatory stone stares of any who witness you. That is the cost of your body's eager betrayal. And in time, you will be slain, your name nothing more than forgotten filth.
+
 
  **< Athena departs, and Medusa weeps and writhes, serpents coiling, fractured sobs turning into hows of anger >**
