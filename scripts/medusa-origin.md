@@ -1,7 +1,7 @@
 <!-- CHARACTERS
 MEDUSA: #39FF14
 POSEIDON: #26f7fd
-[ATHENA]: #ffd700
+ATHENA: #ffd700
 -->
 
 **< A snowstorm rages outside the temple >**
@@ -341,3 +341,4 @@ POSEIDON: #26f7fd
 **[ATHENA]:** And in time, you will be slain, your name nothing more than forgotten filth.
 
  **< Athena departs, and Medusa weeps and writhes, serpents coiling, fractured sobs turning into hows of anger >**
+
