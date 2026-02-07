@@ -1,7 +1,7 @@
 <!-- CHARACTERS
 MEDUSA: #39FF14
 POSEIDON: #26f7fd
-ATHENA: #ffd700
+ATHENA: #ff0000
 -->
 
 **< A snowstorm rages outside the temple >**
@@ -316,7 +316,7 @@ ATHENA: #ffd700
 
 **[ATHENA]:** Your soft skin warmed to his touch, so it shall now be rough, and perpetually cold.
 
-**[ATHENA]:** Your tongue flickered in lust inside me, therefore yor new one will never fit your mouth...
+**[ATHENA]:** Your tongue flickered in lust inside me, therefore your new one will never fit your mouth...
 
 **[ATHENA]:** Your beautiful hair, which you let me use to rein you in like a animal, shall become just that.
 
@@ -341,4 +341,5 @@ ATHENA: #ffd700
 **[ATHENA]:** And in time, you will be slain, your name nothing more than forgotten filth.
 
  **< Athena departs, and Medusa weeps and writhes, serpents coiling, fractured sobs turning into hows of anger >**
+
 
