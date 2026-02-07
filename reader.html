@@ -256,6 +256,22 @@
             text-decoration: underline;
         }
 
+        /* Word Count */
+        .script-word-count {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.85rem;
+            color: rgba(233, 213, 255, 0.6);
+            margin-top: 0.5rem;
+        }
+
+        .script-word-count svg {
+            width: 16px;
+            height: 16px;
+            opacity: 0.7;
+        }
+
         /* Script Cover Image */
         .script-cover {
             margin: 2rem auto;
@@ -1998,6 +2014,24 @@
             return div.innerHTML;
         }
 
+        // Count words in markdown content
+        function countWords(markdown) {
+            // Remove the CHARACTERS block
+            let text = markdown.replace(/<!--\s*CHARACTERS[\s\S]*?-->/gi, '');
+            // Remove markdown syntax
+            text = text.replace(/[#*_`~\[\]()]/g, ' ');
+            // Remove URLs
+            text = text.replace(/https?:\/\/\S+/g, '');
+            // Remove extra whitespace and split
+            const words = text.trim().split(/\s+/).filter(word => word.length > 0);
+            return words.length;
+        }
+
+        // Format number with commas
+        function formatNumber(num) {
+            return num.toLocaleString();
+        }
+
         // Toggle hidden tags visibility
         function toggleTags() {
             const hiddenTags = document.getElementById('hiddenTags');
@@ -2257,6 +2291,17 @@
             const processedFull = CharacterDialogue.process(content, marked);
             currentCharacters = processedFull.characters;
             currentRawHtml = processedFull.rawHtml;
+
+            // Count words in the content
+            const wordCount = countWords(content);
+            const wordCountHTML = `
+                <div class="script-word-count">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                    ${formatNumber(wordCount)} words
+                </div>
+            `;
             
             let processedCondensed = null;
             if (condensedContent) {
@@ -2273,7 +2318,7 @@
                 versionToggleHTML = `
                     <div class="version-toggle-container">
                         <div class="version-toggle">
-                            <span class="version-toggle-label ${!isCondensed ? 'active' : ''}" onclick="setScriptVersion('full')">Long Form</span>
+                            <span class="version-toggle-label ${!isCondensed ? 'active' : ''}" onclick="setScriptVersion('full')">Full Script</span>
                             <div class="version-toggle-switch ${isCondensed ? 'condensed' : ''}" onclick="toggleScriptVersion()"></div>
                             <span class="version-toggle-label ${isCondensed ? 'active' : ''}" onclick="setScriptVersion('condensed')">Condensed</span>
                             <span class="version-info" title="Condensed version removes SFX cues and stage directions">
@@ -2303,6 +2348,7 @@
                         <div class="script-tags">
                             ${buildTagsHTML(script.tags)}
                         </div>
+                        ${wordCountHTML}
                         ${coverImageHTML}
                     </header>
                     ${seriesDropdownHTML}
