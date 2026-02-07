@@ -1,7 +1,7 @@
 <!-- CHARACTERS
 MEDUSA: #39FF14
 POSEIDON: #26f7fd
-ATHENA: #ffd700
+ATHENA: #ff0000
 -->
 
 **< A snowstorm rages outside the temple >**
@@ -124,7 +124,7 @@ ATHENA: #ffd700
 
 **< Wet sounds stop >**
 
-**[ATHENA]:** You are worthless to me now, priestess.  Your beauty lured him, now ugliness shall isolates you. I will change you into a monster, born of your flesh's twisted cravings. Your legs weakened in pleasure, so you shall have none. Your soft skin warmed to his touch, so it shall now be rough, and perpetually cold. Your tongue flickered in lust inside me, therefore yor new one will never fit your mouth. Your beautiful hair, which you let me use to rein you in like a animal, shall become just that. And your beauty, a death sentence to all that witness it. Turned to stone, so not even their bodies might be of use to you.
+**[ATHENA]:** You are worthless to me now, priestess.  Your beauty lured him, now ugliness shall isolates you. I will change you into a monster, born of your flesh's twisted cravings. Your legs weakened in pleasure, so you shall have none. Your soft skin warmed to his touch, so it shall now be rough, and perpetually cold. Your tongue flickered in lust inside me, therefore your new one will never fit your mouth. Your beautiful hair, which you let me use to rein you in like a animal, shall become just that. And your beauty, a death sentence to all that witness it. Turned to stone, so not even their bodies might be of use to you.
 
 **< Medusa's whimpers while Athena talks >**
 
@@ -134,3 +134,4 @@ ATHENA: #ffd700
 
 
  **< Athena departs, and Medusa weeps and writhes, serpents coiling, fractured sobs turning into hows of anger >**
+
