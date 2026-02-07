@@ -2,6 +2,9 @@
  * Character Dialogue Styles
  * =========================
  * Styles for multi-character script coloring
+ * 
+ * When colors are ON: Names are hidden, colored border shows speaker
+ * When colors are OFF: Names are shown, no colored styling
  */
 
 /* ===== CHARACTER LINE STYLING ===== */
@@ -14,34 +17,49 @@
     transition: all 0.2s ease;
 }
 
-.character-line strong {
-    color: var(--character-color, #ff6b9d);
-    text-shadow: 0 0 20px color-mix(in srgb, var(--character-color) 40%, transparent);
+/* When colors are off via class on line itself */
+.character-line.colors-off {
+    border-left: none;
+    padding-left: 0;
+    margin: 0;
 }
 
-/* Hover effect on character lines */
-.character-line:hover {
+/* Hidden character name (when colors are ON) - default state */
+.character-name-hidden {
+    display: none !important;
+}
+
+/* Visible character name (when colors are OFF) */
+.character-name-visible {
+    display: inline;
+    color: var(--character-color);
+    font-weight: 600;
+}
+
+/* Hover effect on character lines when colors are on */
+.character-line:not(.colors-off):hover {
     background: linear-gradient(90deg, 
-        color-mix(in srgb, var(--character-color) 10%, transparent) 0%,
+        color-mix(in srgb, var(--character-color) 15%, transparent) 0%,
         transparent 100%
     );
     padding-left: 20px;
 }
 
-/* Style for the [Name]: part */
-.character-line strong:first-child {
-    font-weight: 700;
-    letter-spacing: 0.3px;
-}
-
 /* ===== CHARACTER LEGEND ===== */
 .character-legend {
     background: linear-gradient(145deg, rgba(20, 15, 35, 0.8), rgba(30, 20, 50, 0.8));
-    border: 1px solid rgba(255, 107, 157, 0.2);
+    border: 1px solid rgba(107, 63, 160, 0.3);
     border-radius: 12px;
     padding: 16px 20px;
     margin-bottom: 24px;
     backdrop-filter: blur(10px);
+}
+
+.character-legend-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
 }
 
 .character-legend-title {
@@ -50,7 +68,6 @@
     text-transform: uppercase;
     letter-spacing: 1px;
     color: rgba(255, 255, 255, 0.6);
-    margin-bottom: 12px;
     display: flex;
     align-items: center;
     gap: 8px;
@@ -77,7 +94,6 @@
     width: 14px;
     height: 14px;
     border-radius: 50%;
-    box-shadow: 0 0 10px currentColor;
     flex-shrink: 0;
 }
 
@@ -87,57 +103,49 @@
     font-weight: 500;
 }
 
-/* ===== ALTERNATIVE: INLINE CHARACTER BADGES ===== */
-.character-badge {
+/* ===== CHARACTER TOGGLE BUTTON ===== */
+.character-toggle-btn {
     display: inline-flex;
     align-items: center;
-    gap: 4px;
-    padding: 2px 8px;
-    background: color-mix(in srgb, var(--character-color) 20%, transparent);
-    border: 1px solid var(--character-color);
-    border-radius: 12px;
+    gap: 6px;
+    padding: 6px 12px;
+    background: linear-gradient(135deg, rgba(107, 63, 160, 0.4), rgba(217, 70, 168, 0.3));
+    border: 1px solid rgba(217, 70, 168, 0.5);
+    border-radius: 20px;
+    color: #f472b6;
     font-size: 0.8rem;
     font-weight: 600;
-    color: var(--character-color);
-    margin-right: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
 }
 
-/* ===== DIALOGUE MODES ===== */
-
-/* Mode 1: Left border (default) - already defined above */
-
-/* Mode 2: Full background tint */
-.dialogue-mode-background .character-line {
-    border-left: none;
-    padding: 12px 16px;
-    border-radius: 8px;
-    background: linear-gradient(135deg,
-        color-mix(in srgb, var(--character-color) 15%, transparent) 0%,
-        color-mix(in srgb, var(--character-color) 5%, transparent) 100%
-    );
-    border: 1px solid color-mix(in srgb, var(--character-color) 30%, transparent);
+.character-toggle-btn:hover {
+    background: linear-gradient(135deg, rgba(107, 63, 160, 0.6), rgba(217, 70, 168, 0.5));
+    border-color: rgba(217, 70, 168, 0.8);
+    box-shadow: 0 0 15px rgba(217, 70, 168, 0.3);
 }
 
-/* Mode 3: Speech bubble style */
-.dialogue-mode-bubble .character-line {
-    border-left: none;
-    padding: 12px 16px;
-    border-radius: 16px 16px 16px 4px;
-    background: color-mix(in srgb, var(--character-color) 12%, rgba(30, 20, 50, 0.9));
-    border: 1px solid color-mix(in srgb, var(--character-color) 25%, transparent);
-    margin: 8px 0;
-    max-width: 90%;
+.character-toggle-btn.disabled {
+    background: rgba(107, 63, 160, 0.2);
+    border-color: rgba(107, 63, 160, 0.3);
+    color: rgba(233, 213, 255, 0.5);
 }
 
-.dialogue-mode-bubble .character-line:nth-child(even) {
-    margin-left: auto;
-    border-radius: 16px 16px 4px 16px;
+.character-toggle-btn svg {
+    width: 16px;
+    height: 16px;
 }
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
     .character-legend {
         padding: 12px 16px;
+    }
+
+    .character-legend-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
     }
 
     .character-legend-items {
@@ -148,11 +156,11 @@
         font-size: 0.9rem;
     }
 
-    .character-line {
+    .character-line:not(.colors-off) {
         padding-left: 12px;
     }
 
-    .character-line:hover {
+    .character-line:not(.colors-off):hover {
         padding-left: 14px;
     }
 }
@@ -167,5 +175,14 @@
     .character-legend {
         background: #f5f5f5;
         border: 1px solid #ccc;
+    }
+    
+    /* Show names in print */
+    .character-name-hidden {
+        display: inline !important;
+    }
+
+    .character-toggle-btn {
+        display: none;
     }
 }
