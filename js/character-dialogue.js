@@ -6,12 +6,12 @@
  * 
  * Usage in .md files:
  * <!-- CHARACTERS
- * Sasha: #ff6b9d
- * Mika: #8a6bff
- * Luna: #6bffc8
+ * MEDUSA: #39FF14
+ * POSEIDON: #26f7fd
+ * ATHENA: #ffd700
  * -->
  * 
- * Then use **[CharacterName]:** for dialogue lines
+ * Then use **NAME:** for dialogue lines (case-insensitive matching)
  */
 
 const CharacterDialogue = {
@@ -26,6 +26,25 @@ const CharacterDialogue = {
         '#c86bff', // Violet
         '#6bff8a', // Lime
     ],
+
+    // Track if colors are enabled
+    colorsEnabled: true,
+
+    /**
+     * Initialize from localStorage
+     */
+    init() {
+        const saved = localStorage.getItem('characterColorsEnabled');
+        this.colorsEnabled = saved === null ? true : saved === 'true';
+    },
+
+    /**
+     * Toggle colors on/off
+     */
+    toggle(enabled) {
+        this.colorsEnabled = enabled;
+        localStorage.setItem('characterColorsEnabled', enabled);
+    },
 
     /**
      * Parse character definitions from markdown content
@@ -74,13 +93,14 @@ const CharacterDialogue = {
 
     /**
      * Auto-detect characters from dialogue patterns
-     * Useful as fallback if no CHARACTERS block is defined
+     * Supports both **NAME:** and **[Name]:** formats
      */
     autoDetectCharacters(markdown) {
         const characters = new Set();
         
-        // Match **[Name]:** pattern
-        const dialogueRegex = /\*\*\[([^\]]+)\]:\*\*/g;
+        // Match **NAME:** pattern (with or without brackets)
+        // Supports: **MEDUSA:** or **[Medusa]:**
+        const dialogueRegex = /\*\*\[?([^\]:\*]+)\]?:\*\*/g;
         let match;
 
         while ((match = dialogueRegex.exec(markdown)) !== null) {
@@ -102,7 +122,7 @@ const CharacterDialogue = {
      * Apply character colors to rendered HTML
      * Call this AFTER marked.js has converted markdown to HTML
      */
-    applyColors(htmlContent, characters) {
+    applyColors(htmlContent, characters, hideNames = true) {
         if (!characters || Object.keys(characters).length === 0) {
             return htmlContent;
         }
@@ -111,32 +131,42 @@ const CharacterDialogue = {
 
         // For each character, wrap their dialogue lines with colored spans
         Object.entries(characters).forEach(([name, color]) => {
-            // Match the rendered HTML pattern: <strong>[Name]:</strong>
-            // And wrap the entire paragraph or line in a colored container
+            // Escape special regex characters in name
             const escapedName = name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
             
-            // Pattern 1: <strong>[Name]:</strong> at start of paragraph
-            const pattern1 = new RegExp(
-                `(<p>)(<strong>\\[${escapedName}\\]:<\\/strong>)`,
-                'gi'
-            );
-            result = result.replace(pattern1, 
-                `$1<span class="character-line" data-character="${name}" style="--character-color: ${color}">$2`
-            );
+            // Pattern to match: <strong>NAME:</strong> or <strong>[Name]:</strong>
+            // At the start of a paragraph
+            const patterns = [
+                // **NAME:** format (no brackets)
+                new RegExp(
+                    `(<p>\\s*)(<strong>${escapedName}:</strong>)`,
+                    'gi'
+                ),
+                // **[Name]:** format (with brackets)
+                new RegExp(
+                    `(<p>\\s*)(<strong>\\[${escapedName}\\]:</strong>)`,
+                    'gi'
+                )
+            ];
 
-            // Pattern 2: Standalone <strong>[Name]:</strong> (not in paragraph)
-            const pattern2 = new RegExp(
-                `(<strong>\\[${escapedName}\\]:<\\/strong>)([^<]*?)(?=<|$)`,
-                'gi'
-            );
-            result = result.replace(pattern2, 
-                `<span class="character-line" data-character="${name}" style="--character-color: ${color}">$1$2</span>`
-            );
+            patterns.forEach(pattern => {
+                if (hideNames && this.colorsEnabled) {
+                    // Hide the name, just show colored line
+                    result = result.replace(pattern, 
+                        `$1<span class="character-line" data-character="${name}" style="--character-color: ${color}"><span class="character-name-hidden">$2</span>`
+                    );
+                } else {
+                    // Show the name with color
+                    result = result.replace(pattern, 
+                        `$1<span class="character-line colors-off" data-character="${name}" style="--character-color: ${color}"><span class="character-name-visible">$2</span>`
+                    );
+                }
+            });
         });
 
         // Close any unclosed character-line spans at paragraph end
         result = result.replace(
-            /(<span class="character-line"[^>]*>)(.*?)(<\/p>)/gi,
+            /(<span class="character-line[^"]*"[^>]*>)([\s\S]*?)(<\/p>)/gi,
             '$1$2</span>$3'
         );
 
@@ -153,14 +183,22 @@ const CharacterDialogue = {
 
         const items = Object.entries(characters).map(([name, color]) => `
             <div class="character-legend-item">
-                <span class="character-legend-color" style="background-color: ${color}"></span>
+                <span class="character-legend-color" style="background-color: ${color}; box-shadow: 0 0 10px ${color};"></span>
                 <span class="character-legend-name">${name}</span>
             </div>
         `).join('');
 
         return `
-            <div class="character-legend">
-                <div class="character-legend-title">Characters</div>
+            <div class="character-legend" id="characterLegend">
+                <div class="character-legend-header">
+                    <div class="character-legend-title">Characters</div>
+                    <button class="character-toggle-btn ${this.colorsEnabled ? '' : 'disabled'}" id="characterToggleBtn" onclick="toggleCharacterColors()" title="Toggle character colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="18" height="18">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+                        </svg>
+                        <span id="colorToggleText">${this.colorsEnabled ? 'Colors On' : 'Colors Off'}</span>
+                    </button>
+                </div>
                 <div class="character-legend-items">
                     ${items}
                 </div>
@@ -170,7 +208,7 @@ const CharacterDialogue = {
 
     /**
      * Process markdown content - main entry point
-     * Returns { html: processedHTML, characters: characterMap, legend: legendHTML }
+     * Returns { html: processedHTML, characters: characterMap, legend: legendHTML, rawHtml: unprocessedHTML }
      */
     process(markdown, markedInstance) {
         // Parse character definitions
@@ -181,23 +219,59 @@ const CharacterDialogue = {
             characters = this.autoDetectCharacters(content);
         }
 
-        // Convert markdown to HTML
+        // Convert markdown to HTML (without character processing)
         const rawHTML = markedInstance ? markedInstance.parse(content) : content;
 
-        // Apply character colors
-        const coloredHTML = this.applyColors(rawHTML, characters);
+        // Apply character colors based on current state
+        const coloredHTML = this.applyColors(rawHTML, characters, this.colorsEnabled);
 
         // Generate legend
-        const legend = this.generateLegendHTML(characters);
+        const legend = Object.keys(characters).length > 1 
+            ? this.generateLegendHTML(characters) 
+            : '';
 
         return {
             html: coloredHTML,
+            rawHtml: rawHTML,
             characters,
             legend,
             hasMultipleCharacters: Object.keys(characters).length > 1
         };
+    },
+
+    /**
+     * Re-process already parsed HTML with current color settings
+     */
+    reprocess(rawHtml, characters) {
+        return this.applyColors(rawHtml, characters, this.colorsEnabled);
     }
 };
+
+// Initialize on load
+CharacterDialogue.init();
+
+// Global toggle function for the button
+function toggleCharacterColors() {
+    const newState = !CharacterDialogue.colorsEnabled;
+    CharacterDialogue.toggle(newState);
+    
+    // Update button text
+    const toggleText = document.getElementById('colorToggleText');
+    if (toggleText) {
+        toggleText.textContent = newState ? 'Colors On' : 'Colors Off';
+    }
+    
+    // Update toggle button appearance
+    const toggleBtn = document.getElementById('characterToggleBtn');
+    if (toggleBtn) {
+        toggleBtn.classList.toggle('disabled', !newState);
+    }
+    
+    // Re-render content with new settings
+    if (window.reprocessCharacterContent) {
+        window.reprocessCharacterContent();
+    }
+}
 
 // Export for use in other files
 if (typeof module !== 'undefined' && module.exports) {
