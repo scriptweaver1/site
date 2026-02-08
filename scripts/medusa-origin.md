@@ -70,7 +70,9 @@ ATHENA: #ff0000
 
 **[POSEIDON]:** She will never forgive you for this insult.
 
-**[POSEIDON]:** As I hold your hands up, and force your legs open for me, 
+**[POSEIDON]:**  As I hold you up by the wrists...
+
+**[POSEIDON]:** And force your legs open for me over her altar...
 
 **[POSEIDON]:** Your cunt drips like rain, soaking the stone.
 
@@ -347,6 +349,7 @@ ATHENA: #ff0000
 **[ATHENA]:** And in time, you will be slain, your name nothing more than forgotten filth.
 
  **< Athena departs, and Medusa weeps and writhes, serpents coiling, fractured sobs turning into hows of anger >**
+
 
 
 
