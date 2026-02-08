@@ -36,7 +36,7 @@ ATHENA: #ff0000
 
 **[MEDUSA]:** Stop, It hurts! Athena, forgive me...
 
-**[POSEIDON]:** She will never forgive you for this insult. As I hold your hands up, and force your legs open for me, your cunt drips like rain, soaking the stone. Your cunt drips already, soaking the stone. Feel it, your thighs slick with shame, temple whore. Even as you fight, your hole weeps for invasion.
+**[POSEIDON]:** She will never forgive you for this insult. As I hold you up by the wrists, and force your legs open for me over her altar, your cunt drips like rain, soaking the stone. Feel it, your thighs slick with shame, temple whore. Even as you fight, your hole weeps for invasion.
 
 **< He flips her over the altar, her belly on cold marble, ass exposed. He kicks her legs apart, and without warning starts to fuck her. >**
 
@@ -134,5 +134,6 @@ ATHENA: #ff0000
 
 
  **< Athena departs, and Medusa weeps and writhes, serpents coiling, fractured sobs turning into hows of anger >**
+
 
 
