@@ -36,7 +36,7 @@ ATHENA: #ff0000
 
 **[MEDUSA]:** Stop, It hurts! Athena, forgive me...
 
-**[POSEIDON]:** Hurts? Your cunt drips already, soaking the stone. Feel it, your thighs slick with shame, temple whore. Even as you fight, your hole weeps for invasion.
+**[POSEIDON]:** She will never forgive you for this insult. As I hold your hands up, and force your legs open for me, your cunt drips like rain, soaking the stone. Your cunt drips already, soaking the stone. Feel it, your thighs slick with shame, temple whore. Even as you fight, your hole weeps for invasion.
 
 **< He flips her over the altar, her belly on cold marble, ass exposed. He kicks her legs apart, and without warning starts to fuck her. >**
 
@@ -100,11 +100,11 @@ ATHENA: #ff0000
 
 **< Athena Orgasms >**
 
-**[ATHENA]:** Better, but reclaiming yout tongue to my serviceis not enough. 
+**[ATHENA]:** Better, but reclaiming your tongue to my service is not enough. 
 
-**< Medusa is flipped into the altar again, face up, ass down. Athena pulls her by her hair, and probes her pussyif her fingers. >**
+**< Medusa is flipped onto the altar again, face up, ass down. Athena pulls her by her hair, and probes her pussy with her fingers. >**
 
-**[ATHENA]:** I must rid your insides of his presence.
+**[ATHENA]:** Return to the altar you desecrated. I must rid your insides of his presence.
 
 **< Medusa gasps, whimpers and moans, wet fingering sounds >**
 
@@ -124,7 +124,7 @@ ATHENA: #ff0000
 
 **< Wet sounds stop >**
 
-**[ATHENA]:** You are worthless to me now, priestess.  Your beauty lured him, now ugliness shall isolates you. I will change you into a monster, born of your flesh's twisted cravings. Your legs weakened in pleasure, so you shall have none. Your soft skin warmed to his touch, so it shall now be rough, and perpetually cold. Your tongue flickered in lust inside me, therefore your new one will never fit your mouth. Your beautiful hair, which you let me use to rein you in like a animal, shall become just that. And your beauty, a death sentence to all that witness it. Turned to stone, so not even their bodies might be of use to you.
+**[ATHENA]:** You are worthless to me now, priestess. Your beauty lured him, now ugliness shall isolates you. I will change you into a monster, born of your flesh's twisted cravings. Your legs weakened in pleasure, so you shall have none. Your soft skin warmed to his touch, so it shall now be rough, and perpetually cold. Your tongue flickered in lust inside me, therefore your new one will never fit your mouth. Your beautiful hair, which you let me use to rein you in like a animal, shall become just that. And your beauty, a death sentence to all that witness it. Turned to stone, so not even their bodies might be of use to you.
 
 **< Medusa's whimpers while Athena talks >**
 
@@ -134,4 +134,5 @@ ATHENA: #ff0000
 
 
  **< Athena departs, and Medusa weeps and writhes, serpents coiling, fractured sobs turning into hows of anger >**
+
 
