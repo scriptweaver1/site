@@ -48,7 +48,7 @@ ATHENA: #ff0000
 
 **[POSEIDON]:** Your purity sings to me like a siren's call. But I believe your piety is nothing but a veil for the harlot beneath.
 
-**< Poseidon seizes her wrist, and yanks her up, Pinning her to Athena's altar. She twists and turns to break free. He rips away her clothes, baring her breast to the cold. Her nipple stiffens in the air. >**
+**< Poseidon seizes her wrist and yanks her up, pinning her to Athena's altar. She twists and turns to break free.  He rips away her clothes, baring her breast to the cold. Her nipple stiffening in the air. >**
 
 **[MEDUSA]:** **[Struggling]** No! I serve Athena alone! Release me! Gods, your hands burn like fire!
 
@@ -68,7 +68,11 @@ ATHENA: #ff0000
 
 **[MEDUSA]:** Athena, forgive me...
 
-**[POSEIDON]:** Hurts? Your cunt drips already, soaking the stone.
+**[POSEIDON]:** She will never forgive you for this insult.
+
+**[POSEIDON]:** As I hold your hands up, and force your legs open for me, 
+
+**[POSEIDON]:** Your cunt drips like rain, soaking the stone.
 
 **[POSEIDON]:** Feel it, your thighs slick with shame, temple whore.
 
@@ -258,9 +262,11 @@ ATHENA: #ff0000
 
 **< Athena Orgasms >**
 
-**[ATHENA]:** Better, but reclaiming yout tongue to my serviceis not enough. 
+**[ATHENA]:** Better, but reclaiming your tongue to my service is not enough. 
 
-**< Medusa is flipped into the altar again, face up, ass down. Athena pulls her by her hair, and probes her pussyif her fingers. >**
+**< Medusa is flipped onto the altar again, face up, ass down. Athena pulls her by her hair, and probes her pussy with her fingers. >**
+
+**[ATHENA]:** Return to the altar you desacrated.
 
 **[ATHENA]:** I must rid your insides of his presence.
 
@@ -341,5 +347,6 @@ ATHENA: #ff0000
 **[ATHENA]:** And in time, you will be slain, your name nothing more than forgotten filth.
 
  **< Athena departs, and Medusa weeps and writhes, serpents coiling, fractured sobs turning into hows of anger >**
+
 
 
