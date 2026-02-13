@@ -22,9 +22,6 @@
     <!-- Character Dialogue System -->
     <link rel="stylesheet" href="css/character-dialogue.css">
     
-    <!-- Versioned Cards Styles -->
-    <link rel="stylesheet" href="css/versioned-cards.css">
-    
     <style>
         :root {
             --cosmic-black: #0a0a12;
@@ -1996,67 +1993,12 @@
         let currentCharacters = null;
         let currentRawHtml = null;
         let currentRawCondensedHtml = null;
-        
-        // Store version switcher HTML globally
-        let currentVersionSwitcherHTML = '';
 
         // Get script ID from URL
         function getScriptId() {
             const params = new URLSearchParams(window.location.search);
             return parseInt(params.get('id'));
         }
-
-        // Get version ID from URL
-        function getVersionId() {
-            const params = new URLSearchParams(window.location.search);
-            return params.get('version');
-        }
-
-        // Version Handler utilities
-        const VersionHandler = {
-            hasVersions(script) {
-                return script.hasVersions && script.versions && script.versions.length > 0;
-            },
-            
-            getVersion(script, versionId) {
-                if (!this.hasVersions(script)) return null;
-                if (!versionId) return script.versions[0];
-                const version = script.versions.find(v => v.versionId === versionId);
-                return version || script.versions[0];
-            },
-            
-            mergeVersionData(script, version) {
-                return {
-                    ...script,
-                    title: version.title,
-                    tags: version.tags,
-                    synopsis: version.synopsis,
-                    image: version.image || script.image,
-                    contentFile: version.contentFile,
-                    contentFileCondensed: version.contentFileCondensed || '',
-                    previewFile: version.previewFile || script.previewFile,
-                    scriptbinLink: version.scriptbinLink || script.scriptbinLink,
-                    _currentVersion: version,
-                    _allVersions: script.versions
-                };
-            },
-            
-            buildVersionSwitcher(script, currentVersionId) {
-                if (!this.hasVersions(script)) return '';
-                
-                const buttons = script.versions.map(version => {
-                    const isActive = version.versionId === currentVersionId ? 'active' : '';
-                    const url = 'reader.html?id=' + script.id + '&version=' + version.versionId;
-                    return '<a href="' + url + '" class="version-btn ' + isActive + '">' + escapeHtml(version.versionLabel) + '</a>';
-                }).join('');
-                
-                return '<div class="version-switcher">' +
-                    '<span class="version-switcher-label">' +
-                    '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">' +
-                    '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />' +
-                    '</svg> Version:</span>' + buttons + '</div>';
-            }
-        };
 
         // Format category name
         function formatCategory(category) {
@@ -2169,7 +2111,7 @@
         };
 
         // Render script page
-        function renderScript(script, content, allScripts, condensedContent = null, versionSwitcherHTML = '') {
+        function renderScript(script, content, allScripts, condensedContent = null) {
             // Update page title
             document.title = `${script.title} | The Immaterial Loom`;
 
@@ -2379,7 +2321,7 @@
                             <span class="version-toggle-label ${!isCondensed ? 'active' : ''}" onclick="setScriptVersion('full')">Full Script</span>
                             <div class="version-toggle-switch ${isCondensed ? 'condensed' : ''}" onclick="toggleScriptVersion()"></div>
                             <span class="version-toggle-label ${isCondensed ? 'active' : ''}" onclick="setScriptVersion('condensed')">Condensed</span>
-                            <span class="version-info" title="Condensed version removes SFX cues and stage directions">
+                            <span class="version-info" title="Condensed version makes the text more compact">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
@@ -2410,7 +2352,6 @@
                         ${coverImageHTML}
                     </header>
                     ${seriesDropdownHTML}
-                    ${versionSwitcherHTML}
                     ${versionToggleHTML}
                     ${shareButtonsHTML}
                     ${fillsHTML}
@@ -2724,7 +2665,7 @@
             return false;
         }
 
-        function renderPatreonGate(script, versionSwitcherHTML = '') {
+        function renderPatreonGate(script) {
             document.title = `${script.title} | The Immaterial Loom`;
             
             document.getElementById('mainContent').innerHTML = `
@@ -2736,7 +2677,6 @@
                     </div>
                     <h1 class="patreon-gate-title">Patron-Only Content</h1>
                     <h2 class="patreon-gate-script-title">${escapeHtml(script.title)}</h2>
-                    ${versionSwitcherHTML}
                     <p class="patreon-gate-text">
                         This script is exclusive to Patrons. Visit the Patreon post to get the password and unlock this content.
                     </p>
@@ -2811,7 +2751,7 @@
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ password: password, version: getVersionId() })
+                    body: JSON.stringify({ password: password })
                 });
                 
                 const data = await response.json();
@@ -2850,7 +2790,7 @@
         }
 
         // Render Patreon script with preview content
-        function renderPatreonPreview(script, previewContent, allScripts, versionSwitcherHTML = '') {
+        function renderPatreonPreview(script, previewContent, allScripts) {
             document.title = `${script.title} | The Immaterial Loom`;
 
             // Process preview with Character Dialogue system
@@ -2901,7 +2841,6 @@
                         </div>
                         ${coverImageHTML}
                     </header>
-                    ${versionSwitcherHTML}
 
                     <!-- Top Unlock Bar -->
                     <div class="preview-top-bar">
@@ -3139,7 +3078,7 @@
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ password: password, version: getVersionId() })
+                    body: JSON.stringify({ password: password })
                 });
                 
                 const data = await response.json();
@@ -3216,7 +3155,7 @@
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ password: password, version: getVersionId() })
+                    body: JSON.stringify({ password: password })
                 });
                 
                 const data = await response.json();
@@ -3269,7 +3208,6 @@
         // Main initialization
         async function init() {
             const scriptId = getScriptId();
-            const versionId = getVersionId();
 
             if (!scriptId) {
                 renderError('No script ID provided. Please select a script from the masterlist.');
@@ -3283,23 +3221,11 @@
                 
                 const data = await response.json();
                 const allScripts = data.scripts || [];
-                let script = allScripts.find(s => s.id === scriptId);
+                const script = allScripts.find(s => s.id === scriptId);
 
                 if (!script) {
                     renderError(`Script with ID ${scriptId} was not found.`);
                     return;
-                }
-
-                // Handle versioned scripts
-                let currentVersion = null;
-                currentVersionSwitcherHTML = '';
-                
-                if (VersionHandler.hasVersions(script)) {
-                    currentVersion = VersionHandler.getVersion(script, versionId);
-                    currentVersionSwitcherHTML = VersionHandler.buildVersionSwitcher(script, currentVersion.versionId);
-                    
-                    // Merge version data into script object
-                    script = VersionHandler.mergeVersionData(script, currentVersion);
                 }
 
                 // Store for use in submitPatreonGateKey
@@ -3316,7 +3242,7 @@
                                 const previewResponse = await fetch(script.previewFile);
                                 if (previewResponse.ok) {
                                     const previewContent = await previewResponse.text();
-                                    renderPatreonPreview(script, previewContent, allScripts, currentVersionSwitcherHTML);
+                                    renderPatreonPreview(script, previewContent, allScripts);
                                     return;
                                 }
                             } catch (e) {
@@ -3324,7 +3250,7 @@
                             }
                         }
                         // No preview or preview failed to load - show regular gate
-                        renderPatreonGate(script, currentVersionSwitcherHTML);
+                        renderPatreonGate(script);
                         return;
                     }
                     
@@ -3335,11 +3261,11 @@
                             const apiResponse = await fetch(`${CONFIG.workerApiUrl}/api/patreon-script/${scriptId}`, {
                                 method: 'POST',
                                 headers: { 'Content-Type': 'application/json' },
-                                body: JSON.stringify({ password: savedPassword, version: getVersionId() })
+                                body: JSON.stringify({ password: savedPassword })
                             });
                             const apiData = await apiResponse.json();
                             if (apiResponse.ok && apiData.success) {
-                                renderScript(script, apiData.content, allScripts, apiData.condensedContent || null, currentVersionSwitcherHTML);
+                                renderScript(script, apiData.content, allScripts, apiData.condensedContent || null);
                                 setupScrollTracking(scriptId);
                                 return;
                             }
@@ -3355,14 +3281,14 @@
                             const previewResponse = await fetch(script.previewFile);
                             if (previewResponse.ok) {
                                 const previewContent = await previewResponse.text();
-                                renderPatreonPreview(script, previewContent, allScripts, currentVersionSwitcherHTML);
+                                renderPatreonPreview(script, previewContent, allScripts);
                                 return;
                             }
                         } catch (e) {
                             console.error('Failed to load preview:', e);
                         }
                     }
-                    renderPatreonGate(script, currentVersionSwitcherHTML);
+                    renderPatreonGate(script);
                     return;
                 }
 
@@ -3394,7 +3320,7 @@
                     }
                 }
                 
-                renderScript(script, content, allScripts, condensedContent, currentVersionSwitcherHTML);
+                renderScript(script, content, allScripts, condensedContent);
 
                 // Setup scroll position tracking
                 setupScrollTracking(scriptId);
