@@ -472,16 +472,6 @@ function createVersionedScriptCard(script, index) {
         </button>
     `;
 
-    // Artist credit (use script-level if not in version)
-    let artistCreditHTML = '';
-    if (script.artist) {
-        if (script.artistLink) {
-            artistCreditHTML = `<div class="card-artist-credit">Art by <a href="${escapeHtml(script.artistLink)}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();">${escapeHtml(script.artist)}</a></div>`;
-        } else {
-            artistCreditHTML = `<div class="card-artist-credit">Art by ${escapeHtml(script.artist)}</div>`;
-        }
-    }
-
     // Version navigation arrows
     const arrowsHTML = `
         <button class="version-arrow version-arrow-prev" onclick="event.stopPropagation(); prevVersion(event, ${script.id}, ${totalVersions})" title="Previous version">
@@ -514,6 +504,18 @@ function createVersionedScriptCard(script, index) {
         const imageHTML = versionImage 
             ? `<img src="${versionImage}" alt="${escapeHtml(version.title)}" class="card-image" loading="lazy">`
             : `<div class="card-placeholder-image">${icon}</div>`;
+
+        // Version-specific artist credit (fall back to script-level)
+        const artist = version.artist || script.artist;
+        const artistLink = version.artistLink || script.artistLink;
+        let artistCreditHTML = '';
+        if (artist) {
+            if (artistLink) {
+                artistCreditHTML = `<div class="card-artist-credit">Art by <a href="${escapeHtml(artistLink)}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();">${escapeHtml(artist)}</a></div>`;
+            } else {
+                artistCreditHTML = `<div class="card-artist-credit">Art by ${escapeHtml(artist)}</div>`;
+            }
+        }
 
         // Version-specific tags
         const tagsHTML = generateTagsHTML(version.tags);
