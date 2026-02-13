@@ -3,25 +3,202 @@
    Cards that rotate between multiple versions
    ================================================ */
 
-/* Versioned card container */
+/* ===== BASE VERSIONED CARD STYLES ===== */
+
+/* Versioned card container - prevent view mode grid from breaking layout */
 .script-card.versioned-card {
     position: relative;
     overflow: hidden;
+    display: block !important;
+    grid-template-columns: none !important;
 }
 
-/* Version content wrapper - only active one is visible */
+/* Version content - hidden by default, shown when active */
 .version-content {
     display: none;
-    opacity: 0;
-    transition: opacity 0.4s ease;
 }
 
 .version-content.active {
-    display: block;
+    display: flex;
+    flex-direction: column;
     opacity: 1;
+    animation: versionFadeIn 0.4s ease;
 }
 
-/* Version label badge */
+/* Ensure card-image-container behaves properly */
+.versioned-card .card-image-container {
+    position: relative;
+    flex-shrink: 0;
+}
+
+/* Ensure card-content is visible and styled */
+.versioned-card .card-content {
+    padding: 1.5rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.versioned-card .card-category {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--cosmic-pink);
+    margin-bottom: 0.6rem;
+}
+
+.versioned-card .card-title {
+    font-family: 'Cinzel', serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--pure-light);
+    margin-bottom: 0.8rem;
+    line-height: 1.3;
+}
+
+.versioned-card .card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.versioned-card .card-synopsis {
+    color: rgba(233, 213, 255, 0.8);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 0.5rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.versioned-card .card-synopsis-container {
+    margin-bottom: 1.2rem;
+}
+
+.versioned-card .card-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-top: auto;
+}
+
+/* ===== VIEW MODE: 1 COLUMN (HORIZONTAL LAYOUT) ===== */
+
+.scripts-grid.view-1 .versioned-card .version-content.active {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    min-height: 240px;
+}
+
+.scripts-grid.view-1 .versioned-card .card-image-container {
+    height: 100%;
+    aspect-ratio: auto;
+}
+
+.scripts-grid.view-1 .versioned-card .card-image,
+.scripts-grid.view-1 .versioned-card .card-placeholder-image {
+    height: 100%;
+    min-height: 240px;
+    object-fit: contain;
+    background: linear-gradient(135deg, var(--nebula-purple) 0%, var(--deep-space) 100%);
+}
+
+.scripts-grid.view-1 .versioned-card .card-content {
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem 1.8rem;
+}
+
+.scripts-grid.view-1 .versioned-card .card-synopsis {
+    -webkit-line-clamp: 5;
+    flex-grow: 1;
+}
+
+.scripts-grid.view-1 .versioned-card .card-synopsis-container {
+    flex-grow: 1;
+    margin-bottom: 1rem;
+}
+
+.scripts-grid.view-1 .versioned-card .card-tags {
+    margin-bottom: 1rem;
+}
+
+.scripts-grid.view-1 .versioned-card .card-buttons {
+    margin-top: auto;
+}
+
+/* ===== VIEW MODE: 2 COLUMNS (VERTICAL LAYOUT) ===== */
+
+.scripts-grid.view-2 .versioned-card .version-content.active {
+    display: flex;
+    flex-direction: column;
+}
+
+.scripts-grid.view-2 .versioned-card .card-image-container {
+    aspect-ratio: 4 / 3;
+    height: auto;
+}
+
+.scripts-grid.view-2 .versioned-card .card-image,
+.scripts-grid.view-2 .versioned-card .card-placeholder-image {
+    height: 100%;
+    object-fit: contain;
+    background: linear-gradient(135deg, var(--nebula-purple) 0%, var(--deep-space) 100%);
+}
+
+.scripts-grid.view-2 .versioned-card .card-synopsis {
+    -webkit-line-clamp: 3;
+}
+
+/* ===== VIEW MODE: 3 COLUMNS (COMPACT VERTICAL) ===== */
+
+.scripts-grid.view-3 .versioned-card .version-content.active {
+    display: flex;
+    flex-direction: column;
+}
+
+.scripts-grid.view-3 .versioned-card .card-image-container {
+    aspect-ratio: 4 / 3;
+    height: auto;
+}
+
+.scripts-grid.view-3 .versioned-card .card-image,
+.scripts-grid.view-3 .versioned-card .card-placeholder-image {
+    height: 100%;
+    object-fit: contain;
+    background: linear-gradient(135deg, var(--nebula-purple) 0%, var(--deep-space) 100%);
+}
+
+.scripts-grid.view-3 .versioned-card .card-title {
+    font-size: 1.15rem;
+}
+
+.scripts-grid.view-3 .versioned-card .card-synopsis {
+    -webkit-line-clamp: 2;
+    font-size: 0.85rem;
+}
+
+.scripts-grid.view-3 .versioned-card .card-tags {
+    margin-bottom: 0.8rem;
+}
+
+.scripts-grid.view-3 .versioned-card .tag {
+    font-size: 0.7rem;
+    padding: 0.25rem 0.6rem;
+}
+
+.scripts-grid.view-3 .versioned-card .card-link {
+    font-size: 0.8rem;
+    padding: 0.5rem 0.9rem;
+}
+
+/* ===== VERSION LABEL BADGE ===== */
+
 .version-label {
     position: absolute;
     top: 12px;
@@ -40,7 +217,8 @@
     pointer-events: none;
 }
 
-/* Navigation arrows */
+/* ===== NAVIGATION ARROWS ===== */
+
 .version-arrow {
     position: absolute;
     top: 50%;
@@ -55,7 +233,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 10;
+    z-index: 15;
     opacity: 0;
     transition: all 0.3s ease;
     backdrop-filter: blur(4px);
@@ -90,16 +268,21 @@
     transform: translateY(-50%) scale(0.95);
 }
 
-/* Version dots indicator */
+/* For horizontal layout, position arrows on image area only */
+.scripts-grid.view-1 .versioned-card .version-arrow {
+    top: 120px;
+}
+
+/* ===== VERSION DOTS INDICATOR ===== */
+
 .version-dots {
     position: absolute;
-    bottom: 12px;
-    left: 50%;
-    transform: translateX(-50%);
+    top: 12px;
+    right: 50px; /* Leave room for favorite button */
     display: flex;
-    gap: 8px;
+    gap: 6px;
     z-index: 10;
-    padding: 6px 12px;
+    padding: 4px 10px;
     background: rgba(18, 16, 31, 0.8);
     border-radius: 20px;
     backdrop-filter: blur(4px);
@@ -127,12 +310,8 @@
     box-shadow: 0 0 8px rgba(217, 70, 168, 0.5);
 }
 
-/* Adjust card content for versioned cards */
-.versioned-card .card-image-container {
-    position: relative;
-}
+/* ===== ANIMATIONS ===== */
 
-/* Transition animation for version switch */
 @keyframes versionFadeIn {
     from {
         opacity: 0;
@@ -144,14 +323,7 @@
     }
 }
 
-.version-content.active {
-    animation: versionFadeIn 0.4s ease;
-}
-
-/* ================================================
-   READER PAGE VERSION SWITCHER
-   Buttons to switch between versions in reader
-   ================================================ */
+/* ===== READER PAGE VERSION SWITCHER ===== */
 
 .version-switcher {
     display: flex;
@@ -208,11 +380,32 @@
     background: linear-gradient(135deg, rgba(107, 63, 160, 0.9) 0%, rgba(217, 70, 168, 0.9) 100%);
 }
 
-/* ================================================
-   RESPONSIVE ADJUSTMENTS
-   ================================================ */
+/* ===== MOBILE RESPONSIVE ===== */
 
 @media (max-width: 768px) {
+    /* Force vertical layout on mobile for all view modes */
+    .scripts-grid.view-1 .versioned-card .version-content.active {
+        display: flex;
+        flex-direction: column;
+        grid-template-columns: none;
+        min-height: auto;
+    }
+    
+    .scripts-grid.view-1 .versioned-card .card-image-container {
+        aspect-ratio: 4 / 3;
+        height: auto;
+    }
+    
+    .scripts-grid.view-1 .versioned-card .card-image,
+    .scripts-grid.view-1 .versioned-card .card-placeholder-image {
+        min-height: auto;
+    }
+    
+    /* Reset arrow position for mobile */
+    .scripts-grid.view-1 .versioned-card .version-arrow {
+        top: 50%;
+    }
+    
     .version-arrow {
         width: 32px;
         height: 32px;
@@ -233,8 +426,8 @@
     }
     
     .version-dots {
-        padding: 4px 10px;
-        gap: 6px;
+        padding: 4px 8px;
+        gap: 5px;
     }
     
     .version-dot {
@@ -257,7 +450,7 @@
     }
 }
 
-/* Touch-friendly: always show arrows on mobile */
+/* Touch-friendly: always show arrows on touch devices */
 @media (hover: none) {
     .version-arrow {
         opacity: 0.9;
