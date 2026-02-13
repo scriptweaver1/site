@@ -482,6 +482,28 @@ function createVersionedScriptCard(script, index) {
         }
     }
 
+    // Version navigation arrows
+    const arrowsHTML = `
+        <button class="version-arrow version-arrow-prev" onclick="event.stopPropagation(); prevVersion(event, ${script.id}, ${totalVersions})" title="Previous version">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+        </button>
+        <button class="version-arrow version-arrow-next" onclick="event.stopPropagation(); nextVersion(event, ${script.id}, ${totalVersions})" title="Next version">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+        </button>
+    `;
+
+    // Version dots
+    let dotsHTML = '<div class="version-dots">';
+    script.versions.forEach((version, vIdx) => {
+        const activeClass = vIdx === 0 ? 'active' : '';
+        dotsHTML += `<button class="version-dot ${activeClass}" onclick="event.stopPropagation(); goToVersion(${script.id}, ${vIdx}, ${totalVersions})" title="${escapeHtml(version.versionLabel)}"></button>`;
+    });
+    dotsHTML += '</div>';
+
     // Generate version contents
     let versionContentsHTML = '';
     script.versions.forEach((version, vIdx) => {
@@ -499,6 +521,14 @@ function createVersionedScriptCard(script, index) {
         // Version-specific buttons
         const buttonsHTML = generateVersionButtonsHTML(script, version);
 
+        // Synopsis with expand functionality
+        const synopsisHTML = `
+            <div class="card-synopsis-container">
+                <p class="card-synopsis">${escapeHtml(version.synopsis)}</p>
+                <button class="synopsis-expand-btn" onclick="event.stopPropagation(); toggleSynopsis(this);" style="display: none;">Show more</button>
+            </div>
+        `;
+
         versionContentsHTML += `
             <div class="version-content ${isActive}" data-version-index="${vIdx}">
                 <div class="card-image-container">
@@ -513,34 +543,12 @@ function createVersionedScriptCard(script, index) {
                     <div class="card-tags">
                         ${tagsHTML}
                     </div>
-                    <p class="card-synopsis">${escapeHtml(version.synopsis)}</p>
+                    ${synopsisHTML}
                     ${buttonsHTML}
                 </div>
             </div>
         `;
     });
-
-    // Version navigation arrows
-    const arrowsHTML = `
-        <button class="version-arrow version-arrow-prev" onclick="prevVersion(event, ${script.id}, ${totalVersions})" title="Previous version">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-            </svg>
-        </button>
-        <button class="version-arrow version-arrow-next" onclick="nextVersion(event, ${script.id}, ${totalVersions})" title="Next version">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-            </svg>
-        </button>
-    `;
-
-    // Version dots
-    let dotsHTML = '<div class="version-dots">';
-    script.versions.forEach((version, vIdx) => {
-        const activeClass = vIdx === 0 ? 'active' : '';
-        dotsHTML += `<button class="version-dot ${activeClass}" onclick="event.stopPropagation(); goToVersion(${script.id}, ${vIdx}, ${totalVersions})" title="${escapeHtml(version.versionLabel)}"></button>`;
-    });
-    dotsHTML += '</div>';
 
     // Initialize rotation after render
     setTimeout(() => initVersionRotation(script.id, totalVersions), 100);
