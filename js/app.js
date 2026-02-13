@@ -9,7 +9,7 @@
 
 // ===== CONFIGURATION =====
 const CONFIG = {
-    dataPath: './data/scripts.json',
+    dataPath: '/scripts.json',
     categories: {
         all: { title: 'All Scripts', icon: '✨' },
         fantasy: { title: 'Fantasy Scripts', icon: '🐉' },
