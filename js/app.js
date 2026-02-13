@@ -108,6 +108,9 @@ function sortScripts(scripts) {
 // ===== RANDOM SCRIPT =====
 function goToRandomScript() {
     const scriptsWithContent = state.scripts.filter(s => {
+        // Patreon scripts always have content (from API)
+        if (s.patreonOnly) return true;
+        
         if (s.hasVersions) {
             return s.versions.some(v => v.contentFile && v.contentFile !== '');
         }
@@ -421,11 +424,15 @@ function createStandardScriptCard(script, index) {
     // Determine click destination
     const hasContent = script.contentFile && script.contentFile !== '';
     const isPatreonOnly = script.patreonOnly === true;
-    const clickHandler = hasContent && !isPatreonOnly 
-        ? `onclick="window.location.href='reader.html?id=${script.id}';"` 
-        : isPatreonOnly && hasContent 
-            ? `onclick="openPatreonModal(${script.id}, '${escapeHtml(script.title).replace(/'/g, "\\'")}');"` 
-            : '';
+    
+    // Patreon scripts are always clickable (content comes from API, not local file)
+    // Non-Patreon scripts need a contentFile to be clickable
+    let clickHandler = '';
+    if (isPatreonOnly) {
+        clickHandler = `onclick="openPatreonModal(${script.id}, '${escapeHtml(script.title).replace(/'/g, "\\'")}');"`;
+    } else if (hasContent) {
+        clickHandler = `onclick="window.location.href='reader.html?id=${script.id}';"`;
+    }
 
     return `
         <article class="script-card" style="animation-delay: ${index * 0.05}s" ${clickHandler}>
@@ -572,28 +579,29 @@ function generateTagsHTML(tags) {
 function generateButtonsHTML(script) {
     let buttonsHTML = '<div class="card-buttons">';
     const isPatreonOnly = script.patreonOnly === true;
+    const hasContent = script.contentFile && script.contentFile !== '';
     
     // "Read Now" button
-    if (script.contentFile && script.contentFile !== '') {
-        if (isPatreonOnly) {
-            buttonsHTML += `
-                <button class="card-link card-link-primary" onclick="event.stopPropagation(); openPatreonModal(${script.id}, '${escapeHtml(script.title)}');">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                    </svg>
-                    Read Now
-                </button>
-            `;
-        } else {
-            buttonsHTML += `
-                <a href="reader.html?id=${script.id}" class="card-link card-link-primary" onclick="event.stopPropagation();">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                    </svg>
-                    Read Now
-                </a>
-            `;
-        }
+    // Patreon scripts always get a button (content comes from API)
+    // Non-Patreon scripts need a contentFile
+    if (isPatreonOnly) {
+        buttonsHTML += `
+            <button class="card-link card-link-primary" onclick="event.stopPropagation(); openPatreonModal(${script.id}, '${escapeHtml(script.title)}');">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                </svg>
+                Read Now
+            </button>
+        `;
+    } else if (hasContent) {
+        buttonsHTML += `
+            <a href="reader.html?id=${script.id}" class="card-link card-link-primary" onclick="event.stopPropagation();">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                </svg>
+                Read Now
+            </a>
+        `;
     }
     
     // "Unlock on Patreon" button
@@ -620,8 +628,8 @@ function generateButtonsHTML(script) {
         `;
     }
     
-    // Coming soon state
-    if ((!script.contentFile || script.contentFile === '') && 
+    // Coming soon state (only for non-Patreon scripts without content)
+    if (!isPatreonOnly && !hasContent && 
         (!script.scriptbinLink || script.scriptbinLink === '' || script.scriptbinLink === '#')) {
         buttonsHTML += `
             <span class="card-link card-link-disabled">
@@ -640,28 +648,29 @@ function generateButtonsHTML(script) {
 function generateVersionButtonsHTML(script, version) {
     let buttonsHTML = '<div class="card-buttons">';
     const isPatreonOnly = script.patreonOnly === true;
+    const hasContent = version.contentFile && version.contentFile !== '';
     
     // "Read Now" button with version parameter
-    if (version.contentFile && version.contentFile !== '') {
-        if (isPatreonOnly) {
-            buttonsHTML += `
-                <button class="card-link card-link-primary" onclick="event.stopPropagation(); openPatreonModalVersioned(${script.id}, '${escapeHtml(version.title)}', '${version.versionId}');">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                    </svg>
-                    Read Now
-                </button>
-            `;
-        } else {
-            buttonsHTML += `
-                <a href="reader.html?id=${script.id}&version=${version.versionId}" class="card-link card-link-primary" onclick="event.stopPropagation();">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                    </svg>
-                    Read Now
-                </a>
-            `;
-        }
+    // Patreon scripts always get a button (content comes from API)
+    // Non-Patreon scripts need a contentFile
+    if (isPatreonOnly) {
+        buttonsHTML += `
+            <button class="card-link card-link-primary" onclick="event.stopPropagation(); openPatreonModalVersioned(${script.id}, '${escapeHtml(version.title)}', '${version.versionId}');">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                </svg>
+                Read Now
+            </button>
+        `;
+    } else if (hasContent) {
+        buttonsHTML += `
+            <a href="reader.html?id=${script.id}&version=${version.versionId}" class="card-link card-link-primary" onclick="event.stopPropagation();">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                </svg>
+                Read Now
+            </a>
+        `;
     }
     
     // "Unlock on Patreon" button
@@ -689,8 +698,8 @@ function generateVersionButtonsHTML(script, version) {
         `;
     }
     
-    // Coming soon state
-    if ((!version.contentFile || version.contentFile === '') && 
+    // Coming soon state (only for non-Patreon scripts without content)
+    if (!isPatreonOnly && !hasContent && 
         (!scriptbinLink || scriptbinLink === '' || scriptbinLink === '#')) {
         buttonsHTML += `
             <span class="card-link card-link-disabled">
