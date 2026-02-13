@@ -1,0 +1,265 @@
+/* ================================================
+   VERSIONED SCRIPT CARDS
+   Cards that rotate between multiple versions
+   ================================================ */
+
+/* Versioned card container */
+.script-card.versioned-card {
+    position: relative;
+    overflow: hidden;
+}
+
+/* Version content wrapper - only active one is visible */
+.version-content {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.version-content.active {
+    display: block;
+    opacity: 1;
+}
+
+/* Version label badge */
+.version-label {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: linear-gradient(135deg, rgba(107, 63, 160, 0.95) 0%, rgba(217, 70, 168, 0.95) 100%);
+    color: #fff;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    z-index: 5;
+    pointer-events: none;
+}
+
+/* Navigation arrows */
+.version-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(18, 16, 31, 0.85);
+    border: 1px solid rgba(217, 70, 168, 0.4);
+    color: #e9d5ff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    opacity: 0;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(4px);
+}
+
+.version-arrow svg {
+    width: 18px;
+    height: 18px;
+}
+
+.version-arrow-prev {
+    left: 8px;
+}
+
+.version-arrow-next {
+    right: 8px;
+}
+
+/* Show arrows on hover */
+.versioned-card:hover .version-arrow {
+    opacity: 1;
+}
+
+.version-arrow:hover {
+    background: rgba(107, 63, 160, 0.9);
+    border-color: rgba(217, 70, 168, 0.8);
+    color: #fff;
+    transform: translateY(-50%) scale(1.1);
+}
+
+.version-arrow:active {
+    transform: translateY(-50%) scale(0.95);
+}
+
+/* Version dots indicator */
+.version-dots {
+    position: absolute;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 10;
+    padding: 6px 12px;
+    background: rgba(18, 16, 31, 0.8);
+    border-radius: 20px;
+    backdrop-filter: blur(4px);
+}
+
+.version-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(233, 213, 255, 0.3);
+    border: 1px solid rgba(233, 213, 255, 0.5);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+}
+
+.version-dot:hover {
+    background: rgba(233, 213, 255, 0.5);
+    transform: scale(1.2);
+}
+
+.version-dot.active {
+    background: linear-gradient(135deg, #d946a8 0%, #f472b6 100%);
+    border-color: #f472b6;
+    box-shadow: 0 0 8px rgba(217, 70, 168, 0.5);
+}
+
+/* Adjust card content for versioned cards */
+.versioned-card .card-image-container {
+    position: relative;
+}
+
+/* Transition animation for version switch */
+@keyframes versionFadeIn {
+    from {
+        opacity: 0;
+        transform: translateX(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.version-content.active {
+    animation: versionFadeIn 0.4s ease;
+}
+
+/* ================================================
+   READER PAGE VERSION SWITCHER
+   Buttons to switch between versions in reader
+   ================================================ */
+
+.version-switcher {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+    padding: 12px 16px;
+    background: rgba(45, 27, 78, 0.4);
+    border-radius: 12px;
+    border: 1px solid rgba(217, 70, 168, 0.2);
+}
+
+.version-switcher-label {
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.85rem;
+    color: #c4b5fd;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-right: 8px;
+}
+
+.version-switcher-label svg {
+    width: 16px;
+    height: 16px;
+}
+
+.version-btn {
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: 1px solid rgba(217, 70, 168, 0.3);
+    background: rgba(18, 16, 31, 0.6);
+    color: #e9d5ff;
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.version-btn:hover {
+    background: rgba(107, 63, 160, 0.5);
+    border-color: rgba(217, 70, 168, 0.6);
+}
+
+.version-btn.active {
+    background: linear-gradient(135deg, rgba(107, 63, 160, 0.8) 0%, rgba(217, 70, 168, 0.8) 100%);
+    border-color: #d946a8;
+    color: #fff;
+    box-shadow: 0 0 12px rgba(217, 70, 168, 0.3);
+}
+
+.version-btn.active:hover {
+    background: linear-gradient(135deg, rgba(107, 63, 160, 0.9) 0%, rgba(217, 70, 168, 0.9) 100%);
+}
+
+/* ================================================
+   RESPONSIVE ADJUSTMENTS
+   ================================================ */
+
+@media (max-width: 768px) {
+    .version-arrow {
+        width: 32px;
+        height: 32px;
+        opacity: 0.8;
+    }
+    
+    .version-arrow svg {
+        width: 16px;
+        height: 16px;
+    }
+    
+    .version-arrow-prev {
+        left: 4px;
+    }
+    
+    .version-arrow-next {
+        right: 4px;
+    }
+    
+    .version-dots {
+        padding: 4px 10px;
+        gap: 6px;
+    }
+    
+    .version-dot {
+        width: 8px;
+        height: 8px;
+    }
+    
+    .version-label {
+        font-size: 0.7rem;
+        padding: 3px 10px;
+    }
+    
+    .version-switcher {
+        padding: 10px 12px;
+    }
+    
+    .version-btn {
+        padding: 6px 12px;
+        font-size: 0.85rem;
+    }
+}
+
+/* Touch-friendly: always show arrows on mobile */
+@media (hover: none) {
+    .version-arrow {
+        opacity: 0.9;
+    }
+}
