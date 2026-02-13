@@ -1923,7 +1923,7 @@
                 <span>Back to Scripts</span>
             </a>
             <a href="index.html" class="logo-mini">
-                <div class="logo-mini-icon">✦</div>
+                <div class="logo-mini-icon">âœ¦</div>
                 <span class="logo-mini-text">The Immaterial Loom</span>
             </a>
             <!-- Accessibility Button -->
@@ -1952,7 +1952,7 @@
         <div class="accessibility-section">
             <label class="accessibility-label">Font Size</label>
             <div class="font-size-controls">
-                <button class="font-size-btn" id="fontSizeDecrease">−</button>
+                <button class="font-size-btn" id="fontSizeDecrease">âˆ’</button>
                 <span class="font-size-display" id="fontSizeDisplay">16</span>
                 <button class="font-size-btn" id="fontSizeIncrease">+</button>
             </div>
@@ -2139,7 +2139,7 @@
         function renderError(message) {
             document.getElementById('mainContent').innerHTML = `
                 <div class="error-state">
-                    <div class="error-icon">📜</div>
+                    <div class="error-icon">ðŸ“œ</div>
                     <h1 class="error-title">Script Not Found</h1>
                     <p class="error-message">${message}</p>
                     <a href="index.html" class="error-btn">
@@ -2299,7 +2299,7 @@
 
                 seriesDropdownHTML = `
                     <div class="series-dropdown">
-                        <span class="series-label">📖 This is part of a series:</span>
+                        <span class="series-label">ðŸ“– This is part of a series:</span>
                         <select class="series-select" onchange="navigateToSeriesPart(this.value)">
                             ${dropdownOptions}
                         </select>
@@ -2506,8 +2506,12 @@
             
             // Score each script by number of shared tags
             const scored = otherScripts.map(script => {
-                const sharedTags = script.tags.filter(tag => 
-                    currentScript.tags.some(t => t.toLowerCase() === tag.toLowerCase())
+                // Get tags - for versioned scripts, use first version's tags
+                const scriptTags = script.hasVersions ? (script.versions[0]?.tags || []) : (script.tags || []);
+                const currentTags = currentScript.hasVersions ? (currentScript.versions[0]?.tags || []) : (currentScript.tags || []);
+                
+                const sharedTags = scriptTags.filter(tag => 
+                    currentTags.some(t => t.toLowerCase() === tag.toLowerCase())
                 );
                 return { script, score: sharedTags.length };
             });
@@ -2519,13 +2523,30 @@
 
         // Create full card HTML for related scripts
         function createRelatedCard(script) {
+            // For versioned scripts, merge first version's data
+            if (script.hasVersions && script.versions && script.versions[0]) {
+                const v = script.versions[0];
+                script = {
+                    ...script,
+                    title: v.title,
+                    tags: v.tags || [],
+                    synopsis: v.synopsis,
+                    image: v.image || script.image,
+                    artist: v.artist || script.artist,
+                    artistLink: v.artistLink || script.artistLink
+                };
+            }
+            
+            // Ensure tags is always an array
+            const tags = script.tags || [];
+            
             const categoryIcons = {
-                fantasy: '🐉',
-                scifi: '🚀',
-                daytoday: '☕',
-                warhammer: '⚔️'
+                fantasy: 'ðŸ‰',
+                scifi: 'ðŸš€',
+                daytoday: 'â˜•',
+                warhammer: 'âš”ï¸'
             };
-            const icon = categoryIcons[script.category] || '✨';
+            const icon = categoryIcons[script.category] || 'âœ¨';
             
             // Format category display name
             const categoryDisplay = script.category === 'daytoday' 
@@ -2557,10 +2578,10 @@
 
             // Generate tags HTML with limit of 5 visible
             const maxVisibleTags = 5;
-            const totalTags = script.tags.length;
+            const totalTags = tags.length;
             const hasMoreTags = totalTags > maxVisibleTags;
             
-            let tagsHTML = script.tags
+            let tagsHTML = tags
                 .map((tag, idx) => {
                     const hiddenClass = idx >= maxVisibleTags ? 'hidden' : '';
                     return `<span class="tag ${hiddenClass}">${escapeHtml(tag)}</span>`;
