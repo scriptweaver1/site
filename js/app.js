@@ -425,12 +425,10 @@ function createStandardScriptCard(script, index) {
     const hasContent = script.contentFile && script.contentFile !== '';
     const isPatreonOnly = script.patreonOnly === true;
     
-    // Patreon scripts are always clickable (content comes from API, not local file)
-    // Non-Patreon scripts need a contentFile to be clickable
+    // Both Patreon and regular scripts navigate to reader.html
+    // Patreon scripts show preview + password gate on reader page
     let clickHandler = '';
-    if (isPatreonOnly) {
-        clickHandler = `onclick="openPatreonModal(${script.id}, '${escapeHtml(script.title).replace(/'/g, "\\'")}');"`;
-    } else if (hasContent) {
+    if (isPatreonOnly || hasContent) {
         clickHandler = `onclick="window.location.href='reader.html?id=${script.id}';"`;
     }
 
@@ -582,16 +580,16 @@ function generateButtonsHTML(script) {
     const hasContent = script.contentFile && script.contentFile !== '';
     
     // "Read Now" button
-    // Patreon scripts always get a button (content comes from API)
-    // Non-Patreon scripts need a contentFile
+    // Both Patreon and regular scripts navigate to reader.html
+    // Patreon scripts show preview + password gate on reader page
     if (isPatreonOnly) {
         buttonsHTML += `
-            <button class="card-link card-link-primary" onclick="event.stopPropagation(); openPatreonModal(${script.id}, '${escapeHtml(script.title)}');">
+            <a href="reader.html?id=${script.id}" class="card-link card-link-primary" onclick="event.stopPropagation();">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                 </svg>
                 Read Now
-            </button>
+            </a>
         `;
     } else if (hasContent) {
         buttonsHTML += `
@@ -651,16 +649,16 @@ function generateVersionButtonsHTML(script, version) {
     const hasContent = version.contentFile && version.contentFile !== '';
     
     // "Read Now" button with version parameter
-    // Patreon scripts always get a button (content comes from API)
-    // Non-Patreon scripts need a contentFile
+    // Both Patreon and regular scripts navigate to reader.html
+    // Patreon scripts show preview + password gate on reader page
     if (isPatreonOnly) {
         buttonsHTML += `
-            <button class="card-link card-link-primary" onclick="event.stopPropagation(); openPatreonModalVersioned(${script.id}, '${escapeHtml(version.title)}', '${version.versionId}');">
+            <a href="reader.html?id=${script.id}&version=${version.versionId}" class="card-link card-link-primary" onclick="event.stopPropagation();">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                 </svg>
                 Read Now
-            </button>
+            </a>
         `;
     } else if (hasContent) {
         buttonsHTML += `
