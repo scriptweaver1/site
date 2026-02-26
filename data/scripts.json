@@ -971,9 +971,9 @@
         "Paid with coins shoved up her ass"
       ],
       "synopsis": "You are a weary traveler, just coming in from the road, and while looking for a place to sleep and a bite to eat, you stumble into a bar that promises a good show with every meal!\n\nYou head inside, and a goblin barmaid approaches you, reads the menu for you, and syas that for a couple more silver coins, she can offer you entertainment like no other! The kind of entertainment to make your toes curl and evey man around jeaulous! How could you ever refuse?",
-      "image": "",
-      "artist": "",
-      "artistLink": "",
+      "image": "images/barmaid.jpg",
+      "artist": "artby_minx",
+      "artistLink": "https://www.instagram.com/artby_minx",
       "contentFile": "",
       "contentFileCondensed": "",
       "scriptbinLink": "",
@@ -986,7 +986,7 @@
       "hidden": false,
       "patreonOnly": true,
       "patreonLink": "",
-      "previewFile": "",
+      "previewFile": "scrpts/previews/barmaid-preview.md",
       "fills": []
     }
   ]
