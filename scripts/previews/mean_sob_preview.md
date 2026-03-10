@@ -11,21 +11,21 @@ There is some fair amount of optional dialogue, but It's only there for making a
 **[...]** = Actions/Intonations  
 **<...>** = SFX
 
-**[ Robotic voice ]:** Acessing data from Majesticus, Offidian Sub-Sector. What file would you like to access? 
+**[Robotic voice]:** Acessing data from Majesticus, Offidian Sub-Sector. What file would you like to access? 
 
 **<Error Beep>** 
 
-**[ Robotic voice ]:** Canoness [YourNameHere] files are under the care of Inquisitor Daniella Vacarious, and require high access clearance codes. Please imput the required codes. 
+**[Robotic voice]:** Canoness [YourNameHere] files are under the care of Inquisitor Daniella Vacarious, and require high access clearance codes. Please imput the required codes. 
 
-**[ Robotic voice ]:** Inquisitorial codes accepted. Accessing feed from Holding cell 101, First of August of 354,M41. 15 hours and 34 minutes, solar standart.
+**[Robotic voice]:** Inquisitorial codes accepted. Accessing feed from Holding cell 101, First of August of 354,M41. 15 hours and 34 minutes, solar standart.
 
-**[ Robotic voice ]:** Reproduce recording?  Pict-recorder data corrupted. 
+**[Robotic voice]:** Reproduce recording?  Pict-recorder data corrupted. 
 
-**[ Robotic voice ]:** Checking… 
+**[Robotic voice]:** Checking… 
 
-**[ Robotic voice ]:** Checking… 
+**[Robotic voice]:** Checking… 
 
-**[ Robotic voice ]:** Audio log backup found, starting audio log.
+**[Robotic voice]:** Audio log backup found, starting audio log.
 
 
 
@@ -221,3 +221,4 @@ And I'll reward you for that...
 
 
 So much for you to enjoy here...
+
