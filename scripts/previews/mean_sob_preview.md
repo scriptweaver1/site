@@ -8,7 +8,7 @@ Robotic voice: #0400ff
 
 There is some fair amount of optional dialogue, but It's only there for making a more well rounded story, so it's all otional
 
-**[...]** = Actions/Intonations
+**[...]** = Actions/Intonations  
 **<...>** = SFX
 
 **[ Robotic voice ]:** Acessing data from Majesticus, Offidian Sub-Sector. What file would you like to access? 
@@ -218,5 +218,6 @@ Come on, if it makes you feel better, you don't have to tell it all to me at onc
 Feed me little morsels of information...
 
 And I'll reward you for that...
+
 
 So much for you to enjoy here...
