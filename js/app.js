@@ -299,6 +299,18 @@ function updateVersionedCardDisplay(scriptId, versionIndex) {
     dots.forEach((dot, idx) => {
         dot.classList.toggle('active', idx === versionIndex);
     });
+
+    // Re-check synopsis overflow for newly visible version
+    requestAnimationFrame(() => {
+        card.querySelectorAll('.version-content.active .card-synopsis-container').forEach(container => {
+            const synopsis = container.querySelector('.card-synopsis');
+            const btn = container.querySelector('.synopsis-expand-btn');
+            if (!synopsis || !btn) return;
+            synopsis.classList.remove('expanded');
+            btn.textContent = 'Show more';
+            btn.style.display = synopsis.scrollHeight > synopsis.clientHeight + 1 ? 'inline-block' : 'none';
+        });
+    });
 }
 
 function goToVersion(scriptId, versionIndex, totalVersions) {
@@ -441,7 +453,10 @@ function createStandardScriptCard(script, index) {
                 <div class="card-tags">
                     ${tagsHTML}
                 </div>
-                <p class="card-synopsis">${escapeHtml(script.synopsis)}</p>
+                <div class="card-synopsis-container">
+                    <p class="card-synopsis">${escapeHtml(script.synopsis)}</p>
+                    <button class="synopsis-expand-btn" onclick="event.stopPropagation(); toggleSynopsis(this);" style="display: none;">Show more</button>
+                </div>
                 ${buttonsHTML}
             </div>
         </article>
@@ -772,6 +787,31 @@ function renderScripts() {
     // Update results count
     const countText = filtered.length === 1 ? '1 script' : `${filtered.length} scripts`;
     elements.resultsCount.textContent = `Showing ${countText}`;
+
+    // Check synopsis overflow after render
+    requestAnimationFrame(checkSynopsisOverflow);
+}
+
+// Toggle synopsis expand/collapse on cards
+function toggleSynopsis(btn) {
+    const container = btn.closest('.card-synopsis-container');
+    const synopsis = container.querySelector('.card-synopsis');
+    const isExpanded = synopsis.classList.toggle('expanded');
+    btn.textContent = isExpanded ? 'Show less' : 'Show more';
+}
+
+// Show expand buttons only when synopsis text is actually clamped
+function checkSynopsisOverflow() {
+    document.querySelectorAll('.card-synopsis-container').forEach(container => {
+        const synopsis = container.querySelector('.card-synopsis');
+        const btn = container.querySelector('.synopsis-expand-btn');
+        if (!synopsis || !btn) return;
+        // Reset expanded state to measure clamped height
+        synopsis.classList.remove('expanded');
+        btn.textContent = 'Show more';
+        // scrollHeight > clientHeight means text is clamped
+        btn.style.display = synopsis.scrollHeight > synopsis.clientHeight + 1 ? 'inline-block' : 'none';
+    });
 }
 
 // ===== CATEGORY SWITCHING =====
