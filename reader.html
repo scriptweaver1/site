@@ -250,6 +250,16 @@
             border-color: rgba(217, 70, 168, 0.6);
         }
 
+        .script-synopsis {
+            color: rgba(233, 213, 255, 0.85);
+            font-size: 1rem;
+            line-height: 1.7;
+            max-width: 700px;
+            margin: 0 auto 1.5rem;
+            font-style: italic;
+            text-align: center;
+        }
+
         .script-meta {
             color: rgba(233, 213, 255, 0.6);
             font-size: 0.9rem;
@@ -2417,6 +2427,7 @@
                         <div class="script-tags">
                             ${buildTagsHTML(script.tags)}
                         </div>
+                        ${script.synopsis ? `<p class="script-synopsis">${escapeHtml(script.synopsis)}</p>` : ''}
                         ${wordCountHTML}
                         ${coverImageHTML}
                     </header>
@@ -2931,6 +2942,7 @@
                             ${patreonBadge}
                             ${tagsHTML}
                         </div>
+                        ${script.synopsis ? `<p class="script-synopsis">${escapeHtml(script.synopsis)}</p>` : ''}
                         ${coverImageHTML}
                     </header>
                     ${versionSwitcherHTML}
