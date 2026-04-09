@@ -20,7 +20,7 @@ It's all lies! Your whole ‘’quest’’ is a lie. Look at me. I said look at
 
 **< Armor and weapons fall to the ground >**
 
-Now, what have they been telling you about ‘’The Great Medusa’’? A half woman , half snake monster, who turns people into stone and is a sowrn enemy of mankind? Lies! I just want to live peacefully on my island! No, I'm not lying! At least do me the courtesy of listening to what I have to say! You don't want to throw your life away for a myth do you? If I were such a monster, would I be letting you live? Would I be insisting on civilized discourse? Just listen, ok? Let me tell you my tale.
+Now, what have they been telling you about ‘’The Great Medusa’’? A half woman , half snake monster, who turns people into stone and is a sworn enemy of mankind? Lies! I just want to live peacefully on my island! No, I'm not lying! At least do me the courtesy of listening to what I have to say! You don't want to throw your life away for a myth do you? If I were such a monster, would I be letting you live? Would I be insisting on civilized discourse? Just listen, ok? Let me tell you my tale.
 
 A very long time, some 800 years ago, I was the wife of King Attalus, The Prosperous. He was a beautiful man! Hailed for his fairness in governance and the prosperity of the lands in which he ruled. He looked a lot like you honestly. A great leader, and a even better husband. The love of his people for him was so great that they began praising him as a god. He tried to stamp down those rumors, as he was a devout man, but it only made it worse. All taking his refusal as proof of divinity. And as you might imagine, my distinct features drew a lot of attention, which furthered his apotheosis in their mind.
 
