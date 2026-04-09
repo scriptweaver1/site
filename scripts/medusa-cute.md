@@ -136,7 +136,7 @@ It cast light at their flaws, and they would make us pay.
 
 First came a great famine. Demeter cursed our lands so nothing would grow.
 
-The Ares brough in war, and we were unable to defend ourselves. 
+Then Ares brough in war, and we were unable to defend ourselves. 
 
 Finally, Thanatos took it's toll, so that by the end all of our reign was beneath the earth, servants to Hades.
 
@@ -170,7 +170,7 @@ When I finally got home, I arrived to nothing but blood and ash.
 
 Pure, unadultered genocide, over a slight to their power that wasn't even my fault. 
 
-After that, the left me alone. To stew in a cold, eternally lonely life.
+After that, they left me alone. To stew in a cold, eternally lonely life.
 
 At least, that is how it seemed. Every once in a while, a hero comes to challenge me, usually at the behest of Aphrodite.
 
