@@ -86,7 +86,7 @@ Armor too, I’m not taking any chances.
 
 Now, what have they been telling you about ‘’The Great Medusa’’?
 
-A half woman , half snake monster, who turns people into stone and is a sowrn enemy of mankind?
+A half woman , half snake monster, who turns people into stone and is a sworn enemy of mankind?
 
 Lies! I just want to live peacefully on my island!
 
