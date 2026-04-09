@@ -6,7 +6,7 @@
 
 **[To yourself]**  Every year it is the same thing, some ‘’hero’’ comes here to try and kill me, for no reason! Why don’t they just leave me alone?
 
-Wait, what was that sound? There you are, you sneaky bastard! Finally gathered enough courage to face me? Spare me your theatrics, I don’t want to hear whatever speech you have or listen to any word from your mouth that aren't that of surrender! The time for talk is long past the moment you invaded my lair! If you are here for my head, you better be prepared for a fight, because I will defend myself from your unfounded attacks!
+Wait, what was that sound? There you are, you sneaky bastard! Finally gathered enough courage to face me? Spare me your theatrics, I don’t want to hear whatever speech you have or listen to any word from your mouth that aren't those of surrender! The time for talk is long past the moment you invaded my lair! If you are here for my head, you better be prepared for a fight, because I will defend myself from your unfounded attacks!
 
 **[Mocking]** Do you want a hug, hero? A tight hug ought to be enough to shatter your resolve, and your bones too if you continue to aggravate me! Where am I? Behind you? Or to your side? Can’t move fast enough to keep up with me, can you? 
 
