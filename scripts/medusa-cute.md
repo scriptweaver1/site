@@ -72,7 +72,7 @@ I promise on my honor that you won’t turn to stone!
 
 **[Sigh]** Fine, don't listen to me. 
 
-That's why you were fighting in that weird srance. Looking for me through the reflection of your shield...
+That's why you were fighting in that weird stance. Looking for me through the reflection of your shield...
 
 Gods, the depths of human imagination boggles the mind!
 
