@@ -12,7 +12,7 @@ Wait, what was that sound?
 
 There you are, you sneaky bastard! Finally gathered enough courage to face me?
 
-Spare me your theatrics, I don’t want to hear whatever speech you have or listen to any word from your mouth that aren’t that of surrender!
+Spare me your theatrics, I don’t want to hear whatever speech you have or listen to any word from your mouth that aren’t those of surrender!
 
 The time for talk is long past the moment you invaded my lair!
 
