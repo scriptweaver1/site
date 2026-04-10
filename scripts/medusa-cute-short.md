@@ -152,6 +152,6 @@ Darling, your eyes! You are looking at me! Oh dear gods above. I'm so happy, so 
 
 I had forgotten. I had forgotten how it feels to love. So intense, so overwhelming. But now that I feel it again. I can't possible live without it. I did not know how much I needed to feel that again. I was - am afraid to be hurt again. But I want to give it a try once more. I want to give it a try with you. You can stay here with me, forever.
 
-Lie down with me next to the dying embers. I don’t have a blanket for you, but with me coiled around you, you are never going to feel cold again. What did you say dear? My hair isn't made of snakes? Your kind has such a wild imagination... **[Laugh]**
+Lie down with me next to the dying embers. I don’t have a blanket for you, but with me coiled around you, you are never going to feel cold again.
 
 **< Soft kisses, gasps and moans until the audio fades >**
