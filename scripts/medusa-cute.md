@@ -1110,10 +1110,4 @@ But with me coiled around you…
 
 You are never going to feel cold again...
 
-What did you say dear?
-
-My hair isn't made of snakes?
-
-Your kind has such a wild imagination... **[Laugh]**
-
 **< Soft kisses, gasps and moans until the audio fades >**
