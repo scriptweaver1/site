@@ -1,11 +1,11 @@
 <!-- CHARACTERS
-**[Linda]:** #39FF14
-**[Ms.Cait]:** #ff0000
+Linda]: #39FF14
+Ms.Cait: #ff0000
 -->
 
 **< Telephone rings,  listener picks it up >**
 
-**[ Linda’s Voice through phone ]** Hey, are you the new hire? Good! Would you please come to the 12th floor? Ms.Cait wants to have a word with you.Thank you!
+**[Linda]:** **[ Linda’s Voice through phone ]** Hey, are you the new hire? Good! Would you please come to the 12th floor? Ms.Cait wants to have a word with you.Thank you!
 
 **< Elevator door opens and closes, steps on the floor  >**
 
