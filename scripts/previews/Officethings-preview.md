@@ -1,5 +1,5 @@
 <!-- CHARACTERS
-Linda]: #39FF14
+Linda: #39FF14
 Ms.Cait: #ff0000
 -->
 
