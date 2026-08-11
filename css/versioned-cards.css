@@ -1,11 +1,5 @@
-/* ================================================
-   VERSIONED SCRIPT CARDS
-   Cards that rotate between multiple versions
-   ================================================ */
-
 /* ===== BASE VERSIONED CARD STYLES ===== */
 
-/* Versioned card container - prevent view mode grid from breaking layout */
 .script-card.versioned-card {
     position: relative;
     overflow: hidden;
@@ -13,7 +7,6 @@
     grid-template-columns: none !important;
 }
 
-/* Version content - hidden by default, shown when active */
 .version-content {
     display: none;
 }
@@ -25,13 +18,11 @@
     animation: versionFadeIn 0.4s ease;
 }
 
-/* Ensure card-image-container behaves properly */
 .versioned-card .card-image-container {
     position: relative;
     flex-shrink: 0;
 }
 
-/* Ensure card-content is visible and styled */
 .versioned-card .card-content {
     padding: 1.5rem;
     flex-grow: 1;
@@ -252,7 +243,6 @@
     right: 8px;
 }
 
-/* Show arrows on hover */
 .versioned-card:hover .version-arrow {
     opacity: 1;
 }
@@ -268,7 +258,6 @@
     transform: translateY(-50%) scale(0.95);
 }
 
-/* For horizontal layout, position arrows on image area only */
 .scripts-grid.view-1 .versioned-card .version-arrow {
     top: 120px;
 }
@@ -278,7 +267,7 @@
 .version-dots {
     position: absolute;
     top: 12px;
-    right: 50px; /* Leave room for favorite button */
+    right: 50px; 
     display: flex;
     gap: 6px;
     z-index: 10;
@@ -383,7 +372,7 @@
 /* ===== MOBILE RESPONSIVE ===== */
 
 @media (max-width: 768px) {
-    /* Force vertical layout on mobile for all view modes */
+
     .scripts-grid.view-1 .versioned-card .version-content.active {
         display: flex;
         flex-direction: column;
@@ -401,7 +390,6 @@
         min-height: auto;
     }
     
-    /* Reset arrow position for mobile */
     .scripts-grid.view-1 .versioned-card .version-arrow {
         top: 50%;
     }
@@ -450,7 +438,6 @@
     }
 }
 
-/* Touch-friendly: always show arrows on touch devices */
 @media (hover: none) {
     .version-arrow {
         opacity: 0.9;
