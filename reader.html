@@ -8,21 +8,16 @@
     
     <title>Reading... | The Immaterial Loom</title>
     
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Raleway:wght@300;400;500;600&family=Crimson+Pro:ital,wght@0,400;0,600;1,400;1,600&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     
-    <!-- OpenDyslexic Font -->
     <link href="https://fonts.cdnfonts.com/css/opendyslexic" rel="stylesheet">
     
-    <!-- Marked.js for Markdown parsing -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     
-    <!-- Character Dialogue System -->
     <link rel="stylesheet" href="css/character-dialogue.css">
     
-    <!-- Versioned Cards Styles -->
     <link rel="stylesheet" href="css/versioned-cards.css">
     
     <style>
@@ -60,7 +55,6 @@
             overflow-x: hidden;
         }
 
-        /* Galaxy Background */
         .galaxy-bg {
             position: fixed;
             top: 0;
@@ -92,7 +86,6 @@
             opacity: 0.5;
         }
 
-        /* Header */
         header {
             padding: 1.5rem 2rem;
             border-bottom: 1px solid rgba(107, 63, 160, 0.3);
@@ -165,14 +158,12 @@
             color: var(--stardust);
         }
 
-        /* Main Content */
         main {
             max-width: 900px;
             margin: 0 auto;
             padding: 3rem 2rem 5rem;
         }
 
-        /* Script Header */
         .script-header {
             text-align: center;
             margin-bottom: 3rem;
@@ -274,7 +265,6 @@
             text-decoration: underline;
         }
 
-        /* Word Count */
         .script-word-count {
             display: inline-flex;
             align-items: center;
@@ -290,7 +280,6 @@
             opacity: 0.7;
         }
 
-        /* Script Cover Image */
         .script-cover {
             margin: 2rem auto;
             max-width: 500px;
@@ -323,7 +312,6 @@
             text-decoration: underline;
         }
 
-        /* Fills Section */
         .fills-section {
             margin: 2.5rem 0;
             padding: 1.5rem 2rem;
@@ -426,7 +414,6 @@
             height: 14px;
         }
 
-        /* Share Buttons Section */
         .share-section {
             margin: 2rem 0;
             text-align: center;
@@ -524,7 +511,6 @@
             border-color: rgba(34, 197, 94, 0.5);
         }
 
-        /* Script Version Toggle */
         .version-toggle-container {
             display: flex;
             justify-content: center;
@@ -599,7 +585,6 @@
             height: 14px;
         }
 
-        /* Related Scripts Section */
         .related-section {
             margin: 3rem 0;
             padding: 2rem;
@@ -622,7 +607,6 @@
             gap: 1rem;
         }
 
-        /* Compact Horizontal Card Styles for Related Scripts */
         .related-section .script-card {
             background: linear-gradient(160deg, rgba(45, 27, 78, 0.6) 0%, rgba(18, 16, 31, 0.9) 100%);
             border: 1px solid rgba(107, 63, 160, 0.3);
@@ -804,7 +788,6 @@
         }
 
 
-        /* Series Navigation - Dropdown at top */
         .series-dropdown {
             margin-bottom: 2rem;
             padding: 1.2rem 1.5rem;
@@ -852,7 +835,6 @@
             padding: 0.5rem;
         }
 
-        /* Series Navigation - Buttons at bottom */
         .series-nav-bottom {
             display: flex;
             justify-content: space-between;
@@ -928,7 +910,6 @@
             }
         }
 
-        /* Reading Actions */
         .reading-actions {
             display: flex;
             justify-content: center;
@@ -960,7 +941,6 @@
             box-shadow: 0 0 20px var(--glow-purple);
         }
 
-        /* Script Content */
         .script-content {
             background: var(--reading-bg);
             border-radius: 20px;
@@ -969,7 +949,6 @@
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
         }
 
-        /* Markdown Styling */
         .script-content h1 {
             font-family: 'Cinzel', serif;
             font-size: 1.8rem;
@@ -1064,7 +1043,6 @@
             padding: 0;
         }
 
-        /* Loading State */
         .loading-state {
             text-align: center;
             padding: 4rem 2rem;
@@ -1089,7 +1067,6 @@
             font-size: 1.1rem;
         }
 
-        /* Error State */
         .error-state {
             text-align: center;
             padding: 4rem 2rem;
@@ -1130,7 +1107,6 @@
             transform: translateY(-2px);
         }
 
-        /* Patreon Gate Page */
         .patreon-gate {
             text-align: center;
             padding: 4rem 2rem;
@@ -1258,7 +1234,6 @@
             border-color: rgba(107, 63, 160, 0.8);
         }
 
-        /* Preview Fade Gate - for Patreon script previews */
         .preview-content {
             position: relative;
         }
@@ -1314,8 +1289,7 @@
             transform: translateY(-2px);
             box-shadow: 0 8px 25px rgba(217, 70, 168, 0.4);
         }
-
-        /* Preview Top Unlock Bar */
+        
         .preview-top-bar {
             background: linear-gradient(135deg, rgba(45, 27, 78, 0.9), rgba(26, 20, 46, 0.95));
             border: 1px solid rgba(107, 63, 160, 0.4);
@@ -1434,7 +1408,6 @@
             text-decoration: underline;
         }
 
-        /* Preview Notice Banner */
         .preview-notice {
             background: linear-gradient(135deg, rgba(255, 66, 77, 0.15), rgba(217, 70, 168, 0.15));
             border: 1px solid rgba(255, 66, 77, 0.3);
@@ -1477,7 +1450,6 @@
             }
         }
 
-        /* Modal Overlay */
         .preview-modal-overlay {
             position: fixed;
             top: 0;
@@ -1665,7 +1637,6 @@
             }
         }
 
-        /* Footer Navigation */
         .footer-nav {
             max-width: 900px;
             margin: 3rem auto 0;
@@ -1674,7 +1645,6 @@
             justify-content: center;
         }
 
-        /* Responsive */
         @media (max-width: 768px) {
             .script-title {
                 font-size: 2rem;
@@ -1711,7 +1681,6 @@
             }
         }
 
-        /* Accessibility Button */
         .accessibility-btn {
             display: flex;
             align-items: center;
@@ -1737,7 +1706,6 @@
             height: 22px;
         }
 
-        /* Accessibility Panel */
         .accessibility-panel {
             position: fixed;
             top: 0;
@@ -1819,7 +1787,6 @@
             display: block;
         }
 
-        /* Font Size Controls */
         .font-size-controls {
             display: flex;
             align-items: center;
@@ -1858,7 +1825,6 @@
             border: 1px solid rgba(107, 63, 160, 0.3);
         }
 
-        /* Font Type Options */
         .font-type-options {
             display: flex;
             flex-direction: column;
@@ -1893,7 +1859,6 @@
         .font-type-btn.font-atkinson { font-family: 'Atkinson Hyperlegible', sans-serif; }
         .font-type-btn.font-dyslexic { font-family: 'OpenDyslexic', sans-serif; }
 
-        /* Reset Button */
         .accessibility-reset {
             width: 100%;
             padding: 0.8rem;
@@ -1912,7 +1877,6 @@
             border-color: rgba(107, 63, 160, 0.6);
         }
 
-        /* Font Family Classes */
         body.font-arial,
         body.font-arial .script-content,
         body.font-arial .script-content p { font-family: Arial, sans-serif !important; }
@@ -1958,7 +1922,6 @@
                 </div>
                 <span class="logo-mini-text">The Immaterial Loom</span>
             </a>
-            <!-- Accessibility Button -->
             <button class="accessibility-btn" id="accessibilityBtn" title="Accessibility Options">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
@@ -1967,10 +1930,8 @@
         </div>
     </header>
 
-    <!-- Accessibility Overlay -->
     <div class="accessibility-overlay" id="accessibilityOverlay"></div>
 
-    <!-- Accessibility Panel -->
     <div class="accessibility-panel" id="accessibilityPanel">
         <div class="accessibility-header">
             <h3 class="accessibility-title">Accessibility</h3>
@@ -2010,41 +1971,33 @@
         </div>
     </main>
 
-    <!-- Character Dialogue System -->
     <script src="js/character-dialogue.js"></script>
 
     <script>
-        // Configuration
         const CONFIG = {
             dataPath: './data/scripts.json',
             workerApiUrl: 'https://patreon-script-api.isapethscriptweaver.workers.dev'
         };
 
-        // Store script data for API calls
         let currentScriptData = null;
         let allScriptsData = null;
 
-        // Store character data for re-processing
         let currentCharacters = null;
         let currentRawHtml = null;
         let currentRawCondensedHtml = null;
         
-        // Store version switcher HTML globally
         let currentVersionSwitcherHTML = '';
 
-        // Get script ID from URL
         function getScriptId() {
             const params = new URLSearchParams(window.location.search);
             return parseInt(params.get('id'));
         }
 
-        // Get version ID from URL
         function getVersionId() {
             const params = new URLSearchParams(window.location.search);
             return params.get('version');
         }
 
-        // Version Handler utilities
         const VersionHandler = {
             hasVersions(script) {
                 return script.hasVersions && script.versions && script.versions.length > 0;
@@ -2092,39 +2045,30 @@
             }
         };
 
-        // Format category name
         function formatCategory(category) {
             if (category === 'daytoday') return 'Day-to-Day';
             if (category === 'scifi') return 'Sci-Fi';
             return category.charAt(0).toUpperCase() + category.slice(1);
         }
 
-        // Escape HTML
         function escapeHtml(text) {
             const div = document.createElement('div');
             div.textContent = text;
             return div.innerHTML;
         }
 
-        // Count words in markdown content
         function countWords(markdown) {
-            // Remove the CHARACTERS block
             let text = markdown.replace(/<!--\s*CHARACTERS[\s\S]*?-->/gi, '');
-            // Remove markdown syntax
             text = text.replace(/[#*_`~\[\]()]/g, ' ');
-            // Remove URLs
             text = text.replace(/https?:\/\/\S+/g, '');
-            // Remove extra whitespace and split
             const words = text.trim().split(/\s+/).filter(word => word.length > 0);
             return words.length;
         }
 
-        // Format number with commas
         function formatNumber(num) {
             return num.toLocaleString();
         }
 
-        // Toggle hidden tags visibility
         function toggleTags() {
             const hiddenTags = document.getElementById('hiddenTags');
             const toggleBtn = document.getElementById('tagsToggle');
@@ -2143,7 +2087,6 @@
             }
         }
 
-        // Build tags HTML with collapsible "show more" for many tags
         function buildTagsHTML(tags, maxVisible = 6) {
             if (!tags || tags.length === 0) return '';
             
@@ -2167,7 +2110,6 @@
             return html;
         }
 
-        // Render error state
         function renderError(message) {
             document.getElementById('mainContent').innerHTML = `
                 <div class="error-state">
@@ -2184,35 +2126,28 @@
             `;
         }
 
-        // Global function to reprocess content when toggling character colors
         window.reprocessCharacterContent = function() {
             if (!currentRawHtml || !currentCharacters) return;
             
             const contentArea = document.getElementById('scriptContentArea');
             if (!contentArea) return;
             
-            // Determine current version
             const savedVersion = localStorage.getItem('scriptVersionPreference') || 'full';
             const rawHtml = (savedVersion === 'condensed' && currentRawCondensedHtml) 
                 ? currentRawCondensedHtml 
                 : currentRawHtml;
             
-            // Re-apply colors with current setting
             const processedHtml = CharacterDialogue.reprocess(rawHtml, currentCharacters);
             contentArea.innerHTML = processedHtml;
         };
 
-        // Render script page
         function renderScript(script, content, allScripts, condensedContent = null, versionSwitcherHTML = '') {
-            // Update page title
             document.title = `${script.title} | The Immaterial Loom`;
 
-            // Get current page URL for sharing
             const pageUrl = window.location.href;
             const shareTitle = encodeURIComponent(script.title);
             const shareUrl = encodeURIComponent(pageUrl);
 
-            // Build share buttons HTML
             const shareButtonsHTML = `
                 <div class="share-section">
                     <p class="share-title">Share this script</p>
@@ -2236,7 +2171,6 @@
                 </div>
             `;
 
-            // Build cover image HTML (after tags)
             let coverImageHTML = '';
             if (script.image) {
                 let artistCredit = '';
@@ -2255,11 +2189,9 @@
                 `;
             }
 
-            // Build fills section HTML
             let fillsHTML = '';
             if (script.fills && script.fills.length > 0) {
                 const fillItems = script.fills.map(fill => {
-                    // Build artists list with links
                     const artistLinks = fill.artists.map(artist => {
                         if (artist.reddit) {
                             return `<a href="${escapeHtml(artist.reddit)}" target="_blank" rel="noopener noreferrer">${escapeHtml(artist.name)}</a>`;
@@ -2297,7 +2229,6 @@
                 `;
             }
 
-            // Build related scripts section
             let relatedHTML = '';
             if (allScripts && allScripts.length > 1) {
                 const relatedScripts = findRelatedScripts(script, allScripts, 3);
@@ -2315,15 +2246,12 @@
                 }
             }
 
-            // Build series navigation (dropdown at top, buttons at bottom)
             let seriesDropdownHTML = '';
             let seriesNavBottomHTML = '';
             
             if (script.seriesId) {
-                // Get all parts in this series
                 const seriesParts = getSeriesParts(script.seriesId, allScripts);
                 
-                // Build dropdown options
                 const dropdownOptions = seriesParts.map(part => {
                     const selected = part.id === script.id ? 'selected' : '';
                     return `<option value="${part.id}" ${selected}>Part ${part.partNumber}: ${escapeHtml(part.title)}</option>`;
@@ -2338,7 +2266,6 @@
                     </div>
                 `;
 
-                // Build bottom navigation buttons
                 const prevPart = script.previousPart ? allScripts.find(s => s.id === script.previousPart) : null;
                 const nextPart = script.nextPart ? allScripts.find(s => s.id === script.nextPart) : null;
 
@@ -2379,12 +2306,10 @@
                 `;
             }
 
-            // Process content with Character Dialogue system
             const processedFull = CharacterDialogue.process(content, marked);
             currentCharacters = processedFull.characters;
             currentRawHtml = processedFull.rawHtml;
 
-            // Count words in the content
             const wordCount = countWords(content);
             const wordCountHTML = `
                 <div class="script-word-count">
@@ -2401,7 +2326,6 @@
                 currentRawCondensedHtml = processedCondensed.rawHtml;
             }
 
-            // Build version toggle HTML (only if condensed version exists)
             let versionToggleHTML = '';
             if (processedCondensed) {
                 const savedVersion = localStorage.getItem('scriptVersionPreference') || 'full';
@@ -2423,13 +2347,11 @@
                 `;
             }
 
-            // Determine which content to show initially
             const savedVersion = localStorage.getItem('scriptVersionPreference') || 'full';
             const initialContent = (savedVersion === 'condensed' && processedCondensed) 
                 ? processedCondensed.html 
                 : processedFull.html;
 
-            // Show legend only if multiple characters
             const legendHTML = processedFull.hasMultipleCharacters ? processedFull.legend : '';
 
             document.getElementById('mainContent').innerHTML = `
@@ -2466,7 +2388,6 @@
                 </nav>
             `;
 
-            // Store content versions globally for switching
             if (processedCondensed) {
                 window.scriptVersions = {
                     full: processedFull.html,
@@ -2476,11 +2397,9 @@
                 };
             }
 
-            // Restore scroll position if returning to this script
             restoreScrollPosition(script.id);
         }
 
-        // Script version toggle functions
         function toggleScriptVersion() {
             const currentVersion = localStorage.getItem('scriptVersionPreference') || 'full';
             const newVersion = currentVersion === 'full' ? 'condensed' : 'full';
@@ -2492,7 +2411,6 @@
             
             localStorage.setItem('scriptVersionPreference', version);
             
-            // Update content - reprocess with current color settings
             const contentArea = document.getElementById('scriptContentArea');
             if (contentArea && currentCharacters) {
                 const rawHtml = version === 'condensed' 
@@ -2501,8 +2419,7 @@
                 const processedHtml = CharacterDialogue.reprocess(rawHtml, currentCharacters);
                 contentArea.innerHTML = processedHtml;
             }
-            
-            // Update toggle UI
+        
             const toggleSwitch = document.querySelector('.version-toggle-switch');
             const labels = document.querySelectorAll('.version-toggle-label');
             
@@ -2516,30 +2433,24 @@
             });
         }
 
-        // Get all parts in a series, sorted by part number
         function getSeriesParts(seriesId, allScripts) {
             return allScripts
                 .filter(s => s.seriesId === seriesId)
                 .sort((a, b) => a.partNumber - b.partNumber);
         }
 
-        // Navigate to a series part
         function navigateToSeriesPart(scriptId) {
             window.location.href = `reader.html?id=${scriptId}`;
         }
 
-        // Find related scripts based on shared tags
         function findRelatedScripts(currentScript, allScripts, count) {
-            // Include scripts that have content OR are Patreon-only (content comes from API)
             const otherScripts = allScripts.filter(s => 
                 s.id !== currentScript.id && 
                 (s.contentFile || s.patreonOnly) && 
                 !s.hidden
             );
             
-            // Score each script by number of shared tags
             const scored = otherScripts.map(script => {
-                // Get tags - for versioned scripts, use first version's tags
                 const scriptTags = script.hasVersions ? (script.versions[0]?.tags || []) : (script.tags || []);
                 const currentTags = currentScript.hasVersions ? (currentScript.versions[0]?.tags || []) : (currentScript.tags || []);
                 
@@ -2549,14 +2460,11 @@
                 return { script, score: sharedTags.length };
             });
 
-            // Sort by score descending and take top N
             scored.sort((a, b) => b.score - a.score);
             return scored.slice(0, count).filter(s => s.score > 0).map(s => s.script);
         }
 
-        // Create full card HTML for related scripts
         function createRelatedCard(script) {
-            // For versioned scripts, merge first version's data
             if (script.hasVersions && script.versions && script.versions[0]) {
                 const v = script.versions[0];
                 script = {
@@ -2570,7 +2478,6 @@
                 };
             }
             
-            // Ensure tags is always an array
             const tags = script.tags || [];
             
             const categoryIcons = {
@@ -2581,14 +2488,12 @@
             };
             const icon = categoryIcons[script.category] || 'âœ¨';
             
-            // Format category display name
             const categoryDisplay = script.category === 'daytoday' 
                 ? 'Day-to-Day' 
                 : script.category === 'scifi'
                     ? 'Sci-Fi'
                     : script.category.charAt(0).toUpperCase() + script.category.slice(1);
 
-            // Handle artist credit
             let artistCreditHTML = '';
             if (script.artist) {
                 if (script.artistLink) {
@@ -2598,7 +2503,6 @@
                 }
             }
 
-            // Handle image
             const imageHTML = script.image 
                 ? `<div class="card-image-container">
                        <img src="${script.image}" alt="${escapeHtml(script.title)}" class="card-image" loading="lazy">
@@ -2609,7 +2513,6 @@
                        ${artistCreditHTML}
                    </div>`;
 
-            // Generate tags HTML with limit of 5 visible
             const maxVisibleTags = 5;
             const totalTags = tags.length;
             const hasMoreTags = totalTags > maxVisibleTags;
@@ -2626,14 +2529,11 @@
                 tagsHTML += `<button class="tag-expand-btn" onclick="event.stopPropagation(); toggleRelatedTags(this);" data-expanded="false">+${hiddenCount} more</button>`;
             }
 
-            // Build action buttons
             let buttonsHTML = '<div class="card-buttons">';
             
-            // Check if this is a Patreon-only script
             const isPatreonOnly = script.patreonOnly === true;
             
             if (isPatreonOnly) {
-                // For Patreon scripts, show "Read Now" that goes to password gate
                 buttonsHTML += `
                     <a href="reader.html?id=${script.id}" class="card-link card-link-primary" onclick="event.stopPropagation();">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -2642,7 +2542,6 @@
                         Read Now
                     </a>
                 `;
-                // Also show "Unlock on Patreon" as secondary option
                 if (script.patreonLink) {
                     buttonsHTML += `
                         <a href="${escapeHtml(script.patreonLink)}" class="card-link card-link-patreon" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();">
@@ -2654,7 +2553,6 @@
                     `;
                 }
             } else {
-                // Regular script - show "Read Now" button
                 if (script.contentFile && script.contentFile !== '') {
                     buttonsHTML += `
                         <a href="reader.html?id=${script.id}" class="card-link card-link-primary" onclick="event.stopPropagation();">
@@ -2666,7 +2564,6 @@
                     `;
                 }
                 
-                // Scriptbin link - only for non-Patreon scripts
                 if (script.scriptbinLink && script.scriptbinLink !== '' && script.scriptbinLink !== '#') {
                     buttonsHTML += `
                         <a href="${escapeHtml(script.scriptbinLink)}" class="card-link card-link-secondary" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();">
@@ -2681,7 +2578,6 @@
             
             buttonsHTML += '</div>';
 
-            // Enable click handler for all scripts with content (including Patreon)
             const hasContent = script.contentFile || script.patreonOnly;
             const clickHandler = hasContent ? `onclick="window.location.href='reader.html?id=${script.id}';"` : '';
 
@@ -2701,7 +2597,6 @@
             `;
         }
 
-        // Toggle tags in related cards
         function toggleRelatedTags(btn) {
             const tagsContainer = btn.parentElement;
             const hiddenTags = tagsContainer.querySelectorAll('.tag.hidden');
@@ -2726,7 +2621,6 @@
             }
         }
 
-        // Copy to clipboard function
         function copyToClipboard(text) {
             navigator.clipboard.writeText(text).then(() => {
                 const copyBtn = document.getElementById('copyLinkBtn');
@@ -2737,7 +2631,6 @@
             });
         }
 
-        // Reading progress functions
         function saveScrollPosition(scriptId) {
             const scrollPos = window.scrollY;
             localStorage.setItem(`scroll_${scriptId}`, scrollPos);
@@ -2762,7 +2655,6 @@
             });
         }
 
-        // Patreon verification functions
         function getUrlKey() {
             const params = new URLSearchParams(window.location.search);
             return params.get('key');
@@ -2771,7 +2663,6 @@
         function verifyPatreonAccess(script) {
             if (!script.patreonOnly) return true;
             
-            // Check if we have validated access in this session
             const sessionAccess = sessionStorage.getItem(`patreon_access_${script.id}`);
             if (sessionAccess === 'granted') {
                 return true;
@@ -2826,7 +2717,6 @@
                 </div>
             `;
 
-            // Focus input and add Enter key handler
             const input = document.getElementById('patreonGateInput');
             if (input) {
                 input.focus();
@@ -2855,7 +2745,6 @@
                 return;
             }
             
-            // Show loading state
             errorEl.style.display = 'none';
             loadingEl.style.display = 'block';
             unlockBtn.disabled = true;
@@ -2873,18 +2762,14 @@
                 const data = await response.json();
                 
                 if (response.ok && data.success) {
-                    // Password valid! Store access for this session
                     sessionStorage.setItem(`patreon_access_${scriptId}`, 'granted');
                     sessionStorage.setItem(`patreon_pw_${scriptId}`, password);
                     
-                    // Render the script with the content from the API (including condensed version if available)
                     renderScript(currentScriptData, data.content, allScriptsData, data.condensedContent || null);
                     
-                    // Setup scroll tracking
                     setupScrollTracking(scriptId);
                     
                 } else {
-                    // Password invalid
                     loadingEl.style.display = 'none';
                     errorEl.textContent = data.error || 'Incorrect password. Please try again.';
                     errorEl.style.display = 'block';
@@ -2905,17 +2790,13 @@
             }
         }
 
-        // Render Patreon script with preview content
         function renderPatreonPreview(script, previewContent, allScripts, versionSwitcherHTML = '') {
             document.title = `${script.title} | The Immaterial Loom`;
 
-            // Process preview with Character Dialogue system
             const processedPreview = CharacterDialogue.process(previewContent, marked);
 
-            // Build tags HTML using helper
             const tagsHTML = buildTagsHTML(script.tags);
 
-            // Build cover image HTML
             let coverImageHTML = '';
             if (script.image) {
                 let artistCredit = '';
@@ -2934,7 +2815,6 @@
                 `;
             }
 
-            // Patreon badge
             const patreonBadge = `
                 <div class="script-tag" style="background: linear-gradient(135deg, #FF424D, #ff6b6b); color: white; font-weight: 600;">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="14" height="14" style="margin-right: 4px;">
@@ -2944,7 +2824,6 @@
                 </div>
             `;
 
-            // Show legend only if multiple characters
             const legendHTML = processedPreview.hasMultipleCharacters ? processedPreview.legend : '';
 
             document.getElementById('mainContent').innerHTML = `
@@ -3067,10 +2946,8 @@
                 </div>
             `;
 
-            // Setup scroll detection for auto-showing modal
             setupPreviewScrollDetection();
 
-            // Add Enter key handler for top bar input
             const topBarInput = document.getElementById('topBarPasswordInput');
             if (topBarInput) {
                 topBarInput.addEventListener('keydown', (e) => {
@@ -3080,7 +2957,6 @@
                 });
             }
 
-            // Add Enter key handler for modal input
             const modalInput = document.getElementById('previewModalInput');
             if (modalInput) {
                 modalInput.addEventListener('keydown', (e) => {
@@ -3090,7 +2966,6 @@
                 });
             }
 
-            // Close modal on overlay click
             const overlay = document.getElementById('previewModalOverlay');
             if (overlay) {
                 overlay.addEventListener('click', (e) => {
@@ -3100,7 +2975,6 @@
                 });
             }
 
-            // Close modal on Escape key
             document.addEventListener('keydown', (e) => {
                 if (e.key === 'Escape') {
                     hidePreviewModal();
@@ -3108,23 +2982,18 @@
             });
         }
 
-        // Track if modal has been shown this session
         let previewModalShown = false;
         let previewModalTimeout = null;
 
-        // Setup scroll detection for preview pages
         function setupPreviewScrollDetection() {
             const checkScrollPosition = () => {
-                // Check if user has scrolled near the bottom
                 const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
                 const scrollHeight = document.documentElement.scrollHeight;
                 const clientHeight = document.documentElement.clientHeight;
                 
-                // If within 100px of bottom and modal hasn't been shown yet
                 if (scrollTop + clientHeight >= scrollHeight - 100 && !previewModalShown) {
                     previewModalShown = true;
-                    
-                    // Show modal after 2 second delay
+                
                     previewModalTimeout = setTimeout(() => {
                         showPreviewModal();
                     }, 2000);
@@ -3132,18 +3001,15 @@
             };
 
             window.addEventListener('scroll', checkScrollPosition);
-            // Also check on load in case content is short
             checkScrollPosition();
         }
 
-        // Show the preview unlock modal
         function showPreviewModal() {
             const overlay = document.getElementById('previewModalOverlay');
             if (overlay) {
                 overlay.classList.add('active');
-                document.body.style.overflow = 'hidden'; // Prevent background scroll
+                document.body.style.overflow = 'hidden'; 
                 
-                // Focus the input
                 setTimeout(() => {
                     const input = document.getElementById('previewModalInput');
                     if (input) input.focus();
@@ -3151,22 +3017,19 @@
             }
         }
 
-        // Hide the preview unlock modal
         function hidePreviewModal() {
             const overlay = document.getElementById('previewModalOverlay');
             if (overlay) {
                 overlay.classList.remove('active');
-                document.body.style.overflow = ''; // Restore scroll
+                document.body.style.overflow = ''; 
             }
             
-            // Clear any pending timeout
             if (previewModalTimeout) {
                 clearTimeout(previewModalTimeout);
                 previewModalTimeout = null;
             }
         }
 
-        // Handle preview modal unlock submission
         async function submitPreviewModal(scriptId) {
             const input = document.getElementById('previewModalInput');
             const errorEl = document.getElementById('previewModalError');
@@ -3184,7 +3047,6 @@
                 return;
             }
             
-            // Show loading state
             errorEl.style.display = 'none';
             loadingEl.style.display = 'block';
             unlockBtn.disabled = true;
@@ -3202,24 +3064,18 @@
                 const data = await response.json();
                 
                 if (response.ok && data.success) {
-                    // Password valid! Store access for this session
                     sessionStorage.setItem(`patreon_access_${scriptId}`, 'granted');
                     sessionStorage.setItem(`patreon_pw_${scriptId}`, password);
                     
-                    // Hide modal and restore scroll
                     hidePreviewModal();
                     
-                    // Render the full script
                     renderScript(currentScriptData, data.content, allScriptsData, data.condensedContent || null);
                     
-                    // Scroll to top to see full content
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                     
-                    // Setup scroll tracking
                     setupScrollTracking(scriptId);
                     
                 } else {
-                    // Password invalid
                     loadingEl.style.display = 'none';
                     errorEl.textContent = data.error || 'Incorrect password. Please try again.';
                     errorEl.style.display = 'block';
@@ -3240,7 +3096,6 @@
             }
         }
 
-        // Handle top bar unlock submission
         async function submitTopBarUnlock(scriptId) {
             const input = document.getElementById('topBarPasswordInput');
             const errorEl = document.getElementById('topBarError');
@@ -3256,7 +3111,6 @@
                 return;
             }
             
-            // Show loading state
             errorEl.style.display = 'none';
             unlockBtn.disabled = true;
             unlockBtn.innerHTML = `
@@ -3279,21 +3133,16 @@
                 const data = await response.json();
                 
                 if (response.ok && data.success) {
-                    // Password valid! Store access for this session
                     sessionStorage.setItem(`patreon_access_${scriptId}`, 'granted');
                     sessionStorage.setItem(`patreon_pw_${scriptId}`, password);
                     
-                    // Render the full script
                     renderScript(currentScriptData, data.content, allScriptsData, data.condensedContent || null);
                     
-                    // Scroll to top to see full content
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                     
-                    // Setup scroll tracking
                     setupScrollTracking(scriptId);
                     
                 } else {
-                    // Password invalid
                     errorEl.textContent = data.error || 'Incorrect password. Please try again.';
                     errorEl.style.display = 'block';
                     unlockBtn.disabled = false;
@@ -3323,7 +3172,6 @@
             }
         }
 
-        // Main initialization
         async function init() {
             const scriptId = getScriptId();
             const versionId = getVersionId();
@@ -3334,7 +3182,6 @@
             }
 
             try {
-                // Load scripts data
                 const response = await fetch(CONFIG.dataPath);
                 if (!response.ok) throw new Error('Failed to load scripts data');
                 
@@ -3347,7 +3194,6 @@
                     return;
                 }
 
-                // Handle versioned scripts
                 let currentVersion = null;
                 currentVersionSwitcherHTML = '';
                 
@@ -3355,19 +3201,14 @@
                     currentVersion = VersionHandler.getVersion(script, versionId);
                     currentVersionSwitcherHTML = VersionHandler.buildVersionSwitcher(script, currentVersion.versionId);
                     
-                    // Merge version data into script object
                     script = VersionHandler.mergeVersionData(script, currentVersion);
                 }
 
-                // Store for use in submitPatreonGateKey
                 currentScriptData = script;
                 allScriptsData = allScripts;
 
-                // Handle Patreon-only scripts
                 if (script.patreonOnly) {
-                    // Check if already verified this session
                     if (!verifyPatreonAccess(script)) {
-                        // Not verified - check if preview is available
                         if (script.previewFile) {
                             try {
                                 const previewResponse = await fetch(script.previewFile);
@@ -3380,12 +3221,10 @@
                                 console.error('Failed to load preview:', e);
                             }
                         }
-                        // No preview or preview failed to load - show regular gate
                         renderPatreonGate(script, currentVersionSwitcherHTML);
                         return;
                     }
                     
-                    // Already verified - re-fetch content from API with saved password
                     const savedPassword = sessionStorage.getItem(`patreon_pw_${scriptId}`);
                     if (savedPassword) {
                         try {
@@ -3405,7 +3244,6 @@
                         }
                     }
                     
-                    // Couldn't get content, show gate again (with preview if available)
                     sessionStorage.removeItem(`patreon_access_${scriptId}`);
                     if (script.previewFile) {
                         try {
@@ -3423,13 +3261,11 @@
                     return;
                 }
 
-                // Regular (non-Patreon) script handling
                 if (!script.contentFile) {
                     renderError('This script does not have content available for reading yet.');
                     return;
                 }
 
-                // Load the markdown content
                 const contentResponse = await fetch(script.contentFile);
                 if (!contentResponse.ok) {
                     renderError('Failed to load script content. The file may be missing.');
@@ -3438,7 +3274,6 @@
 
                 const content = await contentResponse.text();
                 
-                // Load condensed content if available
                 let condensedContent = null;
                 if (script.contentFileCondensed) {
                     try {
@@ -3453,7 +3288,6 @@
                 
                 renderScript(script, content, allScripts, condensedContent, currentVersionSwitcherHTML);
 
-                // Setup scroll position tracking
                 setupScrollTracking(scriptId);
 
             } catch (error) {
@@ -3462,13 +3296,11 @@
             }
         }
 
-        // Start
         init();
     </script>
 
     <!-- Accessibility Script -->
     <script>
-        // Accessibility Settings
         const accessibilitySettings = {
             fontSize: parseInt(localStorage.getItem('accessFontSize')) || 16,
             fontType: localStorage.getItem('accessFontType') || 'default'
@@ -3476,7 +3308,6 @@
 
         const fontSizes = [12, 14, 16, 18, 20, 22, 24, 28, 32];
 
-        // DOM Elements
         const accessibilityBtn = document.getElementById('accessibilityBtn');
         const accessibilityPanel = document.getElementById('accessibilityPanel');
         const accessibilityOverlay = document.getElementById('accessibilityOverlay');
@@ -3487,7 +3318,6 @@
         const fontTypeBtns = document.querySelectorAll('.font-type-btn');
         const accessibilityReset = document.getElementById('accessibilityReset');
 
-        // Open/Close Panel
         function openAccessibilityPanel() {
             accessibilityPanel.classList.add('open');
             accessibilityOverlay.classList.add('open');
@@ -3502,7 +3332,6 @@
         accessibilityClose.addEventListener('click', closeAccessibilityPanel);
         accessibilityOverlay.addEventListener('click', closeAccessibilityPanel);
 
-        // Font Size
         function updateFontSize(size) {
             accessibilitySettings.fontSize = size;
             localStorage.setItem('accessFontSize', size);
@@ -3524,20 +3353,16 @@
             }
         });
 
-        // Font Type
         function updateFontType(type) {
             accessibilitySettings.fontType = type;
             localStorage.setItem('accessFontType', type);
             
-            // Remove all font classes
             document.body.classList.remove('font-arial', 'font-times', 'font-atkinson', 'font-dyslexic');
             
-            // Add new font class if not default
             if (type !== 'default') {
                 document.body.classList.add('font-' + type);
             }
             
-            // Update active button
             fontTypeBtns.forEach(btn => {
                 btn.classList.toggle('active', btn.dataset.font === type);
             });
@@ -3549,13 +3374,11 @@
             });
         });
 
-        // Reset
         accessibilityReset.addEventListener('click', () => {
             updateFontSize(16);
             updateFontType('default');
         });
 
-        // Apply saved settings on load
         function applyAccessibilitySettings() {
             updateFontSize(accessibilitySettings.fontSize);
             updateFontType(accessibilitySettings.fontType);
