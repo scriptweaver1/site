@@ -385,7 +385,6 @@ header {
     flex-shrink: 0;
 }
 
-/* Sort Container */
 .sort-control,
 .sort-container {
     display: inline-flex;
@@ -394,7 +393,6 @@ header {
     flex-shrink: 0;
 }
 
-/* Sort Label */
 .sort-control label,
 .sort-label {
     color: var(--cosmic-pink);
@@ -403,7 +401,6 @@ header {
     white-space: nowrap;
 }
 
-/* Sort Dropdown */
 .sort-select {
     background: rgba(45, 27, 78, 0.6);
     border: 1px solid rgba(107, 63, 160, 0.5);
@@ -433,7 +430,6 @@ header {
     padding: 0.5rem;
 }
 
-/* Favorites Toggle Button */
 .favorites-toggle {
     display: inline-flex;
     align-items: center;
@@ -474,7 +470,6 @@ header {
     fill: var(--nova-pink);
 }
 
-/* Random/Surprise Me Button */
 .random-btn {
     display: inline-flex;
     align-items: center;
@@ -505,7 +500,6 @@ header {
     box-shadow: 0 0 15px var(--glow-pink);
 }
 
-/* View Controls */
 .view-controls {
     display: flex;
     align-items: center;
@@ -565,7 +559,6 @@ header {
     transition: all 0.3s ease;
 }
 
-/* Single column (default) - horizontal cards */
 .scripts-grid.view-1 {
     grid-template-columns: 1fr;
     max-width: 900px;
@@ -610,7 +603,6 @@ header {
     margin-top: auto;
 }
 
-/* Two columns */
 .scripts-grid.view-2 {
     grid-template-columns: repeat(2, 1fr);
 }
@@ -636,7 +628,6 @@ header {
     -webkit-line-clamp: 3;
 }
 
-/* Three columns */
 .scripts-grid.view-3 {
     grid-template-columns: repeat(3, 1fr);
 }
@@ -717,7 +708,6 @@ header {
     opacity: 1;
 }
 
-/* Staggered animation delays */
 .script-card:nth-child(1) { animation-delay: 0.05s; }
 .script-card:nth-child(2) { animation-delay: 0.1s; }
 .script-card:nth-child(3) { animation-delay: 0.15s; }
@@ -807,7 +797,6 @@ header {
     text-decoration: underline;
 }
 
-/* Card Favorite Button */
 .card-favorite-btn {
     position: absolute;
     top: 0.8rem;
@@ -890,12 +879,10 @@ header {
     border-color: var(--nova-pink);
 }
 
-/* Hidden tag class */
 .tag.hidden {
     display: none;
 }
 
-/* Tag Expand Button (+X more) */
 .tag-expand-btn {
     background: rgba(107, 63, 160, 0.4);
     color: var(--cosmic-pink);
@@ -1131,7 +1118,6 @@ header {
         display: none;
     }
 
-    /* Force 2 columns max on tablet */
     .scripts-grid.view-3 {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -1181,7 +1167,6 @@ header {
         padding: 1rem;
     }
 
-    /* Force single column on mobile */
     .scripts-grid,
     .scripts-grid.view-1,
     .scripts-grid.view-2,
@@ -1190,7 +1175,6 @@ header {
         max-width: 100%;
     }
 
-    /* Stack cards vertically on mobile */
     .scripts-grid.view-1 .script-card {
         grid-template-columns: 1fr;
         min-height: auto;
@@ -1233,7 +1217,6 @@ header {
         font-size: 1rem;
     }
 
-    /* Mobile filter controls */
     .section-controls,
     .filter-controls {
         width: 100%;
