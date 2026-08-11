@@ -1,12 +1,3 @@
-/**
- * Script Masterlist - Main Application
- * =====================================
- * This file handles loading scripts from the JSON data file,
- * filtering, searching, and rendering the UI.
- * 
- * Supports versioned scripts with auto-rotating cards.
- */
-
 // ===== CONFIGURATION =====
 const CONFIG = {
     dataPath: './data/scripts.json',
@@ -17,7 +8,7 @@ const CONFIG = {
         daytoday: { title: 'Day-to-Day Scripts', icon: '☕' },
         warhammer: { title: 'Warhammer Scripts', icon: '⚔️' }
     },
-    versionRotateInterval: 15000 // 15 seconds for auto-rotate
+    versionRotateInterval: 15000 
 };
 
 // ===== STATE =====
@@ -31,8 +22,8 @@ let state = {
     favorites: JSON.parse(localStorage.getItem('scriptFavorites')) || [],
     isLoading: true,
     error: null,
-    // Version rotation state
-    versionRotation: {}, // { scriptId: { currentIndex: 0, intervalId: null } }
+   
+    versionRotation: {}, 
 };
 
 // ===== DOM ELEMENTS =====
@@ -94,7 +85,7 @@ function sortScripts(scripts) {
             break;
         case 'alphabetical':
             sorted.sort((a, b) => {
-                // For versioned scripts, use first version's title
+                
                 const titleA = a.hasVersions ? a.versions[0].title : a.title;
                 const titleB = b.hasVersions ? b.versions[0].title : b.title;
                 return titleA.localeCompare(titleB);
@@ -108,7 +99,7 @@ function sortScripts(scripts) {
 // ===== RANDOM SCRIPT =====
 function goToRandomScript() {
     const scriptsWithContent = state.scripts.filter(s => {
-        // Patreon scripts always have content (from API)
+       
         if (s.patreonOnly) return true;
         
         if (s.hasVersions) {
@@ -121,7 +112,7 @@ function goToRandomScript() {
         const randomIndex = Math.floor(Math.random() * scriptsWithContent.length);
         const randomScript = scriptsWithContent[randomIndex];
         
-        // For versioned scripts, pick a random version
+      
         if (randomScript.hasVersions) {
             const randomVersionIndex = Math.floor(Math.random() * randomScript.versions.length);
             const randomVersion = randomScript.versions[randomVersionIndex];
@@ -164,25 +155,21 @@ async function loadScripts() {
 function filterScripts() {
     let filtered = [...state.scripts];
 
-    // Filter out hidden scripts (sequels)
     filtered = filtered.filter(script => !script.hidden);
 
-    // Filter by category
     if (state.currentCategory !== 'all') {
         filtered = filtered.filter(script => script.category === state.currentCategory);
     }
 
-    // Filter by favorites only
     if (state.showFavoritesOnly) {
         filtered = filtered.filter(script => isFavorite(script.id));
     }
 
-    // Filter by search query
     if (state.searchQuery.trim()) {
         const query = state.searchQuery.toLowerCase().trim();
         filtered = filtered.filter(script => {
             if (script.hasVersions) {
-                // Search across all versions
+           
                 return script.versions.some(version => {
                     const titleMatch = version.title.toLowerCase().includes(query);
                     const tagsMatch = version.tags.some(tag => tag.toLowerCase().includes(query));
@@ -199,7 +186,7 @@ function filterScripts() {
         });
     }
 
-    // Apply sorting
+
     filtered = sortScripts(filtered);
 
     return filtered;
@@ -207,7 +194,7 @@ function filterScripts() {
 
 // ===== COUNT UPDATES =====
 function updateCounts() {
-    // Only count non-hidden scripts
+    
     const visibleScripts = state.scripts.filter(s => !s.hidden);
     document.getElementById('count-all').textContent = visibleScripts.length;
     
@@ -254,7 +241,7 @@ function renderEmptyState() {
 
 // ===== VERSION ROTATION FUNCTIONS =====
 function initVersionRotation(scriptId, totalVersions) {
-    // Clear any existing interval
+    
     if (state.versionRotation[scriptId]?.intervalId) {
         clearInterval(state.versionRotation[scriptId].intervalId);
     }
@@ -274,13 +261,11 @@ function rotateVersion(scriptId, direction, totalVersions) {
     
     let newIndex = state.versionRotation[scriptId].currentIndex + direction;
     
-    // Wrap around
     if (newIndex >= totalVersions) newIndex = 0;
     if (newIndex < 0) newIndex = totalVersions - 1;
     
     state.versionRotation[scriptId].currentIndex = newIndex;
     
-    // Update the card display
     updateVersionedCardDisplay(scriptId, newIndex);
 }
 
@@ -288,19 +273,16 @@ function updateVersionedCardDisplay(scriptId, versionIndex) {
     const card = document.querySelector(`[data-script-id="${scriptId}"]`);
     if (!card) return;
     
-    // Hide all version contents
     const allVersions = card.querySelectorAll('.version-content');
     allVersions.forEach((v, idx) => {
         v.classList.toggle('active', idx === versionIndex);
     });
     
-    // Update dots
     const dots = card.querySelectorAll('.version-dot');
     dots.forEach((dot, idx) => {
         dot.classList.toggle('active', idx === versionIndex);
     });
 
-    // Re-check synopsis overflow for newly visible version
     requestAnimationFrame(() => {
         card.querySelectorAll('.version-content.active .card-synopsis-container').forEach(container => {
             const synopsis = container.querySelector('.card-synopsis');
@@ -314,7 +296,7 @@ function updateVersionedCardDisplay(scriptId, versionIndex) {
 }
 
 function goToVersion(scriptId, versionIndex, totalVersions) {
-    // Reset the auto-rotate timer
+    
     if (state.versionRotation[scriptId]?.intervalId) {
         clearInterval(state.versionRotation[scriptId].intervalId);
     }
@@ -332,14 +314,12 @@ function goToVersion(scriptId, versionIndex, totalVersions) {
 function prevVersion(event, scriptId, totalVersions) {
     event.stopPropagation();
     
-    // Reset the auto-rotate timer
     if (state.versionRotation[scriptId]?.intervalId) {
         clearInterval(state.versionRotation[scriptId].intervalId);
     }
     
     rotateVersion(scriptId, -1, totalVersions);
     
-    // Restart auto-rotate
     state.versionRotation[scriptId].intervalId = setInterval(() => {
         rotateVersion(scriptId, 1, totalVersions);
     }, CONFIG.versionRotateInterval);
@@ -348,20 +328,17 @@ function prevVersion(event, scriptId, totalVersions) {
 function nextVersion(event, scriptId, totalVersions) {
     event.stopPropagation();
     
-    // Reset the auto-rotate timer
     if (state.versionRotation[scriptId]?.intervalId) {
         clearInterval(state.versionRotation[scriptId].intervalId);
     }
     
     rotateVersion(scriptId, 1, totalVersions);
     
-    // Restart auto-rotate
     state.versionRotation[scriptId].intervalId = setInterval(() => {
         rotateVersion(scriptId, 1, totalVersions);
     }, CONFIG.versionRotateInterval);
 }
 
-// Clean up intervals when re-rendering
 function cleanupVersionRotation() {
     Object.keys(state.versionRotation).forEach(scriptId => {
         if (state.versionRotation[scriptId]?.intervalId) {
@@ -373,7 +350,7 @@ function cleanupVersionRotation() {
 
 // ===== CARD CREATION =====
 function createScriptCard(script, index) {
-    // Handle versioned scripts
+
     if (script.hasVersions && script.versions && script.versions.length > 0) {
         return createVersionedScriptCard(script, index);
     }
@@ -385,17 +362,14 @@ function createStandardScriptCard(script, index) {
     const categoryConfig = CONFIG.categories[script.category] || CONFIG.categories.all;
     const icon = categoryConfig.icon;
     
-    // Format category display name
     const categoryDisplay = script.category === 'daytoday' 
         ? 'Day-to-Day' 
         : script.category.charAt(0).toUpperCase() + script.category.slice(1);
 
-    // Check if favorited
     const isFav = isFavorite(script.id);
     const favClass = isFav ? 'favorited' : '';
     const favFill = isFav ? 'var(--nova-pink)' : 'none';
 
-    // Favorite button HTML
     const favoriteBtn = `
         <button class="card-favorite-btn ${favClass}" onclick="event.stopPropagation(); toggleFavorite(${script.id});" title="${isFav ? 'Remove from favorites' : 'Add to favorites'}">
             <svg xmlns="http://www.w3.org/2000/svg" fill="${favFill}" viewBox="0 0 24 24" stroke="currentColor">
@@ -404,7 +378,6 @@ function createStandardScriptCard(script, index) {
         </button>
     `;
 
-    // Handle artist credit
     let artistCreditHTML = '';
     if (script.artist) {
         if (script.artistLink) {
@@ -414,7 +387,6 @@ function createStandardScriptCard(script, index) {
         }
     }
 
-    // Handle image
     const imageHTML = script.image 
         ? `<div class="card-image-container">
                ${favoriteBtn}
@@ -427,18 +399,13 @@ function createStandardScriptCard(script, index) {
                ${artistCreditHTML}
            </div>`;
 
-    // Generate tags HTML
     const tagsHTML = generateTagsHTML(script.tags);
 
-    // Build action buttons
     const buttonsHTML = generateButtonsHTML(script);
 
-    // Determine click destination
     const hasContent = script.contentFile && script.contentFile !== '';
     const isPatreonOnly = script.patreonOnly === true;
     
-    // Both Patreon and regular scripts navigate to reader.html
-    // Patreon scripts show preview + password gate on reader page
     let clickHandler = '';
     if (isPatreonOnly || hasContent) {
         clickHandler = `onclick="window.location.href='reader.html?id=${script.id}';"`;
@@ -468,17 +435,14 @@ function createVersionedScriptCard(script, index) {
     const icon = categoryConfig.icon;
     const totalVersions = script.versions.length;
     
-    // Format category display name
     const categoryDisplay = script.category === 'daytoday' 
         ? 'Day-to-Day' 
         : script.category.charAt(0).toUpperCase() + script.category.slice(1);
 
-    // Check if favorited
     const isFav = isFavorite(script.id);
     const favClass = isFav ? 'favorited' : '';
     const favFill = isFav ? 'var(--nova-pink)' : 'none';
 
-    // Favorite button HTML (shared across versions)
     const favoriteBtn = `
         <button class="card-favorite-btn ${favClass}" onclick="event.stopPropagation(); toggleFavorite(${script.id});" title="${isFav ? 'Remove from favorites' : 'Add to favorites'}">
             <svg xmlns="http://www.w3.org/2000/svg" fill="${favFill}" viewBox="0 0 24 24" stroke="currentColor">
@@ -487,7 +451,6 @@ function createVersionedScriptCard(script, index) {
         </button>
     `;
 
-    // Version navigation arrows
     const arrowsHTML = `
         <button class="version-arrow version-arrow-prev" onclick="event.stopPropagation(); prevVersion(event, ${script.id}, ${totalVersions})" title="Previous version">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -501,7 +464,6 @@ function createVersionedScriptCard(script, index) {
         </button>
     `;
 
-    // Version dots
     let dotsHTML = '<div class="version-dots">';
     script.versions.forEach((version, vIdx) => {
         const activeClass = vIdx === 0 ? 'active' : '';
@@ -509,18 +471,15 @@ function createVersionedScriptCard(script, index) {
     });
     dotsHTML += '</div>';
 
-    // Generate version contents
     let versionContentsHTML = '';
     script.versions.forEach((version, vIdx) => {
         const isActive = vIdx === 0 ? 'active' : '';
         
-        // Version-specific image
         const versionImage = version.image || script.image;
         const imageHTML = versionImage 
             ? `<img src="${versionImage}" alt="${escapeHtml(version.title)}" class="card-image" loading="lazy">`
             : `<div class="card-placeholder-image">${icon}</div>`;
-
-        // Version-specific artist credit (fall back to script-level)
+        
         const artist = version.artist || script.artist;
         const artistLink = version.artistLink || script.artistLink;
         let artistCreditHTML = '';
@@ -532,13 +491,10 @@ function createVersionedScriptCard(script, index) {
             }
         }
 
-        // Version-specific tags
         const tagsHTML = generateTagsHTML(version.tags);
 
-        // Version-specific buttons
         const buttonsHTML = generateVersionButtonsHTML(script, version);
 
-        // Synopsis with expand functionality
         const synopsisHTML = `
             <div class="card-synopsis-container">
                 <p class="card-synopsis">${escapeHtml(version.synopsis)}</p>
@@ -567,7 +523,6 @@ function createVersionedScriptCard(script, index) {
         `;
     });
 
-    // Initialize rotation after render
     setTimeout(() => initVersionRotation(script.id, totalVersions), 100);
 
     return `
@@ -604,9 +559,6 @@ function generateButtonsHTML(script) {
     const isPatreonOnly = script.patreonOnly === true;
     const hasContent = script.contentFile && script.contentFile !== '';
     
-    // "Read Now" button
-    // Both Patreon and regular scripts navigate to reader.html
-    // Patreon scripts show preview + password gate on reader page
     if (isPatreonOnly) {
         buttonsHTML += `
             <a href="reader.html?id=${script.id}" class="card-link card-link-primary" onclick="event.stopPropagation();">
@@ -627,7 +579,6 @@ function generateButtonsHTML(script) {
         `;
     }
     
-    // "Unlock on Patreon" button
     if (isPatreonOnly && script.patreonLink) {
         buttonsHTML += `
             <a href="${escapeHtml(script.patreonLink)}" class="card-link card-link-patreon" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();">
@@ -639,7 +590,6 @@ function generateButtonsHTML(script) {
         `;
     }
     
-    // "Read on Scriptbin" button
     if (!isPatreonOnly && script.scriptbinLink && script.scriptbinLink !== '' && script.scriptbinLink !== '#') {
         buttonsHTML += `
             <a href="${escapeHtml(script.scriptbinLink)}" class="card-link card-link-secondary" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();">
@@ -651,7 +601,6 @@ function generateButtonsHTML(script) {
         `;
     }
     
-    // Coming soon state (only for non-Patreon scripts without content)
     if (!isPatreonOnly && !hasContent && 
         (!script.scriptbinLink || script.scriptbinLink === '' || script.scriptbinLink === '#')) {
         buttonsHTML += `
@@ -673,9 +622,6 @@ function generateVersionButtonsHTML(script, version) {
     const isPatreonOnly = script.patreonOnly === true;
     const hasContent = version.contentFile && version.contentFile !== '';
     
-    // "Read Now" button with version parameter
-    // Both Patreon and regular scripts navigate to reader.html
-    // Patreon scripts show preview + password gate on reader page
     if (isPatreonOnly) {
         buttonsHTML += `
             <a href="reader.html?id=${script.id}&version=${version.versionId}" class="card-link card-link-primary" onclick="event.stopPropagation();">
@@ -696,7 +642,6 @@ function generateVersionButtonsHTML(script, version) {
         `;
     }
     
-    // "Unlock on Patreon" button
     if (isPatreonOnly && script.patreonLink) {
         buttonsHTML += `
             <a href="${escapeHtml(script.patreonLink)}" class="card-link card-link-patreon" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();">
@@ -708,7 +653,6 @@ function generateVersionButtonsHTML(script, version) {
         `;
     }
     
-    // "Read on Scriptbin" button (version-specific or script-level)
     const scriptbinLink = version.scriptbinLink || script.scriptbinLink;
     if (!isPatreonOnly && scriptbinLink && scriptbinLink !== '' && scriptbinLink !== '#') {
         buttonsHTML += `
@@ -721,7 +665,6 @@ function generateVersionButtonsHTML(script, version) {
         `;
     }
     
-    // Coming soon state (only for non-Patreon scripts without content)
     if (!isPatreonOnly && !hasContent && 
         (!scriptbinLink || scriptbinLink === '' || scriptbinLink === '#')) {
         buttonsHTML += `
@@ -738,7 +681,6 @@ function generateVersionButtonsHTML(script, version) {
     return buttonsHTML;
 }
 
-// Toggle tags visibility
 function toggleTags(btn) {
     const tagsContainer = btn.parentElement;
     const hiddenTags = tagsContainer.querySelectorAll('.tag.hidden');
@@ -763,7 +705,6 @@ function toggleTags(btn) {
     }
 }
 
-// Handle tag click for search
 function handleTagClick(tag) {
     elements.searchInput.value = tag;
     state.searchQuery = tag;
@@ -771,7 +712,7 @@ function handleTagClick(tag) {
 }
 
 function renderScripts() {
-    // Cleanup existing version rotations
+
     cleanupVersionRotation();
     
     const filtered = filterScripts();
@@ -784,15 +725,12 @@ function renderScripts() {
             .join('');
     }
 
-    // Update results count
     const countText = filtered.length === 1 ? '1 script' : `${filtered.length} scripts`;
     elements.resultsCount.textContent = `Showing ${countText}`;
 
-    // Check synopsis overflow after render
     requestAnimationFrame(checkSynopsisOverflow);
 }
 
-// Toggle synopsis expand/collapse on cards
 function toggleSynopsis(btn) {
     const container = btn.closest('.card-synopsis-container');
     const synopsis = container.querySelector('.card-synopsis');
@@ -800,16 +738,13 @@ function toggleSynopsis(btn) {
     btn.textContent = isExpanded ? 'Show less' : 'Show more';
 }
 
-// Show expand buttons only when synopsis text is actually clamped
 function checkSynopsisOverflow() {
     document.querySelectorAll('.card-synopsis-container').forEach(container => {
         const synopsis = container.querySelector('.card-synopsis');
         const btn = container.querySelector('.synopsis-expand-btn');
         if (!synopsis || !btn) return;
-        // Reset expanded state to measure clamped height
         synopsis.classList.remove('expanded');
         btn.textContent = 'Show more';
-        // scrollHeight > clientHeight means text is clamped
         btn.style.display = synopsis.scrollHeight > synopsis.clientHeight + 1 ? 'inline-block' : 'none';
     });
 }
@@ -849,14 +784,12 @@ function debounce(func, wait) {
 
 // ===== EVENT LISTENERS =====
 function initializeEventListeners() {
-    // Category navigation
     elements.navItems.forEach(item => {
         item.addEventListener('click', () => {
             setActiveCategory(item.dataset.category);
         });
     });
 
-    // Search input with debouncing
     const debouncedSearch = debounce((value) => {
         state.searchQuery = value;
         renderScripts();
@@ -866,7 +799,6 @@ function initializeEventListeners() {
         debouncedSearch(e.target.value);
     });
 
-    // Clear search on Escape key
     elements.searchInput.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
             elements.searchInput.value = '';
@@ -874,8 +806,7 @@ function initializeEventListeners() {
             renderScripts();
         }
     });
-
-    // View toggle buttons
+    
     if (elements.viewToggle) {
         elements.viewToggle.addEventListener('click', (e) => {
             const btn = e.target.closest('.view-btn');
@@ -886,7 +817,6 @@ function initializeEventListeners() {
         });
     }
 
-    // Sort select
     if (elements.sortSelect) {
         elements.sortSelect.value = state.sortOrder;
         elements.sortSelect.addEventListener('change', (e) => {
@@ -896,7 +826,6 @@ function initializeEventListeners() {
         });
     }
 
-    // Favorites toggle
     if (elements.favoritesToggle) {
         elements.favoritesToggle.addEventListener('click', () => {
             state.showFavoritesOnly = !state.showFavoritesOnly;
@@ -905,7 +834,6 @@ function initializeEventListeners() {
         });
     }
 
-    // Random script button
     if (elements.randomBtn) {
         elements.randomBtn.addEventListener('click', goToRandomScript);
     }
@@ -1011,7 +939,6 @@ function submitPatreonKey() {
     window.location.href = url;
 }
 
-// Handle Enter key in password input
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Enter' && document.getElementById('patreonModal')?.classList.contains('active')) {
         submitPatreonKey();
@@ -1028,7 +955,6 @@ function initialize() {
     loadScripts();
 }
 
-// Start the application when DOM is ready
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initialize);
 } else {
