@@ -8,20 +8,15 @@
     
     <title>The Immaterial Loom | Script Archive</title>
     
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Raleway:wght@300;400;500;600&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     
-    <!-- OpenDyslexic Font -->
     <link href="https://fonts.cdnfonts.com/css/opendyslexic" rel="stylesheet">
     
-    <!-- Styles -->
     <link rel="stylesheet" href="css/styles.css">
     
-    <!-- Versioned Cards Styles -->
     <link rel="stylesheet" href="css/versioned-cards.css">
-    <!-- Age Verification Modal Styles -->
     <style>
         .age-modal-overlay {
             position: fixed;
@@ -136,7 +131,6 @@
             border-color: rgba(107, 63, 160, 0.8);
         }
 
-        /* Hide main content until verified */
         body.age-unverified header,
         body.age-unverified main {
             filter: blur(15px);
@@ -144,7 +138,6 @@
             user-select: none;
         }
 
-        /* Patreon Modal */
         .patreon-modal-overlay {
             position: fixed;
             top: 0;
@@ -316,7 +309,6 @@
             height: 22px;
         }
 
-        /* Accessibility Panel */
         .accessibility-panel {
             position: fixed;
             top: 0;
@@ -398,7 +390,6 @@
             display: block;
         }
 
-        /* Font Size Controls */
         .font-size-controls {
             display: flex;
             align-items: center;
@@ -437,7 +428,6 @@
             border: 1px solid rgba(107, 63, 160, 0.3);
         }
 
-        /* Font Type Options */
         .font-type-options {
             display: flex;
             flex-direction: column;
@@ -472,7 +462,6 @@
         .font-type-btn.font-atkinson { font-family: 'Atkinson Hyperlegible', sans-serif; }
         .font-type-btn.font-dyslexic { font-family: 'OpenDyslexic', sans-serif; }
 
-        /* Reset Button */
         .accessibility-reset {
             width: 100%;
             padding: 0.8rem;
@@ -491,7 +480,6 @@
             border-color: rgba(107, 63, 160, 0.6);
         }
 
-        /* Font Family Classes */
         body.font-arial { font-family: Arial, sans-serif !important; }
         body.font-arial * { font-family: inherit; }
         body.font-arial .logo h1,
@@ -522,7 +510,6 @@
     </style>
 </head>
 <body class="age-unverified">
-    <!-- Age Verification Modal -->
     <div class="age-modal-overlay" id="ageModal">
         <div class="age-modal">
             <div class="age-modal-icon">⚠️</div>
@@ -539,7 +526,6 @@
         </div>
     </div>
 
-    <!-- Patreon Access Modal -->
     <div class="patreon-modal-overlay" id="patreonModal">
         <div class="patreon-modal">
             <button class="patreon-modal-close" onclick="closePatreonModal()">
@@ -572,10 +558,8 @@
         </div>
     </div>
 
-    <!-- Accessibility Overlay -->
     <div class="accessibility-overlay" id="accessibilityOverlay"></div>
 
-    <!-- Accessibility Panel -->
     <div class="accessibility-panel" id="accessibilityPanel">
         <div class="accessibility-header">
             <h3 class="accessibility-title">Accessibility</h3>
@@ -608,11 +592,9 @@
         <button class="accessibility-reset" id="accessibilityReset">Reset to Defaults</button>
     </div>
 
-    <!-- Background Effects -->
     <div class="galaxy-bg"></div>
     <div class="stars"></div>
 
-    <!-- Header -->
     <header>
         <div class="header-content">
             <div class="logo">
@@ -634,7 +616,6 @@
                     <span>Patreon</span>
                 </a>
                 
-                <!-- Accessibility Button -->
                 <button class="accessibility-btn" id="accessibilityBtn" title="Accessibility Options">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
@@ -655,9 +636,7 @@
         </div>
     </header>
 
-    <!-- Main Content -->
     <main class="main-container">
-        <!-- Sidebar Navigation -->
         <aside class="sidebar">
             <nav class="nav-panel">
                 <h2 class="nav-title">Categories</h2>
@@ -691,7 +670,6 @@
             </nav>
         </aside>
 
-        <!-- Scripts Display Area -->
         <section class="scripts-section">
             <div class="section-header">
                 <h2 class="section-title" id="sectionTitle">All Scripts</h2>
@@ -706,7 +684,6 @@
                         </select>
                     </div>
                     
-                    <!-- Favorites Toggle -->
                     <button class="favorites-toggle" id="favoritesToggle" title="Show Favorites Only">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
@@ -714,7 +691,6 @@
                         <span>Favorites</span>
                     </button>
                     
-                    <!-- Random Script Button -->
                     <button class="random-btn" id="randomBtn" title="Surprise me!">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
@@ -747,17 +723,13 @@
                 </div>
             </div>
             <div class="scripts-grid view-1" id="scriptsGrid">
-                <!-- Scripts will be dynamically loaded here -->
             </div>
         </section>
     </main>
 
-    <!-- Application Script -->
     <script src="js/app.js"></script>
 
-    <!-- Age Verification Script -->
     <script>
-        // Check if user has already verified age
         function checkAgeVerification() {
             const verified = localStorage.getItem('ageVerified');
             if (verified === 'true') {
@@ -765,30 +737,24 @@
             }
         }
 
-        // User clicked "Proceed"
         function verifyAge() {
             localStorage.setItem('ageVerified', 'true');
             hideAgeModal();
         }
 
-        // User clicked "Leave"
         function leaveSite() {
             window.location.href = 'https://www.google.com';
         }
 
-        // Hide the modal and show the site
         function hideAgeModal() {
             document.getElementById('ageModal').classList.add('hidden');
             document.body.classList.remove('age-unverified');
         }
 
-        // Check on page load
         checkAgeVerification();
     </script>
 
-    <!-- Accessibility Script -->
     <script>
-        // Accessibility Settings
         const accessibilitySettings = {
             fontSize: parseInt(localStorage.getItem('accessFontSize')) || 16,
             fontType: localStorage.getItem('accessFontType') || 'default'
@@ -796,7 +762,6 @@
 
         const fontSizes = [12, 14, 16, 18, 20, 22, 24, 28, 32];
 
-        // DOM Elements
         const accessibilityBtn = document.getElementById('accessibilityBtn');
         const accessibilityPanel = document.getElementById('accessibilityPanel');
         const accessibilityOverlay = document.getElementById('accessibilityOverlay');
@@ -807,7 +772,6 @@
         const fontTypeBtns = document.querySelectorAll('.font-type-btn');
         const accessibilityReset = document.getElementById('accessibilityReset');
 
-        // Open/Close Panel
         function openAccessibilityPanel() {
             accessibilityPanel.classList.add('open');
             accessibilityOverlay.classList.add('open');
@@ -822,7 +786,6 @@
         accessibilityClose.addEventListener('click', closeAccessibilityPanel);
         accessibilityOverlay.addEventListener('click', closeAccessibilityPanel);
 
-        // Font Size
         function updateFontSize(size) {
             accessibilitySettings.fontSize = size;
             localStorage.setItem('accessFontSize', size);
@@ -844,20 +807,16 @@
             }
         });
 
-        // Font Type
         function updateFontType(type) {
             accessibilitySettings.fontType = type;
             localStorage.setItem('accessFontType', type);
             
-            // Remove all font classes
             document.body.classList.remove('font-arial', 'font-times', 'font-atkinson', 'font-dyslexic');
             
-            // Add new font class if not default
             if (type !== 'default') {
                 document.body.classList.add('font-' + type);
             }
-            
-            // Update active button
+
             fontTypeBtns.forEach(btn => {
                 btn.classList.toggle('active', btn.dataset.font === type);
             });
@@ -869,13 +828,11 @@
             });
         });
 
-        // Reset
         accessibilityReset.addEventListener('click', () => {
             updateFontSize(16);
             updateFontType('default');
         });
 
-        // Apply saved settings on load
         function applyAccessibilitySettings() {
             updateFontSize(accessibilitySettings.fontSize);
             updateFontType(accessibilitySettings.fontType);
