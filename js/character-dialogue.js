@@ -1,61 +1,32 @@
-/**
- * Character Dialogue System
- * ==========================
- * Parses character definitions from markdown files and applies
- * color styling to dialogue lines.
- * 
- * Usage in .md files:
- * <!-- CHARACTERS
- * MEDUSA: #39FF14
- * POSEIDON: #26f7fd
- * ATHENA: #ffd700
- * -->
- * 
- * Then use **NAME:** for dialogue lines (case-insensitive matching)
- */
-
 const CharacterDialogue = {
-    // Default color palette for characters without defined colors
+
     defaultColors: [
-        '#ff6b9d', // Pink
-        '#8a6bff', // Purple
-        '#6bffc8', // Mint
-        '#ffb86b', // Orange
-        '#6bcfff', // Sky blue
-        '#ff6b6b', // Coral
-        '#c86bff', // Violet
-        '#6bff8a', // Lime
+        '#ff6b9d', 
+        '#8a6bff', 
+        '#6bffc8', 
+        '#ffb86b', 
+        '#6bcfff', 
+        '#ff6b6b', 
+        '#c86bff', 
+        '#6bff8a', 
     ],
 
-    // Track if colors are enabled
     colorsEnabled: true,
 
-    /**
-     * Initialize from localStorage
-     */
     init() {
         const saved = localStorage.getItem('characterColorsEnabled');
         this.colorsEnabled = saved === null ? true : saved === 'true';
     },
 
-    /**
-     * Toggle colors on/off
-     */
     toggle(enabled) {
         this.colorsEnabled = enabled;
         localStorage.setItem('characterColorsEnabled', enabled);
     },
 
-    /**
-     * Parse character definitions from markdown content
-     * Returns { characters: { name: color }, content: cleanedContent }
-     */
     parseCharacters(markdown) {
         const characters = {};
         let content = markdown;
 
-        // Look for character definition block
-        // Format: <!-- CHARACTERS\nName: #color\nName2: #color2\n-->
         const charBlockRegex = /<!--\s*CHARACTERS\s*\n([\s\S]*?)-->/i;
         const match = markdown.match(charBlockRegex);
 
@@ -67,13 +38,11 @@ const CharacterDialogue = {
                 const trimmed = line.trim();
                 if (!trimmed) return;
 
-                // Parse "Name: #color" or "Name: color"
                 const colonIndex = trimmed.indexOf(':');
                 if (colonIndex > 0) {
                     const name = trimmed.substring(0, colonIndex).trim();
                     let color = trimmed.substring(colonIndex + 1).trim();
 
-                    // Ensure color has # prefix if it's a hex color
                     if (color && !color.startsWith('#') && /^[0-9a-fA-F]{3,6}$/.test(color)) {
                         color = '#' + color;
                     }
@@ -84,22 +53,15 @@ const CharacterDialogue = {
                 }
             });
 
-            // Remove the character block from content
             content = markdown.replace(charBlockRegex, '').trim();
         }
 
         return { characters, content };
     },
 
-    /**
-     * Auto-detect characters from dialogue patterns
-     * Supports both **NAME:** and **[Name]:** formats
-     */
     autoDetectCharacters(markdown) {
         const characters = new Set();
         
-        // Match **NAME:** pattern (with or without brackets)
-        // Supports: **MEDUSA:** or **[Medusa]:**
         const dialogueRegex = /\*\*\[?([^\]:\*]+)\]?:\*\*/g;
         let match;
 
@@ -107,7 +69,6 @@ const CharacterDialogue = {
             characters.add(match[1].trim());
         }
 
-        // Assign default colors
         const result = {};
         let colorIndex = 0;
         characters.forEach(name => {
@@ -118,10 +79,7 @@ const CharacterDialogue = {
         return result;
     },
 
-    /**
-     * Apply character colors to rendered HTML
-     * Call this AFTER marked.js has converted markdown to HTML
-     */
+
     applyColors(htmlContent, characters, hideNames = true) {
         if (!characters || Object.keys(characters).length === 0) {
             return htmlContent;
@@ -129,20 +87,17 @@ const CharacterDialogue = {
 
         let result = htmlContent;
 
-        // For each character, wrap their dialogue lines with colored spans
         Object.entries(characters).forEach(([name, color]) => {
-            // Escape special regex characters in name
+
             const escapedName = name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
             
-            // Pattern to match: <strong>NAME:</strong> or <strong>[Name]:</strong>
-            // At the start of a paragraph
             const patterns = [
-                // **NAME:** format (no brackets)
+
                 new RegExp(
                     `(<p>\\s*)(<strong>${escapedName}:</strong>)`,
                     'gi'
                 ),
-                // **[Name]:** format (with brackets)
+    
                 new RegExp(
                     `(<p>\\s*)(<strong>\\[${escapedName}\\]:</strong>)`,
                     'gi'
@@ -151,12 +106,12 @@ const CharacterDialogue = {
 
             patterns.forEach(pattern => {
                 if (hideNames && this.colorsEnabled) {
-                    // Hide the name, just show colored line
+    
                     result = result.replace(pattern, 
                         `$1<span class="character-line" data-character="${name}" style="--character-color: ${color}"><span class="character-name-hidden">$2</span>`
                     );
                 } else {
-                    // Show the name with color
+        
                     result = result.replace(pattern, 
                         `$1<span class="character-line colors-off" data-character="${name}" style="--character-color: ${color}"><span class="character-name-visible">$2</span>`
                     );
@@ -164,7 +119,6 @@ const CharacterDialogue = {
             });
         });
 
-        // Close any unclosed character-line spans at paragraph end
         result = result.replace(
             /(<span class="character-line[^"]*"[^>]*>)([\s\S]*?)(<\/p>)/gi,
             '$1$2</span>$3'
@@ -173,9 +127,6 @@ const CharacterDialogue = {
         return result;
     },
 
-    /**
-     * Generate CSS for character legend/key
-     */
     generateLegendHTML(characters) {
         if (!characters || Object.keys(characters).length === 0) {
             return '';
@@ -206,26 +157,19 @@ const CharacterDialogue = {
         `;
     },
 
-    /**
-     * Process markdown content - main entry point
-     * Returns { html: processedHTML, characters: characterMap, legend: legendHTML, rawHtml: unprocessedHTML }
-     */
     process(markdown, markedInstance) {
-        // Parse character definitions
+
         let { characters, content } = this.parseCharacters(markdown);
 
-        // If no characters defined, try auto-detection
+   
         if (Object.keys(characters).length === 0) {
             characters = this.autoDetectCharacters(content);
         }
 
-        // Convert markdown to HTML (without character processing)
         const rawHTML = markedInstance ? markedInstance.parse(content) : content;
 
-        // Apply character colors based on current state
         const coloredHTML = this.applyColors(rawHTML, characters, this.colorsEnabled);
 
-        // Generate legend
         const legend = Object.keys(characters).length > 1 
             ? this.generateLegendHTML(characters) 
             : '';
@@ -239,35 +183,27 @@ const CharacterDialogue = {
         };
     },
 
-    /**
-     * Re-process already parsed HTML with current color settings
-     */
     reprocess(rawHtml, characters) {
         return this.applyColors(rawHtml, characters, this.colorsEnabled);
     }
 };
 
-// Initialize on load
 CharacterDialogue.init();
 
-// Global toggle function for the button
 function toggleCharacterColors() {
     const newState = !CharacterDialogue.colorsEnabled;
     CharacterDialogue.toggle(newState);
     
-    // Update button text
     const toggleText = document.getElementById('colorToggleText');
     if (toggleText) {
         toggleText.textContent = newState ? 'Colors On' : 'Colors Off';
     }
     
-    // Update toggle button appearance
     const toggleBtn = document.getElementById('characterToggleBtn');
     if (toggleBtn) {
         toggleBtn.classList.toggle('disabled', !newState);
     }
-    
-    // Re-render content with new settings
+
     if (window.reprocessCharacterContent) {
         window.reprocessCharacterContent();
     }
