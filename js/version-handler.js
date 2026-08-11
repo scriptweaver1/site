@@ -1,42 +1,27 @@
-/**
- * Version Handler for The Immaterial Loom Reader
- * ===============================================
- * Handles versioned scripts with multiple content variants
- * 
- * Add this to reader.html before the main script:
- * <script src="js/version-handler.js"></script>
- */
 
 const VersionHandler = {
-    // Get version ID from URL
+    
     getVersionId() {
         const params = new URLSearchParams(window.location.search);
         return params.get('version');
     },
 
-    // Check if script has versions
     hasVersions(script) {
         return script.hasVersions && script.versions && script.versions.length > 0;
     },
 
-    // Get specific version from script
     getVersion(script, versionId) {
         if (!this.hasVersions(script)) return null;
         
-        // If no versionId specified, return first version
         if (!versionId) return script.versions[0];
         
-        // Find matching version
         const version = script.versions.find(v => v.versionId === versionId);
-        return version || script.versions[0]; // Fallback to first
+        return version || script.versions[0]; 
     },
 
-    // Merge version data with script base data
-    // Version-specific fields override script-level fields
     mergeVersionData(script, version) {
         return {
             ...script,
-            // Version-specific overrides
             title: version.title,
             tags: version.tags,
             synopsis: version.synopsis,
@@ -45,13 +30,11 @@ const VersionHandler = {
             contentFileCondensed: version.contentFileCondensed || '',
             previewFile: version.previewFile || script.previewFile,
             scriptbinLink: version.scriptbinLink || script.scriptbinLink,
-            // Keep reference to version info
             _currentVersion: version,
             _allVersions: script.versions
         };
     },
 
-    // Build version switcher HTML
     buildVersionSwitcher(script, currentVersionId) {
         if (!this.hasVersions(script)) return '';
 
@@ -78,7 +61,6 @@ const VersionHandler = {
         `;
     },
 
-    // Update URL without page reload (for future use)
     updateUrl(scriptId, versionId) {
         const url = new URL(window.location);
         url.searchParams.set('id', scriptId);
@@ -90,16 +72,15 @@ const VersionHandler = {
         window.history.pushState({}, '', url);
     },
 
-    // For Patreon versioned scripts - get R2 paths
+
     getPatreonPaths(script, versionId) {
         if (!this.hasVersions(script)) {
-            return null; // Not versioned, use default handling
+            return null; 
         }
 
         const version = this.getVersion(script, versionId);
         if (!version) return null;
 
-        // Return version-specific R2 paths (these would be configured in worker)
         return {
             versionId: version.versionId,
             versionLabel: version.versionLabel
@@ -107,7 +88,6 @@ const VersionHandler = {
     }
 };
 
-// Helper function (same as in reader.html)
 function escapeHtml(text) {
     const div = document.createElement('div');
     div.textContent = text;
