@@ -462,8 +462,19 @@
       "totalParts": null,
       "previousPart": null,
       "nextPart": null,
-      "hidden": true,
-      "fills": []
+      "hidden": false,
+      "patreonOnly": false,
+      "fills": [
+        {
+          "artists": [
+            {
+              "name": "u/Submissiveshygoth2",
+              "reddit": "https://www.reddit.com/user/submissiveshygoth2/submitted/"
+            }
+          ],
+          "postLink": "https://www.reddit.com/r/gonewildaudio/comments/1t10wkw/21f4a_f4a_f4m_f4f_mega_collab_roll_for_hole/"
+        }
+      ]
     },
     {
       "id": 10,
