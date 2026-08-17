@@ -16,6 +16,12 @@
     
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     
+    <!-- Lock the page before first paint so a direct link to a script is
+         gated exactly like the front page. Must stay above the stylesheets. -->
+    <script>document.documentElement.classList.add('age-locked');</script>
+    <link rel="stylesheet" href="css/site-gate.css">
+    <script src="js/site-gate.js"></script>
+
     <link rel="stylesheet" href="css/character-dialogue.css">
     
     <link rel="stylesheet" href="css/versioned-cards.css">
@@ -169,6 +175,25 @@
             margin-bottom: 3rem;
             padding-bottom: 2rem;
             border-bottom: 1px solid rgba(107, 63, 160, 0.3);
+        }
+
+        .script-categories {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .script-categories .script-category {
+            margin-bottom: 0;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .script-categories .script-category:hover {
+            background: rgba(217, 70, 168, 0.3);
+            border-color: var(--nova-pink);
+            color: var(--pure-light);
         }
 
         .script-category {
@@ -1922,7 +1947,7 @@
                 </div>
                 <span class="logo-mini-text">The Immaterial Loom</span>
             </a>
-            <button class="accessibility-btn" id="accessibilityBtn" title="Accessibility Options">
+            <button class="accessibility-btn" id="accessibilityBtn" title="Options">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
                 </svg>
@@ -1934,7 +1959,7 @@
 
     <div class="accessibility-panel" id="accessibilityPanel">
         <div class="accessibility-header">
-            <h3 class="accessibility-title">Accessibility</h3>
+            <h3 class="accessibility-title">Options</h3>
             <button class="accessibility-close" id="accessibilityClose">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -1961,6 +1986,15 @@
             </div>
         </div>
 
+        <div class="accessibility-section">
+            <label class="accessibility-label">Content</label>
+            <button type="button" class="option-toggle" id="spoilerToggle" aria-pressed="true">
+                <span>Blur images until clicked</span>
+                <span class="option-toggle-switch" aria-hidden="true"></span>
+            </button>
+            <p class="option-hint">Turn this off to keep every image unblurred permanently on this device.</p>
+        </div>
+
         <button class="accessibility-reset" id="accessibilityReset">Reset to Defaults</button>
     </div>
 
@@ -1971,6 +2005,7 @@
         </div>
     </main>
 
+    <script src="js/categories.js"></script>
     <script src="js/character-dialogue.js"></script>
 
     <script>
@@ -2045,10 +2080,22 @@
             }
         };
 
-        function formatCategory(category) {
-            if (category === 'daytoday') return 'Day-to-Day';
-            if (category === 'scifi') return 'Sci-Fi';
-            return category.charAt(0).toUpperCase() + category.slice(1);
+        // Categories come from js/categories.js so this page and the archive
+        // never disagree about what a slug means.
+        function formatCategory(script) {
+            const labels = getScriptCategoryLabels(script);
+            return labels.join(' \u00b7 ');
+        }
+
+        // One clickable chip per category, each linking back to the archive
+        // filtered to that category.
+        function buildCategoryChipsHTML(script) {
+            const slugs = getScriptCategories(script);
+            if (slugs.length === 0) return '';
+            return '<span class="script-categories">' + slugs.map(function (slug) {
+                return '<a class="script-category" href="index.html?category=' + encodeURIComponent(slug) + '">' +
+                    getCategoryIcon(slug) + ' ' + escapeHtml(getCategoryLabel(slug)) + '</a>';
+            }).join('') + '</span>';
         }
 
         function escapeHtml(text) {
@@ -2357,7 +2404,7 @@
             document.getElementById('mainContent').innerHTML = `
                 <article>
                     <header class="script-header">
-                        <span class="script-category">${formatCategory(script.category)}</span>
+                        ${buildCategoryChipsHTML(script)}
                         <h1 class="script-title">${escapeHtml(script.title)}</h1>
                         <div class="script-tags">
                             ${buildTagsHTML(script.tags)}
@@ -2480,19 +2527,9 @@
             
             const tags = script.tags || [];
             
-            const categoryIcons = {
-                fantasy: 'ðŸ‰',
-                scifi: 'ðŸš€',
-                daytoday: 'â˜•',
-                warhammer: 'âš”ï¸'
-            };
-            const icon = categoryIcons[script.category] || 'âœ¨';
+            const icon = getScriptIcon(script);
             
-            const categoryDisplay = script.category === 'daytoday' 
-                ? 'Day-to-Day' 
-                : script.category === 'scifi'
-                    ? 'Sci-Fi'
-                    : script.category.charAt(0).toUpperCase() + script.category.slice(1);
+            const categoryDisplay = formatCategory(script);
 
             let artistCreditHTML = '';
             if (script.artist) {
@@ -2585,7 +2622,7 @@
                 <article class="script-card" ${clickHandler}>
                     ${imageHTML}
                     <div class="card-content">
-                        <span class="card-category">${categoryDisplay}</span>
+                        ${categoryDisplay ? `<span class="card-category">${escapeHtml(categoryDisplay)}</span>` : ''}
                         <h3 class="card-title">${escapeHtml(script.title)}</h3>
                         <div class="card-tags">
                             ${tagsHTML}
@@ -3377,6 +3414,8 @@
         accessibilityReset.addEventListener('click', () => {
             updateFontSize(16);
             updateFontType('default');
+            // Restore image blurring along with the typography defaults.
+            if (window.SiteGate) window.SiteGate.resetSpoilers();
         });
 
         function applyAccessibilitySettings() {
