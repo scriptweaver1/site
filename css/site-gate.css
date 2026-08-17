@@ -1,0 +1,388 @@
+/* =========================================================================
+   AGE GATE + IMAGE SPOILERS
+   Shared by index.html and reader.html.
+   ========================================================================= */
+
+/* ---- Content lock -------------------------------------------------------
+   Set on <html> by the inline head snippet BEFORE first paint, so no
+   explicit content is ever visible behind the gate — not even for a frame.
+   ------------------------------------------------------------------------- */
+html.age-locked,
+html.age-locked body {
+    overflow: hidden !important;
+}
+
+html.age-locked body > *:not(.age-modal-overlay):not(.galaxy-bg):not(.stars) {
+    visibility: hidden !important;
+}
+
+/* ---- The gate ---------------------------------------------------------- */
+.age-modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 100000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    background: rgba(10, 10, 18, 0.98);
+    backdrop-filter: blur(12px);
+    overflow-y: auto;
+}
+
+.age-modal-overlay.hidden {
+    display: none;
+}
+
+.age-modal {
+    background: linear-gradient(160deg, rgba(45, 27, 78, 0.92) 0%, rgba(18, 16, 31, 0.97) 100%);
+    border: 1px solid rgba(217, 70, 168, 0.4);
+    border-radius: 24px;
+    padding: 2.75rem 2.5rem;
+    max-width: 540px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 0 60px rgba(217, 70, 168, 0.3), 0 20px 60px rgba(0, 0, 0, 0.5);
+    animation: ageModalFadeIn 0.4s ease;
+    margin: auto;
+}
+
+@keyframes ageModalFadeIn {
+    from { opacity: 0; transform: scale(0.94) translateY(20px); }
+    to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.age-modal-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 78px;
+    height: 78px;
+    margin-bottom: 1.4rem;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #6b3fa0, #d946a8);
+    color: #faf5ff;
+    font-family: 'Cinzel', serif;
+    font-size: 1.55rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    box-shadow: 0 0 30px rgba(217, 70, 168, 0.5);
+}
+
+.age-modal-title {
+    font-family: 'Cinzel', serif;
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 1.2rem;
+    background: linear-gradient(135deg, #faf5ff 0%, #f472b6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: #faf5ff;
+}
+
+.age-modal-text {
+    font-family: 'Raleway', sans-serif;
+    font-size: 1rem;
+    line-height: 1.75;
+    color: #e9d5ff;
+    margin-bottom: 1.6rem;
+}
+
+.age-modal-text strong {
+    color: #f472b6;
+}
+
+.age-modal-terms {
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.85rem;
+    line-height: 1.65;
+    color: rgba(233, 213, 255, 0.62);
+    text-align: left;
+    background: rgba(10, 10, 18, 0.4);
+    border: 1px solid rgba(107, 63, 160, 0.3);
+    border-radius: 14px;
+    padding: 1rem 1.2rem;
+    margin-bottom: 1.8rem;
+}
+
+.age-modal-terms li {
+    margin-left: 1.1rem;
+    margin-bottom: 0.35rem;
+}
+
+.age-modal-terms li:last-child {
+    margin-bottom: 0;
+}
+
+.age-modal-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.age-modal-btn {
+    padding: 0.9rem 2.4rem;
+    border-radius: 30px;
+    font-family: 'Raleway', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+    min-width: 150px;
+}
+
+.age-modal-btn.proceed {
+    background: linear-gradient(135deg, #6b3fa0, #d946a8);
+    color: #faf5ff;
+    box-shadow: 0 0 20px rgba(217, 70, 168, 0.4);
+}
+
+.age-modal-btn.proceed:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 35px rgba(217, 70, 168, 0.6);
+}
+
+.age-modal-btn.leave {
+    background: transparent;
+    color: #e9d5ff;
+    border: 1px solid rgba(107, 63, 160, 0.5);
+}
+
+.age-modal-btn.leave:hover {
+    background: rgba(107, 63, 160, 0.3);
+    border-color: rgba(107, 63, 160, 0.8);
+}
+
+.age-modal-btn:focus-visible {
+    outline: 2px solid #f472b6;
+    outline-offset: 3px;
+}
+
+.age-modal-footnote {
+    margin-top: 1.4rem;
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.78rem;
+    color: rgba(233, 213, 255, 0.45);
+    line-height: 1.6;
+}
+
+/* =========================================================================
+   IMAGE SPOILERS
+   Active only while <body> carries .spoiler-images. Containers are blurred
+   until clicked; the permanent opt-out in the Options panel removes the
+   class entirely.
+   ========================================================================= */
+
+.card-image-container,
+.script-cover {
+    position: relative;
+}
+
+body.spoiler-images .card-image-container:not(.revealed) .card-image,
+body.spoiler-images .card-image-container:not(.revealed) .card-placeholder-image,
+body.spoiler-images .script-cover:not(.revealed) img {
+    filter: blur(22px) saturate(0.65) brightness(0.7);
+    transform: scale(1.08);
+    transition: filter 0.45s ease, transform 0.45s ease;
+    will-change: filter;
+}
+
+body.spoiler-images .card-image-container.revealed .card-image,
+body.spoiler-images .card-image-container.revealed .card-placeholder-image,
+body.spoiler-images .script-cover.revealed img {
+    filter: none;
+    transform: scale(1);
+    transition: filter 0.45s ease, transform 0.45s ease;
+}
+
+/* Hide the artist credit and version label until revealed — they leak the
+   subject of the image the spoiler is meant to hide. */
+body.spoiler-images .card-image-container:not(.revealed) .card-artist-credit,
+body.spoiler-images .card-image-container:not(.revealed) .version-label,
+body.spoiler-images .script-cover:not(.revealed) .script-cover-credit {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Click-to-reveal veil */
+.spoiler-veil {
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    background: rgba(10, 10, 18, 0.35);
+    border: none;
+    color: #faf5ff;
+    font-family: 'Raleway', sans-serif;
+    text-align: center;
+    padding: 1rem;
+    transition: background 0.25s ease;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body.spoiler-images .card-image-container:not(.revealed) > .spoiler-veil,
+body.spoiler-images .script-cover:not(.revealed) > .spoiler-veil {
+    display: flex;
+}
+
+.spoiler-veil:hover {
+    background: rgba(107, 63, 160, 0.35);
+}
+
+.spoiler-veil:focus-visible {
+    outline: 2px solid #f472b6;
+    outline-offset: -6px;
+}
+
+.spoiler-veil-icon {
+    width: 30px;
+    height: 30px;
+    opacity: 0.9;
+}
+
+.spoiler-veil-label {
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.8);
+}
+
+.spoiler-veil-hint {
+    font-size: 0.72rem;
+    opacity: 0.75;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.8);
+}
+
+/* Re-hide button, shown on a revealed image so a reveal is undoable. */
+.spoiler-rehide {
+    position: absolute;
+    bottom: 0.6rem;
+    left: 0.6rem;
+    z-index: 6;
+    display: none;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.3rem 0.65rem;
+    border: 1px solid rgba(217, 70, 168, 0.4);
+    border-radius: 20px;
+    background: rgba(10, 10, 18, 0.72);
+    color: #e9d5ff;
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 600;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.25s ease, background 0.25s ease;
+}
+
+body.spoiler-images .card-image-container.revealed > .spoiler-rehide,
+body.spoiler-images .script-cover.revealed > .spoiler-rehide {
+    display: inline-flex;
+}
+
+body.spoiler-images .card-image-container.revealed:hover > .spoiler-rehide,
+body.spoiler-images .script-cover.revealed:hover > .spoiler-rehide,
+.spoiler-rehide:focus-visible {
+    opacity: 1;
+}
+
+.spoiler-rehide:hover {
+    background: rgba(217, 70, 168, 0.5);
+    color: #faf5ff;
+}
+
+.spoiler-rehide svg {
+    width: 13px;
+    height: 13px;
+}
+
+/* =========================================================================
+   OPTIONS PANEL — spoiler toggle
+   ========================================================================= */
+.option-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    width: 100%;
+    padding: 0.85rem 1rem;
+    background: rgba(45, 27, 78, 0.45);
+    border: 1px solid rgba(107, 63, 160, 0.45);
+    border-radius: 14px;
+    color: #e9d5ff;
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.option-toggle:hover {
+    border-color: #d946a8;
+    background: rgba(107, 63, 160, 0.35);
+}
+
+.option-toggle:focus-visible {
+    outline: 2px solid #f472b6;
+    outline-offset: 2px;
+}
+
+.option-toggle-switch {
+    position: relative;
+    flex-shrink: 0;
+    width: 42px;
+    height: 24px;
+    border-radius: 20px;
+    background: rgba(10, 10, 18, 0.7);
+    border: 1px solid rgba(107, 63, 160, 0.6);
+    transition: all 0.25s ease;
+}
+
+.option-toggle-switch::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: rgba(233, 213, 255, 0.6);
+    transition: all 0.25s ease;
+}
+
+.option-toggle[aria-pressed="true"] .option-toggle-switch {
+    background: linear-gradient(135deg, #6b3fa0, #d946a8);
+    border-color: #d946a8;
+}
+
+.option-toggle[aria-pressed="true"] .option-toggle-switch::after {
+    left: 20px;
+    background: #faf5ff;
+}
+
+.option-hint {
+    margin-top: 0.6rem;
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.75rem;
+    line-height: 1.55;
+    color: rgba(233, 213, 255, 0.5);
+}
+
+@media (max-width: 600px) {
+    .age-modal {
+        padding: 2rem 1.5rem;
+    }
+    .age-modal-btn {
+        width: 100%;
+    }
+}

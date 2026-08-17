@@ -1261,3 +1261,126 @@ header {
         min-width: 100%;
     }
 }
+
+/* =========================================================================
+   AUDIENCE FILTER PANEL (sidebar, below Categories)
+   ========================================================================= */
+.audience-panel {
+    margin-bottom: 1.2rem;
+    padding: 1.2rem 1.5rem;
+}
+
+.audience-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.audience-btn {
+    flex: 1 1 0;
+    min-width: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+    padding: 0.65rem 0.5rem;
+    background: rgba(45, 27, 78, 0.5);
+    border: 1px solid rgba(107, 63, 160, 0.5);
+    border-radius: 25px;
+    color: var(--stardust);
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.audience-btn:hover {
+    background: rgba(217, 70, 168, 0.25);
+    border-color: var(--nova-pink);
+}
+
+.audience-btn:focus-visible {
+    outline: 2px solid var(--cosmic-pink);
+    outline-offset: 2px;
+}
+
+.audience-btn.active {
+    background: linear-gradient(135deg, rgba(217, 70, 168, 0.45), rgba(107, 63, 160, 0.55));
+    border-color: var(--nova-pink);
+    color: var(--pure-light);
+    box-shadow: 0 0 15px var(--glow-pink);
+}
+
+.audience-count {
+    background: rgba(10, 10, 18, 0.45);
+    border-radius: 20px;
+    padding: 0.1rem 0.45rem;
+    font-size: 0.7rem;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+.audience-btn.active .audience-count {
+    background: rgba(10, 10, 18, 0.35);
+    color: var(--cosmic-pink);
+}
+
+.audience-hint {
+    margin-top: 0.9rem;
+    font-size: 0.75rem;
+    line-height: 1.5;
+    color: rgba(233, 213, 255, 0.55);
+}
+
+/* =========================================================================
+   MULTI-CATEGORY CHIPS ON CARDS
+   ========================================================================= */
+.card-categories {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 0.7rem;
+}
+
+.card-categories .card-category {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    margin-bottom: 0;
+    padding: 0.2rem 0.6rem;
+    background: rgba(107, 63, 160, 0.28);
+    border: 1px solid rgba(217, 70, 168, 0.35);
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.card-categories .card-category:hover {
+    background: rgba(217, 70, 168, 0.35);
+    border-color: var(--nova-pink);
+    color: var(--pure-light);
+}
+
+.card-category-icon {
+    font-size: 0.85rem;
+    line-height: 1;
+}
+
+/* Sidebar labels can wrap now that names are longer (Multi-Speaker etc.) */
+.nav-label {
+    flex: 1;
+    min-width: 0;
+}
+
+@media (max-width: 900px) {
+    .audience-panel {
+        margin-bottom: 1rem;
+    }
+    .audience-btn {
+        flex: 1 1 30%;
+        min-width: 90px;
+    }
+}
