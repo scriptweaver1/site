@@ -266,6 +266,40 @@ header {
     position: sticky;
     top: 2rem;
     height: fit-content;
+
+    /* The sidebar is taller than the viewport now that there are 14
+       categories plus the audience panel. Without these it stays pinned by
+       `sticky` and the bottom entries can never be reached — so give it its
+       own scroll area capped to the visible height. */
+    max-height: calc(100vh - 4rem);
+    overflow-y: auto;
+    overflow-x: hidden;
+    /* Stops the page from scrolling on past the sidebar's own end. */
+    overscroll-behavior: contain;
+    padding-right: 6px;
+
+    scrollbar-width: thin;
+    scrollbar-color: rgba(217, 70, 168, 0.55) transparent;
+}
+
+.sidebar::-webkit-scrollbar {
+    width: 8px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+    background: rgba(217, 70, 168, 0.45);
+    border-radius: 10px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+    background: rgba(217, 70, 168, 0.75);
+    background-clip: content-box;
 }
 
 .nav-panel {
@@ -1101,6 +1135,11 @@ header {
     .sidebar {
         width: 100%;
         position: static;
+        /* Stacked layout: let it take its natural height and scroll with
+           the page instead of being its own scroll box. */
+        max-height: none;
+        overflow: visible;
+        padding-right: 0;
     }
 
     .nav-list {
