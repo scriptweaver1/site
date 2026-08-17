@@ -1,20 +1,15 @@
 // ===== CONFIGURATION =====
+// Categories and audience buckets live in js/categories.js — edit them there.
 const CONFIG = {
     dataPath: './data/scripts.json',
-    categories: {
-        all: { title: 'All Scripts', icon: '✨' },
-        fantasy: { title: 'Fantasy Scripts', icon: '🐉' },
-        scifi: { title: 'Sci-Fi Scripts', icon: '🚀' },
-        daytoday: { title: 'Day-to-Day Scripts', icon: '☕' },
-        warhammer: { title: 'Warhammer Scripts', icon: '⚔️' }
-    },
-    versionRotateInterval: 15000 
+    versionRotateInterval: 15000
 };
 
 // ===== STATE =====
 let state = {
     scripts: [],
     currentCategory: 'all',
+    audienceFilters: JSON.parse(localStorage.getItem('scriptAudienceFilters')) || [],
     searchQuery: '',
     currentView: localStorage.getItem('scriptViewMode') || '1',
     sortOrder: localStorage.getItem('scriptSortOrder') || 'newest',
@@ -22,15 +17,18 @@ let state = {
     favorites: JSON.parse(localStorage.getItem('scriptFavorites')) || [],
     isLoading: true,
     error: null,
-   
-    versionRotation: {}, 
+
+    versionRotation: {},
 };
 
 // ===== DOM ELEMENTS =====
 const elements = {
     scriptsGrid: document.getElementById('scriptsGrid'),
     searchInput: document.getElementById('searchInput'),
-    navItems: document.querySelectorAll('.nav-item'),
+    navList: document.getElementById('navList'),
+    navItems: [],
+    audienceFilters: document.getElementById('audienceFilters'),
+    audienceButtons: [],
     sectionTitle: document.getElementById('sectionTitle'),
     resultsCount: document.getElementById('resultsCount'),
     viewToggle: document.getElementById('viewToggle'),
@@ -157,8 +155,16 @@ function filterScripts() {
 
     filtered = filtered.filter(script => !script.hidden);
 
+    // Primary filter: a script appears under EVERY category it belongs to.
     if (state.currentCategory !== 'all') {
-        filtered = filtered.filter(script => script.category === state.currentCategory);
+        filtered = filtered.filter(script =>
+            getScriptCategories(script).includes(state.currentCategory)
+        );
+    }
+
+    // Secondary filter: audience buttons (X4M / X4F / A4A), matched as OR.
+    if (state.audienceFilters.length > 0) {
+        filtered = filtered.filter(script => scriptMatchesAudiences(script, state.audienceFilters));
     }
 
     if (state.showFavoritesOnly) {
@@ -168,19 +174,20 @@ function filterScripts() {
     if (state.searchQuery.trim()) {
         const query = state.searchQuery.toLowerCase().trim();
         filtered = filtered.filter(script => {
+            const categoryMatch = getScriptCategoryLabels(script)
+                .some(label => label.toLowerCase().includes(query));
+
             if (script.hasVersions) {
-           
-                return script.versions.some(version => {
-                    const titleMatch = version.title.toLowerCase().includes(query);
-                    const tagsMatch = version.tags.some(tag => tag.toLowerCase().includes(query));
-                    const synopsisMatch = version.synopsis.toLowerCase().includes(query);
+                return categoryMatch || script.versions.some(version => {
+                    const titleMatch = (version.title || '').toLowerCase().includes(query);
+                    const tagsMatch = (version.tags || []).some(tag => tag.toLowerCase().includes(query));
+                    const synopsisMatch = (version.synopsis || '').toLowerCase().includes(query);
                     return titleMatch || tagsMatch || synopsisMatch;
-                }) || script.category.toLowerCase().includes(query);
+                });
             } else {
-                const titleMatch = script.title.toLowerCase().includes(query);
-                const tagsMatch = script.tags.some(tag => tag.toLowerCase().includes(query));
-                const synopsisMatch = script.synopsis.toLowerCase().includes(query);
-                const categoryMatch = script.category.toLowerCase().includes(query);
+                const titleMatch = (script.title || '').toLowerCase().includes(query);
+                const tagsMatch = (script.tags || []).some(tag => tag.toLowerCase().includes(query));
+                const synopsisMatch = (script.synopsis || '').toLowerCase().includes(query);
                 return titleMatch || tagsMatch || synopsisMatch || categoryMatch;
             }
         });
@@ -192,19 +199,107 @@ function filterScripts() {
     return filtered;
 }
 
+// ===== SIDEBAR RENDERING =====
+// The category list and audience buttons are built from js/categories.js so
+// there is only ever one place to edit when the taxonomy changes.
+function renderNav() {
+    if (!elements.navList) return;
+
+    const items = [ALL_CATEGORY, ...CATEGORY_DEFS];
+    elements.navList.innerHTML = items.map(cat => `
+        <li class="nav-item${cat.slug === state.currentCategory ? ' active' : ''}"
+            data-category="${cat.slug}" role="button" tabindex="0">
+            <span class="nav-icon">${cat.icon}</span>
+            <span class="nav-label">${escapeHtml(cat.label)}</span>
+            <span class="nav-count" id="count-${cat.slug}">0</span>
+        </li>
+    `).join('');
+
+    elements.navItems = elements.navList.querySelectorAll('.nav-item');
+    elements.navItems.forEach(item => {
+        item.addEventListener('click', () => setActiveCategory(item.dataset.category));
+        item.addEventListener('keydown', e => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                setActiveCategory(item.dataset.category);
+            }
+        });
+    });
+}
+
+function renderAudienceFilters() {
+    if (!elements.audienceFilters) return;
+
+    elements.audienceFilters.innerHTML = AUDIENCE_DEFS.map(aud => `
+        <button class="audience-btn${state.audienceFilters.includes(aud.key) ? ' active' : ''}"
+                data-audience="${aud.key}" title="${escapeHtml(aud.title)}"
+                aria-pressed="${state.audienceFilters.includes(aud.key)}">
+            <span class="audience-label">${escapeHtml(aud.label)}</span>
+            <span class="audience-count" id="audience-count-${aud.key}">0</span>
+        </button>
+    `).join('');
+
+    elements.audienceButtons = elements.audienceFilters.querySelectorAll('.audience-btn');
+    elements.audienceButtons.forEach(btn => {
+        btn.addEventListener('click', () => toggleAudienceFilter(btn.dataset.audience));
+    });
+}
+
+function toggleAudienceFilter(key) {
+    const idx = state.audienceFilters.indexOf(key);
+    if (idx > -1) {
+        state.audienceFilters.splice(idx, 1);
+    } else {
+        state.audienceFilters.push(key);
+    }
+    localStorage.setItem('scriptAudienceFilters', JSON.stringify(state.audienceFilters));
+
+    elements.audienceButtons.forEach(btn => {
+        const on = state.audienceFilters.includes(btn.dataset.audience);
+        btn.classList.toggle('active', on);
+        btn.setAttribute('aria-pressed', on);
+    });
+
+    updateSectionTitle();
+    renderScripts();
+}
+
+function clearAudienceFilters() {
+    state.audienceFilters = [];
+    localStorage.setItem('scriptAudienceFilters', '[]');
+    renderAudienceFilters();
+    updateSectionTitle();
+    renderScripts();
+}
+
 // ===== COUNT UPDATES =====
 function updateCounts() {
-    
     const visibleScripts = state.scripts.filter(s => !s.hidden);
-    document.getElementById('count-all').textContent = visibleScripts.length;
-    
-    const categories = ['fantasy', 'scifi', 'daytoday', 'warhammer'];
-    categories.forEach(cat => {
-        const count = visibleScripts.filter(s => s.category === cat).length;
-        const element = document.getElementById(`count-${cat}`);
-        if (element) {
-            element.textContent = count;
-        }
+
+    // Category counts respect the active audience filter, so the sidebar
+    // never promises results a click won't deliver.
+    const pool = state.audienceFilters.length
+        ? visibleScripts.filter(s => scriptMatchesAudiences(s, state.audienceFilters))
+        : visibleScripts;
+
+    const allEl = document.getElementById('count-all');
+    if (allEl) allEl.textContent = pool.length;
+
+    CATEGORY_DEFS.forEach(cat => {
+        const element = document.getElementById(`count-${cat.slug}`);
+        if (!element) return;
+        element.textContent = pool.filter(s => getScriptCategories(s).includes(cat.slug)).length;
+    });
+
+    // Audience counts respect the active category the same way.
+    const audiencePool = state.currentCategory === 'all'
+        ? visibleScripts
+        : visibleScripts.filter(s => getScriptCategories(s).includes(state.currentCategory));
+
+    AUDIENCE_DEFS.forEach(aud => {
+        const element = document.getElementById(`audience-count-${aud.key}`);
+        if (!element) return;
+        element.textContent = audiencePool.filter(s => scriptMatchesAudiences(s, [aud.key])).length;
     });
 }
 
@@ -230,11 +325,16 @@ function renderErrorState() {
 }
 
 function renderEmptyState() {
+    const audienceHint = state.audienceFilters.length
+        ? `<p><button class="retry-button" onclick="clearAudienceFilters()">Clear audience filter</button></p>`
+        : '';
+
     return `
         <div class="empty-state">
             <div class="empty-icon">🔭</div>
             <h3 class="empty-title">No Scripts Found</h3>
-            <p>Try adjusting your search or selecting a different category.</p>
+            <p>Try adjusting your search, category, or audience filter.</p>
+            ${audienceHint}
         </div>
     `;
 }
@@ -358,13 +458,24 @@ function createScriptCard(script, index) {
     return createStandardScriptCard(script, index);
 }
 
+// Renders one chip per category the script belongs to. Chips are clickable
+// and jump the sidebar to that category.
+function generateCategoryChipsHTML(script) {
+    const slugs = getScriptCategories(script);
+    if (slugs.length === 0) return '';
+
+    return `<div class="card-categories">` + slugs.map(slug => `
+        <span class="card-category" data-category="${slug}"
+              onclick="event.stopPropagation(); setActiveCategory('${slug}');"
+              title="Show all ${escapeHtml(getCategoryLabel(slug))} scripts">
+            <span class="card-category-icon">${getCategoryIcon(slug)}</span>${escapeHtml(getCategoryLabel(slug))}
+        </span>
+    `).join('') + `</div>`;
+}
+
 function createStandardScriptCard(script, index) {
-    const categoryConfig = CONFIG.categories[script.category] || CONFIG.categories.all;
-    const icon = categoryConfig.icon;
-    
-    const categoryDisplay = script.category === 'daytoday' 
-        ? 'Day-to-Day' 
-        : script.category.charAt(0).toUpperCase() + script.category.slice(1);
+    const icon = getScriptIcon(script);
+    const categoryChips = generateCategoryChipsHTML(script);
 
     const isFav = isFavorite(script.id);
     const favClass = isFav ? 'favorited' : '';
@@ -415,7 +526,7 @@ function createStandardScriptCard(script, index) {
         <article class="script-card" style="animation-delay: ${index * 0.05}s" ${clickHandler}>
             ${imageHTML}
             <div class="card-content">
-                <span class="card-category">${categoryDisplay}</span>
+                ${categoryChips}
                 <h3 class="card-title">${escapeHtml(script.title)}</h3>
                 <div class="card-tags">
                     ${tagsHTML}
@@ -431,13 +542,9 @@ function createStandardScriptCard(script, index) {
 }
 
 function createVersionedScriptCard(script, index) {
-    const categoryConfig = CONFIG.categories[script.category] || CONFIG.categories.all;
-    const icon = categoryConfig.icon;
+    const icon = getScriptIcon(script);
     const totalVersions = script.versions.length;
-    
-    const categoryDisplay = script.category === 'daytoday' 
-        ? 'Day-to-Day' 
-        : script.category.charAt(0).toUpperCase() + script.category.slice(1);
+    const categoryChips = generateCategoryChipsHTML(script);
 
     const isFav = isFavorite(script.id);
     const favClass = isFav ? 'favorited' : '';
@@ -511,7 +618,7 @@ function createVersionedScriptCard(script, index) {
                     <div class="version-label">${escapeHtml(version.versionLabel)}</div>
                 </div>
                 <div class="card-content">
-                    <span class="card-category">${categoryDisplay}</span>
+                    ${categoryChips}
                     <h3 class="card-title">${escapeHtml(version.title)}</h3>
                     <div class="card-tags">
                         ${tagsHTML}
@@ -714,9 +821,11 @@ function handleTagClick(tag) {
 function renderScripts() {
 
     cleanupVersionRotation();
-    
+
+    updateCounts();
+
     const filtered = filterScripts();
-    
+
     if (filtered.length === 0) {
         elements.scriptsGrid.innerHTML = renderEmptyState();
     } else {
@@ -751,16 +860,32 @@ function checkSynopsisOverflow() {
 
 // ===== CATEGORY SWITCHING =====
 function setActiveCategory(category) {
-    state.currentCategory = category;
-    
+    const slug = category === 'all' ? 'all' : (normalizeCategorySlug(category) || 'all');
+    state.currentCategory = slug;
+
     elements.navItems.forEach(item => {
-        item.classList.toggle('active', item.dataset.category === category);
+        item.classList.toggle('active', item.dataset.category === slug);
     });
-    
-    const categoryConfig = CONFIG.categories[category];
-    elements.sectionTitle.textContent = categoryConfig ? categoryConfig.title : 'All Scripts';
-    
+
+    updateSectionTitle();
     renderScripts();
+}
+
+// Title reads e.g. "Fantasy Scripts" or "Fantasy Scripts · X4M".
+function updateSectionTitle() {
+    if (!elements.sectionTitle) return;
+
+    const base = state.currentCategory === 'all'
+        ? 'All Scripts'
+        : `${getCategoryLabel(state.currentCategory) || 'All'} Scripts`;
+
+    const audienceLabels = AUDIENCE_DEFS
+        .filter(a => state.audienceFilters.includes(a.key))
+        .map(a => a.label);
+
+    elements.sectionTitle.textContent = audienceLabels.length
+        ? `${base} · ${audienceLabels.join(' / ')}`
+        : base;
 }
 
 // ===== UTILITY FUNCTIONS =====
@@ -784,11 +909,8 @@ function debounce(func, wait) {
 
 // ===== EVENT LISTENERS =====
 function initializeEventListeners() {
-    elements.navItems.forEach(item => {
-        item.addEventListener('click', () => {
-            setActiveCategory(item.dataset.category);
-        });
-    });
+    // Nav item and audience button listeners are attached in renderNav() /
+    // renderAudienceFilters(), since those elements are built at runtime.
 
     const debouncedSearch = debounce((value) => {
         state.searchQuery = value;
@@ -948,10 +1070,41 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
+// ===== DEEP LINKING =====
+// Lets reader.html chips link back here as index.html?category=fantasy,
+// and supports index.html?audience=4m for shareable filtered views.
+function applyUrlFilters() {
+    const params = new URLSearchParams(window.location.search);
+
+    const cat = params.get('category');
+    if (cat) {
+        const slug = cat === 'all' ? 'all' : normalizeCategorySlug(cat);
+        if (slug) state.currentCategory = slug;
+    }
+
+    const aud = params.get('audience');
+    if (aud) {
+        const keys = aud.split(',')
+            .map(k => k.trim().toLowerCase())
+            .filter(k => AUDIENCE_DEFS.some(a => a.key === k));
+        if (keys.length) state.audienceFilters = keys;
+    }
+
+    const q = params.get('q');
+    if (q && elements.searchInput) {
+        elements.searchInput.value = q;
+        state.searchQuery = q;
+    }
+}
+
 // ===== INITIALIZATION =====
 function initialize() {
+    applyUrlFilters();
+    renderNav();
+    renderAudienceFilters();
     initializeEventListeners();
     initializeView();
+    updateSectionTitle();
     loadScripts();
 }
 
