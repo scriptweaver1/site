@@ -1436,7 +1436,8 @@
           "image": "images/medusa-cute.jpg",
           "artist": "@CyanCapsule",
           "artistLink": "https://x.com/CyanCapsule",
-          "previewFile": "scripts/medusa-cute.md"
+          "previewFile": "",
+          "contentFile": "scripts/medusa-cute.md"
         },
         {
           "versionId": "F4F-version",
@@ -1469,7 +1470,8 @@
           "image": "images/F4F-medusa-cute.jpg",
           "artist": "@Evviart",
           "artistLink": "https://x.com/Evviart",
-          "previewFile": "scripts/F4F-medusa-cute.md"
+          "previewFile": "",
+          "contentFile": "scripts/F4F-medusa-cute.md"
         }
       ]
     },
@@ -1693,7 +1695,8 @@
           "image": "images/ramblefap-cut.jpg",
           "artist": "@ff_ichigo_",
           "artistLink": "https://x.com/ff_ichigo_",
-          "previewFile": "scripts/ramblefap-cut.md"
+          "previewFile": "",
+          "contentFile": "scripts/ramblefap-cut.md"
         },
         {
           "versionId": "version-b",
@@ -1719,7 +1722,8 @@
           "image": "images/ramblefap.jpg",
           "artist": "@AoiFreesia",
           "artistLink": "https://x.com/AoiFreesia",
-          "previewFile": "scripts/ramblefap.md"
+          "previewFile": "",
+          "contentFile": "scripts/ramblefap.md"
         }
       ]
     },
