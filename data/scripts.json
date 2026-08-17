@@ -1436,8 +1436,10 @@
           "image": "images/medusa-cute.jpg",
           "artist": "@CyanCapsule",
           "artistLink": "https://x.com/CyanCapsule",
+          "contentFile": "scripts/medusa-cute.md",
+          "contentFileCondensed": "scripts/medusa-cute-short.md",
           "previewFile": "",
-          "contentFile": "scripts/medusa-cute.md"
+          "scriptbinLink": ""
         },
         {
           "versionId": "F4F-version",
@@ -1470,8 +1472,10 @@
           "image": "images/F4F-medusa-cute.jpg",
           "artist": "@Evviart",
           "artistLink": "https://x.com/Evviart",
+          "contentFile": "scripts/F4F-medusa-cute.md",
+          "contentFileCondensed": "scripts/F4F-medusa-cute-short.md",
           "previewFile": "",
-          "contentFile": "scripts/F4F-medusa-cute.md"
+          "scriptbinLink": ""
         }
       ]
     },
@@ -1695,8 +1699,10 @@
           "image": "images/ramblefap-cut.jpg",
           "artist": "@ff_ichigo_",
           "artistLink": "https://x.com/ff_ichigo_",
+          "contentFile": "scripts/ramblefap-cut.md",
+          "contentFileCondensed": "scripts/ramblefap-cut-short.md",
           "previewFile": "",
-          "contentFile": "scripts/ramblefap-cut.md"
+          "scriptbinLink": ""
         },
         {
           "versionId": "version-b",
@@ -1722,8 +1728,10 @@
           "image": "images/ramblefap.jpg",
           "artist": "@AoiFreesia",
           "artistLink": "https://x.com/AoiFreesia",
+          "contentFile": "scripts/ramblefap.md",
+          "contentFileCondensed": "scripts/ramblefap-short.md",
           "previewFile": "",
-          "contentFile": "scripts/ramblefap.md"
+          "scriptbinLink": ""
         }
       ]
     },
