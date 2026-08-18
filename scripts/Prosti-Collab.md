@@ -14,11 +14,11 @@ X: #ff0000
 
 **< Door closes >**
 
-**[X]:** I'm sorry, it mimight be unprofessional of me, but...
+**[X]:** I'm sorry, it might be unprofessional of me, but...
 
 **[X]:** You mind if I take a quick shower? 
 
-**[X]:** I know, I should have done it before getting here, but I had a lot of stuff in my mind...
+**[X]:** I know, I should have done it before getting here but I had a lot of stuff in my mind...
 
 **[X]:** And if we're honest, I'm a bit nervous too...
 
@@ -32,7 +32,7 @@ X: #ff0000
 
 **[Y]:** Oh my, hello sir! Please tell me you're the one that hired me for the night? 
 
-**[Y]:** You are! Yay, I'm so happy to hear that! You're quite handsome!
+**[Y]:** You are? Yay! I'm so happy to hear that! You're quite handsome!
 
 **[Y]:** You're going to invite me in or what? 
 
@@ -64,7 +64,7 @@ X: #ff0000
 
 **[Y]:** Not that it matters, this got even more interesting all of a sudden!
 
-**[X]:** No, no I'm not either of those things. he hired me!
+**[X]:** No, no, I'm not either of those things. he hired me!
 
 **[X]:** No one told me there was going to be another girl. 
 
@@ -110,7 +110,7 @@ X: #ff0000
 
 **[X]:** Don’t start.
 
-**[Y]:** i'm serious! Just sit there, on the mandatory cuck chair every hotel has!
+**[Y]:** I'm serious! Just sit there, on the mandatory cuck chair every hotel has!
 
 **[X]:** You want me to sit down... and watch?
 
@@ -160,13 +160,13 @@ X: #ff0000
 
 **[Y]:** Making my mouth water...
 
-**[X]:** You're really going to be narrating eveything you do?
+**[X]:** You're really going to be narrating everything you do?
 
 **[Y]:** It's called 'dirty-talk", sweetheart. You should try it some day...
 
 **[Y]:** Besides, It's not like you care, is it? 
 
-**[Y]:** No take-backisies. You’re going to stand right there and watch me take care of him. No commenting. No joining. Not yet at least...
+**[Y]:** No take-backsies. You’re going to stand right there and watch me take care of him. No commenting. No joining. Not yet at least...
 
 **[X]:** “Not yet”? There is no “yet.”
 
@@ -228,7 +228,7 @@ X: #ff0000
 
 **[Y]:** I enjoy gagging on big, thick cocks such as yours...
 
-**[Y]:** gets my pussy all wet and ready for what comes next...
+**[Y]:** Gets my pussy all wet and ready for what comes next...
 
 **[X]:** Does anyone believe in those things you say?
 
@@ -264,7 +264,7 @@ X: #ff0000
 
 **[X]:** Jesus.
 
-**[Y]:** Keep looking, sweethard. Don’t you dare turn away. You’re paid to look, remember?
+**[Y]:** Keep looking, sweetheart. Don’t you dare turn away. You’re paid to look, remember?
 
 **[Y]:** Fuck, that's a thick cock...
 
@@ -274,7 +274,7 @@ X: #ff0000
 
 **[Y]:** I want that. You read my bio, right? I'm a pain-slut...
 
-**[Y]:** Be rough with me, and I won't cry, I'll just cum...
+**[Y]:** Be rough with me. I won't cry, I'll just cum...
 
 **[Y]:** Fuck yes. Pinch my nipples...
 
@@ -288,7 +288,7 @@ X: #ff0000
 
 **[Y]:** You are. Your eyes haven’t left us once.
 
-**[Y]:** Pull off for a second.
+**[Y]:** Pull out for a second.
 
 **[Y]:** Look at that, sweetheart. Strings of cunt juice connecting my pussy to his cock... 
 
@@ -304,9 +304,9 @@ X: #ff0000
 
 **[Y]:** Your cock is so fucking thick...
 
-**[Y]:** I think I can see it bulging...
+**[Y]:** I think I can see it bulging my belly!
 
-**[Y]:** Fuck, you're making me cum so hard...
+**[Y]:** Fuck, you're going to make me cum so hard...
 
 **[X]:** …Fuck.
 
@@ -334,7 +334,7 @@ X: #ff0000
 
 **[Y]:** That's it, baby. Fuck me harder. 
 
-**[Y]:** I want to cum on your gorgeoud cock while she’s forced to watch.
+**[Y]:** I want to cum on your gorgeous cock while she’s forced to watch.
 
 **[Y]:** I’m close, please don’t stop!  
 
@@ -356,7 +356,7 @@ X: #ff0000
 
 **[Y]:** Isn't he a sweetheart? Flip me over. 
 
-**[Y]:** I want to look at her while you ppund your cum deeper inside me...
+**[Y]:** I want to look at her while you pound your cum deeper inside me...
 
 **[X]:** N-no, D-don’t look at me.
 
@@ -388,7 +388,7 @@ X: #ff0000
 
 **[X]:** This doesn't make what you did right, okay? That was scummy! 
 
-**[Y]:** Interesting strategy, doesn't feel like a apolog for me, though...
+**[Y]:** Interesting strategy, doesn't really feel like a apology, though...
 
 **[X]:** Just... just give me your cock already...
 
@@ -396,7 +396,7 @@ X: #ff0000
 
 **[Y]:** Pull out of me, baby. I need a little rest. 
 
-**[Y]:** Let her have taste of use mixed together...
+**[Y]:** Let her have a taste of us mixed together...
 
 **[X]:** He smells so good up close. Fuck.
 
@@ -414,7 +414,7 @@ X: #ff0000
 
 **[X]:** Tastes so good...
 
-**[X]:** I want- I want to get fucked too...
+**[X]:** I want-I want to get fucked too...
 
 **[X]:** My pussy is throbbing, and your cock is so big...
 
@@ -428,7 +428,7 @@ X: #ff0000
 
 **[Y]:** I'm just saying it could be better.
 
-**[Y]:**Why don't you take him in deeper?
+**[Y]:** Why don't you take him in deeper?
 
 **[X]:** I-I don't do deepthroat.
 
@@ -448,7 +448,7 @@ X: #ff0000
 
 **[Y]:** I think you're just afraid to gag. 
 
-**[X]:** He is too thick...
+**[X]:** He's too thick...
 
 **[Y]:** **[Sigh]** I'll help. open wide!
 
@@ -458,9 +458,11 @@ X: #ff0000
 
 **[Y]:** There we go! Just needed a little push!
 
-**[Y]:** Look at here, gagging on dick like a pro.
+**[Y]:** Look at her, gagging on dick like a pro.
 
-**[Y]:** Tears of happiness running down her face.
+**[Y]:** Were ruining her make-up...
+
+**[Y]:** But those are some beautiful, black tears of happiness running down her face!
 
 **[Y]:** We should let her breathe though... 
 
@@ -472,7 +474,7 @@ X: #ff0000
 
 **[Y]:** Amazing how she is still bitchy about it! 
 
-**[Y]:** Maybe if we do it again we can fix her?
+**[Y]:** Maybe if we do it again, we can fix that attitude?
 
 **[X]:** **< X Deepthroating sounds, lots of gagging, gasping and moaning in between lines>**
 
@@ -484,7 +486,7 @@ X: #ff0000
 
 **[Y]:** Let me finger that wet pussy of yours...
 
-**[Y]:** Fuck, you're wet...
+**[Y]:** Fuck, you're so wet!
 
 **[Y]:** You really need some cock inside you, huh?
 
@@ -492,15 +494,15 @@ X: #ff0000
 
 **[X]:** I proved I'm a good girl...
 
-**[X]:** I apolgised, I gagged and choked all over your big cock...
+**[X]:** I apologised, I gagged and choked all over your big cock...
 
 **[X]:** Please, please fuck me...
 
-**[X]:** I want to, please make me cum...
+**[X]:** I want to be fucked, please make me cum...
 
 **[Y]:** Awww, how could anyone ever say no to the way she begs?
 
-**[Y]:** FUck her tight little pussy. 
+**[Y]:** Fuck her tight, little pussy. 
 
 **[Y]:** I don't think you even need to go slowly...
 
@@ -532,7 +534,7 @@ X: #ff0000
 
 **[Y]:** **[Whispering]** Go easy on her, inch by inch...
 
-**[Y]:** Fuck, she is good...
+**[Y]:** Fuck, she's good...
 
 **[Y]:** You've really never done this before?
 
@@ -544,7 +546,7 @@ X: #ff0000
 
 **[X]:** S-so much cum...
 
-**[X]:** H-his cock. I-it's so big.
+**[X]:** H-his cock. I-It's so big.
 
 **[X]:** It's stretching me up...
 
@@ -564,9 +566,9 @@ X: #ff0000
 
 **[Y]:** You're doing great, baby...
 
-**[Y]:** I think whe is about to cum...
+**[Y]:** The way she's shivering under me...
 
-**[Y]:** The way she is shivering under me...
+**[Y]:** I think she is about to cum...
 
 **[Y]:** Don't cum yet though...
 
@@ -616,7 +618,7 @@ X: #ff0000
 
 **[Y]:** Ooooh, hear that, baby? 
 S
-**[Y]:** She is ready to be bred! 
+**[Y]:** She's ready to be bred! 
 
 **[X]:** N-no, I don't want that...
 
@@ -624,11 +626,11 @@ S
 
 **[Y]:** Uh, whatever then. Take your cock out of her. She doesn't deserve it...
 
-**[X]:** N-NO! F-fuck it! Cum in me, cum in me, I want it!
+**[X]:** N-NO! F-Fuck it! Cum in me, cum in me, I want it!
 
 **[X]:** Breed me, fill my pussy up with all of your cum...
 
-**[X]:** Make me pregnant, just please, let me cum! 
+**[X]:** Make me pregnant, please, just let me cum! 
 
 **[Y]:** Music to my ears...
 
@@ -640,7 +642,7 @@ S
 
 **[Y]:** I think that's supposed to be his line! 
 
-**[Y]:** But i'm sure we can make up to him?
+**[Y]:** But I'm sure we can make up to him?
 
 **[X]:** Yes, we can...
 
@@ -658,6 +660,6 @@ S
 
 **[X]:** Do you mind taking a turn in the chair?
 
-**[Y]:** Don't worry, baby. unlike her, you won't need to beg to have fun again...
+**[Y]:** Don't worry, baby. Unlike her, you won't need to beg to have fun again...
 
 
