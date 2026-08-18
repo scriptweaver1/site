@@ -14,7 +14,17 @@ X: #ff0000
 
 **< Door closes >**
 
-**[X]:** You mind if I take a quick shower? I'll be right back...
+**[X]:** I'm sorry, it mimight be unprofessional of me, but...
+
+**[X]:** You mind if I take a quick shower? 
+
+**[X]:** I know, I should have done it before getting here, but I had a lot of stuff in my mind...
+
+**[X]:** And if we're honest, I'm a bit nervous too...
+
+**[X]:** You're my first client ever! 
+
+**[X]:** Thank you, I'll be right back...
 
 **< Showering in the background >**
 
@@ -72,7 +82,23 @@ X: #ff0000
 
 **[X]:** …I’m not walking out. I need that cash.
 
-**[Y]:** What is there to do, then? You want him to choose which one stays?
+**[X]:** This is also my first job, and I can't have a bad review on it!
+
+**[Y]:** Wait, wait, this is your first job?
+
+**[Y]:** How cute! You're very lucky then!
+
+**[X]:** What is lucky about this?
+
+**[Y]:** Isn't it obvious? You got a grade A slut right here to coach you through it!
+
+**[Y]:** Believe me, I would have killed for the smae thing back when I started..
+
+**[X]:** No. That is not right at all. 
+
+**[X]:** And I don't need any help! I know how to fuck, thank you very much!
+
+**[Y]:** What is there to do, then? You want him to choose which one of us stays?
 
 **[X]:** Obviously me! My time is valuable!
 
