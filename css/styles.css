@@ -174,18 +174,6 @@ header {
     height: 18px;
 }
 
-.social-btn.kofi {
-    background: rgba(255, 94, 91, 0.15);
-    color: #ff5e5b;
-    border-color: rgba(255, 94, 91, 0.4);
-}
-
-.social-btn.kofi:hover {
-    background: #ff5e5b;
-    color: white;
-    box-shadow: 0 0 20px rgba(255, 94, 91, 0.5);
-}
-
 .social-btn.reddit {
     background: rgba(255, 69, 0, 0.15);
     color: #ff4500;
