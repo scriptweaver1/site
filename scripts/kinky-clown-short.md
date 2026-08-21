@@ -1,6 +1,6 @@
-{...} = Spoken to the crowd in a singing tone
-<...> = SFX
-[...] = Stage Directions
+{...} = Spoken to the crowd in a singing tone  
+<...> = SFX  
+[...] = Stage Directions  
 
 
 {Come one, come all}
