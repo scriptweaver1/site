@@ -540,7 +540,7 @@
     },
     {
       "id": 10,
-      "title": "Werewolf hunter goes crazy over the largest knot of her life!",
+      "title": "Werewolf hunter goes FERAL over your FAT KNOT!",
       "categories": [
         "fantasy"
       ],
@@ -571,8 +571,9 @@
       "image": "images/werewolf-hunt.jpg",
       "artist": "@Aleriia_V",
       "artistLink": "https://x.com/Aleriia_V",
-      "scriptbinLink": "",
-      "previewFile": "scripts/previews/werewolf-hunt-preview.md",
+      "contentFile": "scripts/werewolf-hunt.md",
+      "contentFileCondensed": "scripts/werewolf-hunt-short.md",
+      "scriptbinLink": "https://scriptbin.works/u/Isapeth/f4m-f4m-werewolf-hunter-goes-feral-over-your",
       "dateAdded": "2026-01-23",
       "seriesId": "",
       "partNumber": null,
@@ -580,8 +581,7 @@
       "previousPart": null,
       "nextPart": null,
       "hidden": false,
-      "patreonOnly": true,
-      "patreonLink": "https://www.patreon.com/posts/148966439",
+      "patreonOnly": false,
       "fills": []
     },
     {
