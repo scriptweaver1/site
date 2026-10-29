@@ -205,28 +205,6 @@ Anri, usually shy and apologetic, but can go wild once she gets confortable.
 
 **[Lilac]:** With pleasure dear...
 
-**< L and A continue kissing, moans and gasps intensify >**
+**< Lilac and Anry continue kissing, moans and gasps intensify >**
 
 **[Lilac]:** Shit, someone is coming! Act natural!
-
-**[Anri]:** What?! Dammit!
-
-**[Lilac]:** Oh, hi there human!
-
-**[Lilac]:** Sorry! I didn't mean to startle you!
-
-**[Lilac]:** You didn't notice us?
-
-**[Lilac]:** Oh, I see. You were not expecting anyone here at this hour.
-
-**[Anri]:** **[Angry/Resentful]** Neither were we...
-
-**[Lilac]:** What my friend here is trying to say is that you surprised us! 
-
-**[Lilac]:** We thought the same thing you did!
-
-**[Anri]:** L!
-
-**[Lilac]:** **[Whispering]** Shut up, I'm doing something!
-
-**[Lilac]:** Please join us!
